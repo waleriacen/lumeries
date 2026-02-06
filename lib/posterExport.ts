@@ -18,7 +18,7 @@ type Star = {
   bv?: number;
 };
 
-// Color schemes
+// Color schemes - matched exactly to MoonPoster.tsx
 const colorSchemes = {
   dark: {
     bg1: '#0f0f15',
@@ -117,6 +117,21 @@ async function loadStars(): Promise<Star[]> {
     }));
 }
 
+// Load a web font for canvas use
+async function loadCursiveFont(): Promise<boolean> {
+  try {
+    const font = new FontFace(
+      'GreatVibes',
+      'url(https://fonts.gstatic.com/s/greatvibes/v19/RWmMoKWR9v4ksMfaWd_JN9XFiaQ.woff2)'
+    );
+    const loaded = await font.load();
+    document.fonts.add(loaded);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 // Format date based on locale
 function formatDate(date: Date, locale: string): string {
   if (locale === 'en-US' || locale === 'en-GB') {
@@ -165,12 +180,17 @@ export async function generatePosterPNG(
   canvas.height = targetHeight;
   const ctx = canvas.getContext('2d')!;
 
-  // Scale factor (base is 500x700)
+  // Scale factor (base is 500x700 - matches MoonPoster.tsx viewBox)
   const scale = targetWidth / 500;
+
+  onProgress?.(5);
+
+  // Load cursive font for names
+  const hasCursiveFont = await loadCursiveFont();
 
   onProgress?.(10);
 
-  // 1. Draw background gradient
+  // 1. Draw background gradient - matches MoonPoster.tsx radial gradient
   const gradient = ctx.createRadialGradient(
     targetWidth / 2, targetHeight * 0.35, 0,
     targetWidth / 2, targetHeight * 0.35, targetHeight * 0.7
@@ -211,16 +231,17 @@ export async function generatePosterPNG(
 
   onProgress?.(40);
 
-  // 3. Draw moon
+  // 3. Draw moon - positions match MoonPoster.tsx exactly
+  // MoonPoster: left: 50%, top: 38%, translate(-50%, -50%), width: 75%
   const moonCenterX = targetWidth / 2;
   const moonCenterY = targetHeight * 0.38;
   const moonRadius = targetWidth * 0.375; // 75% of width / 2
 
-  // Moon rotation
+  // Moon rotation - matches MoonPoster.tsx exactly
   const dayOfYear = Math.floor((parsedDate.getTime() - new Date(parsedDate.getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
   const moonRotation = (dayOfYear * 0.5) % 360;
   const rotationRad = (moonRotation * Math.PI) / 180;
-  const tiltRad = (25 * Math.PI) / 180; // 25 degree tilt
+  const tiltRad = (25 * Math.PI) / 180; // 25 degree tilt - matches MoonPoster
 
   // Load and draw moon texture
   try {
@@ -247,7 +268,7 @@ export async function generatePosterPNG(
       moonRadius * 2
     );
 
-    // Apply color filter (brightness/contrast/desaturation)
+    // Apply color filter - matches MoonPoster: brightness(0.85) contrast(1.15) saturate(0.75)
     ctx.globalCompositeOperation = 'multiply';
     ctx.fillStyle = 'rgba(200, 200, 210, 0.15)';
     ctx.fillRect(-moonRadius, -moonRadius, moonRadius * 2, moonRadius * 2);
@@ -269,7 +290,7 @@ export async function generatePosterPNG(
 
   onProgress?.(60);
 
-  // 4. Draw 3D lighting effect
+  // 4. Draw 3D lighting effect - matches MoonPoster.tsx radial-gradient exactly
   ctx.save();
   ctx.translate(moonCenterX, moonCenterY);
   ctx.rotate(tiltRad);
@@ -292,8 +313,7 @@ export async function generatePosterPNG(
 
   onProgress?.(70);
 
-  // 5. Draw moon phase shadow
-  // Match exactly the SVG logic from MoonPoster.tsx
+  // 5. Draw moon phase shadow - matches MoonPoster.tsx SVG logic exactly
   const moonIllumination = SunCalc.getMoonIllumination(parsedDate);
   const phase = moonIllumination.phase;
   const fraction = moonIllumination.fraction;
@@ -310,12 +330,10 @@ export async function generatePosterPNG(
     ctx.arc(0, 0, moonRadius, 0, Math.PI * 2);
     ctx.clip();
 
-    // Shadow opacity - matches MoonPoster.tsx exactly
+    // Shadow opacity - matches MoonPoster.tsx exactly (0.65)
     const shadowOpacity = 0.65;
 
     if (illumination < 0.08) {
-      // Near new moon - slightly transparent full shadow
-      // Scale opacity from 0.65 (at 0% illumination) to 0.95 (at 8%)
       const normalizedIllum = illumination / 0.08;
       const newMoonOpacity = 0.65 + Math.sqrt(normalizedIllum) * 0.30;
       ctx.fillStyle = `rgba(0,0,0,${newMoonOpacity})`;
@@ -327,32 +345,20 @@ export async function generatePosterPNG(
       ctx.fillStyle = `rgba(0,0,0,${shadowOpacity})`;
       ctx.beginPath();
 
-      // Moon phase shadow drawing - matching MoonPoster.tsx SVG paths exactly
-      // Canvas angles: 0 = right (3 o'clock), positive = clockwise
-      // -Math.PI/2 = top, Math.PI/2 = bottom, Math.PI = left
-
       if (isCrescent) {
         if (isWaxing) {
-          // Waxing crescent: lit on RIGHT, shadow on LEFT
-          // Draw left semicircle + terminator ellipse back
-          ctx.arc(0, 0, moonRadius, Math.PI / 2, -Math.PI / 2, false); // left semicircle (bottom to top via left)
+          ctx.arc(0, 0, moonRadius, Math.PI / 2, -Math.PI / 2, false);
           ctx.ellipse(0, 0, Math.max(0.1, terminatorRx), moonRadius, 0, -Math.PI / 2, Math.PI / 2, false);
         } else {
-          // Waning crescent: lit on LEFT, shadow on RIGHT
-          // Draw right semicircle + terminator ellipse back
-          ctx.arc(0, 0, moonRadius, -Math.PI / 2, Math.PI / 2, false); // right semicircle (top to bottom via right)
+          ctx.arc(0, 0, moonRadius, -Math.PI / 2, Math.PI / 2, false);
           ctx.ellipse(0, 0, Math.max(0.1, terminatorRx), moonRadius, 0, Math.PI / 2, -Math.PI / 2, false);
         }
       } else {
         if (isWaxing) {
-          // Waxing gibbous: small shadow on LEFT only
-          // Draw left semicircle + terminator bulging right
-          ctx.arc(0, 0, moonRadius, Math.PI / 2, -Math.PI / 2, false); // left semicircle
+          ctx.arc(0, 0, moonRadius, Math.PI / 2, -Math.PI / 2, false);
           ctx.ellipse(0, 0, Math.max(0.1, terminatorRx), moonRadius, 0, -Math.PI / 2, Math.PI / 2, true);
         } else {
-          // Waning gibbous: small shadow on RIGHT only
-          // Draw right semicircle + terminator bulging left
-          ctx.arc(0, 0, moonRadius, -Math.PI / 2, Math.PI / 2, false); // right semicircle
+          ctx.arc(0, 0, moonRadius, -Math.PI / 2, Math.PI / 2, false);
           ctx.ellipse(0, 0, Math.max(0.1, terminatorRx), moonRadius, 0, Math.PI / 2, -Math.PI / 2, true);
         }
       }
@@ -365,43 +371,90 @@ export async function generatePosterPNG(
 
   onProgress?.(80);
 
-  // 6. Draw text
+  // 6. Draw text - positions match MoonPoster.tsx CSS layout exactly
+  // MoonPoster.tsx: text container at bottom: 8%, width: 85%, textAlign: center
+  // Text flows top-to-bottom: title -> names -> date -> coordinates -> tagline
   const formattedDate = formatDate(parsedDate, locale);
   const textCenterX = targetWidth / 2;
-  const textBottomY = targetHeight * 0.92;
 
-  // Title
-  ctx.fillStyle = c.text;
-  ctx.font = `300 ${12 * scale}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
-  ctx.textAlign = 'center';
-  ctx.letterSpacing = `${3 * scale}px`;
-  ctx.fillText((title || formattedDate).toUpperCase(), textCenterX, textBottomY - 60 * scale);
+  // Font sizes matching MoonPoster.tsx exactly (in base 500px units, then scaled)
+  const titleFontSize = 12 * scale;
+  const namesFontSize = 14 * scale;
+  const dateFontSize = 9 * scale;
+  const coordsFontSize = 8 * scale;
+  const taglineFontSize = 7 * scale;
 
-  // Names (cursive)
-  ctx.font = `italic ${14 * scale}px "Snell Roundhand", "Brush Script MT", cursive`;
-  ctx.letterSpacing = `${1 * scale}px`;
-  ctx.fillText(names, textCenterX, textBottomY - 40 * scale);
+  // Margins matching MoonPoster.tsx CSS marginBottom values
+  const titleMarginBottom = 10 * scale;
+  const namesMarginBottom = 10 * scale;
+  const dateMarginBottom = 4 * scale;
+  const coordsMarginBottom = 8 * scale;
 
-  // Date
-  ctx.fillStyle = c.textSecondary;
-  ctx.font = `300 ${9 * scale}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
-  ctx.letterSpacing = `${2 * scale}px`;
-  ctx.fillText(formattedDate.toUpperCase(), textCenterX, textBottomY - 22 * scale);
-
-  // Coordinates
+  // Calculate total text block height (top-to-bottom like CSS flow)
+  let textBlockHeight = titleFontSize + titleMarginBottom;
+  textBlockHeight += namesFontSize + namesMarginBottom;
+  textBlockHeight += dateFontSize + dateMarginBottom;
   if (coordinates) {
-    ctx.fillStyle = c.textMuted;
-    ctx.font = `${8 * scale}px "SF Mono", Monaco, monospace`;
-    ctx.letterSpacing = `${1.5 * scale}px`;
-    ctx.fillText(coordinates, textCenterX, textBottomY - 10 * scale);
+    textBlockHeight += coordsFontSize + coordsMarginBottom;
+  }
+  if (tagline) {
+    textBlockHeight += taglineFontSize;
   }
 
-  // Tagline
+  // Position the text block so its bottom aligns with CSS bottom: 8%
+  const textBlockBottom = targetHeight * 0.92;
+  const textBlockTop = textBlockBottom - textBlockHeight;
+
+  ctx.textAlign = 'center';
+
+  // Draw text top-to-bottom (matching CSS flow)
+  let currentY = textBlockTop;
+
+  // Title - matches: fontSize 12px, fontWeight 300, letterSpacing 3px, uppercase, Helvetica Neue
+  ctx.fillStyle = c.text;
+  ctx.font = `300 ${titleFontSize}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
+  ctx.letterSpacing = `${3 * scale}px`;
+  currentY += titleFontSize;
+  ctx.fillText((title || formattedDate).toUpperCase(), textCenterX, currentY);
+  currentY += titleMarginBottom;
+
+  // Names - matches: fontSize 14px, italic, cursive font, letterSpacing 1px
+  ctx.fillStyle = c.text;
+  if (hasCursiveFont) {
+    ctx.font = `${namesFontSize}px GreatVibes, cursive`;
+  } else {
+    ctx.font = `italic ${namesFontSize}px "Snell Roundhand", "Brush Script MT", "Lucida Handwriting", cursive`;
+  }
+  ctx.letterSpacing = `${1 * scale}px`;
+  currentY += namesFontSize;
+  ctx.fillText(names, textCenterX, currentY);
+  currentY += namesMarginBottom;
+
+  // Date - matches: fontSize 9px, fontWeight 300, letterSpacing 2px, uppercase
+  ctx.fillStyle = c.textSecondary;
+  ctx.font = `300 ${dateFontSize}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
+  ctx.letterSpacing = `${2 * scale}px`;
+  currentY += dateFontSize;
+  ctx.fillText(formattedDate.toUpperCase(), textCenterX, currentY);
+  currentY += dateMarginBottom;
+
+  // Coordinates - matches: fontSize 8px, letterSpacing 1.5px, monospace
+  if (coordinates) {
+    ctx.fillStyle = c.textMuted;
+    ctx.font = `${coordsFontSize}px "SF Mono", Monaco, monospace`;
+    ctx.letterSpacing = `${1.5 * scale}px`;
+    currentY += coordsFontSize;
+    ctx.fillText(coordinates, textCenterX, currentY);
+    currentY += coordsMarginBottom;
+  }
+
+  // Tagline - matches: fontSize 7px, fontWeight 400, letterSpacing 2px, uppercase
   if (tagline) {
     ctx.fillStyle = c.textMuted;
-    ctx.font = `400 ${7 * scale}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
+    ctx.font = `400 ${taglineFontSize}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
     ctx.letterSpacing = `${2 * scale}px`;
-    ctx.fillText(tagline.toUpperCase(), textCenterX, textBottomY);
+    currentY += taglineFontSize;
+    ctx.fillText(tagline.toUpperCase(), textCenterX, currentY);
   }
 
   onProgress?.(100);
