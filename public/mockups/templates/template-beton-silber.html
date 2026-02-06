@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumeries - Beton Silber Industrial</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+
+    .canvas {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Background Layer - Dark Concrete Texture */
+    .background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #2a2a2a 0%, #1f1f1f 25%, #242424 50%, #1f1f1f 75%, #2a2a2a 100%);
+      z-index: 1;
+    }
+
+    .background::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255,255,255,0.02) 1px, rgba(255,255,255,0.02) 3px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px),
+        radial-gradient(ellipse at 20% 50%, rgba(100,100,100,0.05) 0%, transparent 50%);
+      z-index: 1;
+      mix-blend-mode: overlay;
+    }
+
+    .background::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(45deg, rgba(40,40,40,0) 0px, rgba(40,40,40,0) 2px, rgba(50,50,50,0.1) 2px, rgba(50,50,50,0.1) 4px);
+      z-index: 2;
+    }
+
+    /* Spotlight effect */
+    .spotlight {
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+      z-index: 3;
+      pointer-events: none;
+      filter: blur(40px);
+    }
+
+    /* Poster Slot */
+    .poster-slot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 540px;
+      height: 680px;
+      z-index: 10;
+      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      overflow: hidden;
+    }
+
+    .poster-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .poster-slot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.08) 100%);
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .poster-slot::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 0 50px rgba(0,0,0,0.1);
+      z-index: 21;
+      pointer-events: none;
+    }
+
+    /* Chrome Frame SVG */
+    .frame-svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 580px;
+      height: 720px;
+      z-index: 9;
+      filter: drop-shadow(0 15px 35px rgba(0,0,0,0.5));
+    }
+
+    /* Geometric Accents */
+    .accents-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    .accent-line {
+      position: absolute;
+      background: linear-gradient(90deg, transparent 0%, #c0c0c0 50%, transparent 100%);
+      opacity: 0.5;
+    }
+
+    .accent-line-1 {
+      top: 120px;
+      left: 80px;
+      width: 200px;
+      height: 2px;
+    }
+
+    .accent-line-2 {
+      bottom: 140px;
+      right: 100px;
+      width: 150px;
+      height: 2px;
+    }
+
+    .accent-diamond {
+      position: absolute;
+      opacity: 0.6;
+    }
+
+    .diamond-1 {
+      top: 180px;
+      right: 70px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .diamond-2 {
+      bottom: 240px;
+      left: 85px;
+      width: 16px;
+      height: 16px;
+    }
+
+    .diamond-3 {
+      top: 380px;
+      left: 70px;
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Minimal dots */
+    .accent-dots {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 7;
+      pointer-events: none;
+    }
+
+    .dot {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #e8e8e8, #a0a0a0);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .dot-1 {
+      top: 200px;
+      right: 120px;
+      width: 8px;
+      height: 8px;
+      opacity: 0.6;
+    }
+
+    .dot-2 {
+      bottom: 200px;
+      right: 90px;
+      width: 6px;
+      height: 6px;
+      opacity: 0.5;
+    }
+
+    .dot-3 {
+      top: 400px;
+      left: 100px;
+      width: 7px;
+      height: 7px;
+      opacity: 0.55;
+    }
+
+    .dot-4 {
+      top: 250px;
+      left: 60px;
+      width: 5px;
+      height: 5px;
+      opacity: 0.4;
+    }
+
+    .dot-5 {
+      bottom: 350px;
+      right: 110px;
+      width: 6px;
+      height: 6px;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <!-- Background -->
+    <div class="background"></div>
+    <div class="spotlight"></div>
+
+    <!-- Geometric Accents -->
+    <div class="accents-container">
+      <div class="accent-line accent-line-1"></div>
+      <div class="accent-line accent-line-2"></div>
+
+      <svg class="accent-diamond diamond-1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="diamondGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#e8e8e8;stop-opacity:0.8" />
+            <stop offset="50%" style="stop-color:#c0c0c0;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#808080;stop-opacity:0.8" />
+          </linearGradient>
+        </defs>
+        <polygon points="50,10 90,50 50,90 10,50" fill="url(#diamondGradient1)" stroke="#808080" stroke-width="0.5" opacity="0.7"/>
+      </svg>
+
+      <svg class="accent-diamond diamond-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="diamondGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#e8e8e8;stop-opacity:0.8" />
+            <stop offset="50%" style="stop-color:#c0c0c0;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#808080;stop-opacity:0.8" />
+          </linearGradient>
+        </defs>
+        <polygon points="50,10 90,50 50,90 10,50" fill="url(#diamondGradient2)" stroke="#808080" stroke-width="0.5" opacity="0.7"/>
+      </svg>
+
+      <svg class="accent-diamond diamond-3" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="diamondGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#e8e8e8;stop-opacity:0.8" />
+            <stop offset="50%" style="stop-color:#c0c0c0;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#808080;stop-opacity:0.8" />
+          </linearGradient>
+        </defs>
+        <polygon points="50,10 90,50 50,90 10,50" fill="url(#diamondGradient3)" stroke="#808080" stroke-width="0.5" opacity="0.7"/>
+      </svg>
+    </div>
+
+    <!-- Dots -->
+    <div class="accent-dots">
+      <div class="dot dot-1"></div>
+      <div class="dot dot-2"></div>
+      <div class="dot dot-3"></div>
+      <div class="dot dot-4"></div>
+      <div class="dot dot-5"></div>
+    </div>
+
+    <!-- Chrome/Silver Frame -->
+    <svg class="frame-svg" viewBox="0 0 600 750" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="silverFrameGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#f0f0f0;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#d0d0d0;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#a0a0a0;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="silverFrameGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3" />
+          <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0" />
+          <stop offset="100%" style="stop-color:#000000;stop-opacity:0.2" />
+        </linearGradient>
+      </defs>
+
+      <!-- Outer frame - sleek brushstroke style -->
+      <rect x="25" y="25" width="550" height="700" fill="none" stroke="url(#silverFrameGradient)" stroke-width="20" opacity="0.9"/>
+      <rect x="35" y="35" width="530" height="680" fill="none" stroke="url(#silverFrameGradient)" stroke-width="8" opacity="0.6"/>
+
+      <!-- Highlight on frame -->
+      <rect x="25" y="25" width="550" height="700" fill="url(#silverFrameGradient2)" pointer-events="none"/>
+
+      <!-- Corner accents -->
+      <circle cx="35" cy="35" r="4" fill="#e8e8e8" opacity="0.8"/>
+      <circle cx="565" cy="35" r="4" fill="#e8e8e8" opacity="0.8"/>
+      <circle cx="35" cy="715" r="4" fill="#808080" opacity="0.6"/>
+      <circle cx="565" cy="715" r="4" fill="#808080" opacity="0.6"/>
+    </svg>
+
+    <!-- Poster Slot -->
+    <div class="poster-slot" id="poster-slot" data-poster-url="">
+      <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%); color: #999; font-family: Arial, sans-serif; font-size: 14px; text-align: center;">
+        Poster Image
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const POSTER_URL = ''; // Set poster image URL here - e.g., 'https://example.com/poster.jpg'
+
+    function loadPoster() {
+      const posterSlot = document.getElementById('poster-slot');
+
+      if (POSTER_URL && POSTER_URL.trim() !== '') {
+        const img = document.createElement('img');
+        img.src = POSTER_URL;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        img.style.display = 'block';
+        posterSlot.innerHTML = '';
+        posterSlot.appendChild(img);
+      }
+    }
+
+    // Load poster on page load
+    window.addEventListener('load', loadPoster);
+
+    // Also try loading immediately in case image is cached
+    if (document.readyState === 'complete') {
+      loadPoster();
+    }
+
+    // For Etsy 3000x3000px sizing, multiply all values by 2.78
+    // ?size=3000 parameter can be added to URL for dynamic scaling
+  </script>
+</body>
+</html>

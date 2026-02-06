@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumeries - White Brick Scandinavian</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      background: #f8f8f8;
+    }
+
+    .canvas {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Background Layer - White Brick Pattern */
+    .background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background:
+        repeating-linear-gradient(0deg, transparent, transparent 59px, #e0e0e0 59px, #e0e0e0 61px),
+        repeating-linear-gradient(90deg, transparent, transparent 99px, #e0e0e0 99px, #e0e0e0 101px),
+        repeating-linear-gradient(0deg, transparent, transparent 59px, #e0e0e0 59px, #e0e0e0 61px);
+      background-color: #f5f5f5;
+      background-size: 100% 120px, 200px 100%, 100px 120px;
+      background-position: 0 0, 0 0, 50px 0;
+      z-index: 1;
+    }
+
+    .background::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(0,0,0,0.02) 59px, rgba(0,0,0,0.02) 61px),
+        repeating-linear-gradient(90deg, transparent, transparent 99px, rgba(0,0,0,0.02) 99px, rgba(0,0,0,0.02) 101px);
+      background-size: 100% 120px, 200px 100%;
+      background-position: 0 0, 0 0;
+      z-index: 2;
+      mix-blend-mode: multiply;
+    }
+
+    .background::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.2) 0%, transparent 70%);
+      z-index: 3;
+    }
+
+    /* Poster Slot */
+    .poster-slot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 540px;
+      height: 680px;
+      z-index: 10;
+      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      border: 1px solid #333;
+      overflow: hidden;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.1);
+    }
+
+    .poster-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .poster-slot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.05) 100%);
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    /* Fairy Lights String */
+    .lights-container {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 40px;
+      z-index: 8;
+      pointer-events: none;
+    }
+
+    .lights-string {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .light {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #FFE55C, #FFD700);
+      box-shadow: 0 0 15px #FFD700, 0 0 30px rgba(255, 215, 0, 0.4);
+      animation: glow 2s ease-in-out infinite;
+    }
+
+    .light-1 {
+      left: 40px;
+      top: 15px;
+      animation-delay: 0s;
+    }
+
+    .light-2 {
+      left: 100px;
+      top: 15px;
+      animation-delay: 0.2s;
+    }
+
+    .light-3 {
+      left: 160px;
+      top: 15px;
+      animation-delay: 0.4s;
+    }
+
+    .light-4 {
+      left: 220px;
+      top: 15px;
+      animation-delay: 0.6s;
+    }
+
+    .light-5 {
+      left: 280px;
+      top: 15px;
+      animation-delay: 0.8s;
+    }
+
+    .light-6 {
+      left: 340px;
+      top: 15px;
+      animation-delay: 1s;
+    }
+
+    .light-7 {
+      left: 400px;
+      top: 15px;
+      animation-delay: 1.2s;
+    }
+
+    .light-8 {
+      left: 460px;
+      top: 15px;
+      animation-delay: 1.4s;
+    }
+
+    .light-9 {
+      left: 520px;
+      top: 15px;
+      animation-delay: 1.6s;
+    }
+
+    .light-10 {
+      left: 560px;
+      top: 15px;
+      animation-delay: 0.3s;
+    }
+
+    @keyframes glow {
+      0%, 100% { opacity: 0.7; box-shadow: 0 0 10px #FFD700, 0 0 20px rgba(255, 215, 0, 0.3); }
+      50% { opacity: 1; box-shadow: 0 0 20px #FFD700, 0 0 40px rgba(255, 215, 0, 0.6); }
+    }
+
+    .light-wire {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      width: 560px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(100,100,100,0.3), transparent);
+      z-index: 7;
+    }
+
+    /* Monstera Leaf Shadow - Subtle */
+    .monstera-shadow {
+      position: absolute;
+      bottom: 80px;
+      left: 40px;
+      width: 120px;
+      height: 140px;
+      opacity: 0.08;
+      z-index: 5;
+      filter: blur(3px);
+    }
+
+    /* Minimal Frame */
+    .frame-border {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 540px;
+      height: 680px;
+      z-index: 9;
+      border: 2px solid #333;
+      pointer-events: none;
+      box-shadow: 0 0 0 1px #f5f5f5 inset;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <!-- Background -->
+    <div class="background"></div>
+
+    <!-- Fairy Lights -->
+    <div class="lights-container">
+      <div class="light-wire"></div>
+      <div class="lights-string">
+        <div class="light light-1"></div>
+        <div class="light light-2"></div>
+        <div class="light light-3"></div>
+        <div class="light light-4"></div>
+        <div class="light light-5"></div>
+        <div class="light light-6"></div>
+        <div class="light light-7"></div>
+        <div class="light light-8"></div>
+        <div class="light light-9"></div>
+        <div class="light light-10"></div>
+      </div>
+    </div>
+
+    <!-- Monstera Leaf Shadow -->
+    <svg class="monstera-shadow" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="monsteraShadow" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#000000;stop-opacity:0.3" />
+          <stop offset="100%" style="stop-color:#000000;stop-opacity:0.1" />
+        </linearGradient>
+      </defs>
+      <!-- Monstera leaf shape -->
+      <path d="M 50,5 Q 70,15 75,35 Q 80,50 75,65 Q 70,80 60,90 L 50,95 L 40,90 Q 30,80 25,65 Q 20,50 25,35 Q 30,15 50,5 Z" fill="url(#monsteraShadow)"/>
+      <!-- Leaf hole details -->
+      <ellipse cx="45" cy="40" rx="8" ry="10" fill="#f5f5f5" opacity="0.5"/>
+      <ellipse cx="55" cy="60" rx="7" ry="9" fill="#f5f5f5" opacity="0.5"/>
+      <ellipse cx="50" cy="75" rx="6" ry="8" fill="#f5f5f5" opacity="0.5"/>
+    </svg>
+
+    <!-- Frame Border -->
+    <div class="frame-border"></div>
+
+    <!-- Poster Slot -->
+    <div class="poster-slot" id="poster-slot" data-poster-url="">
+      <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%); color: #999; font-family: Arial, sans-serif; font-size: 14px; text-align: center;">
+        Poster Image
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const POSTER_URL = ''; // Set poster image URL here - e.g., 'https://example.com/poster.jpg'
+
+    function loadPoster() {
+      const posterSlot = document.getElementById('poster-slot');
+
+      if (POSTER_URL && POSTER_URL.trim() !== '') {
+        const img = document.createElement('img');
+        img.src = POSTER_URL;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        img.style.display = 'block';
+        posterSlot.innerHTML = '';
+        posterSlot.appendChild(img);
+      }
+    }
+
+    // Load poster on page load
+    window.addEventListener('load', loadPoster);
+
+    // Also try loading immediately in case image is cached
+    if (document.readyState === 'complete') {
+      loadPoster();
+    }
+
+    // For Etsy 3000x3000px sizing, multiply all values by 2.78
+    // ?size=3000 parameter can be added to URL for dynamic scaling
+  </script>
+</body>
+</html>

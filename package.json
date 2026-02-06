@@ -1,0 +1,46 @@
+{
+  "name": "teeinblue-clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test:replicate": "npx tsx scripts/replicate-test.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@getbrevo/brevo": "^3.0.1",
+    "@resvg/resvg-js": "^2.6.2",
+    "@sparticuz/chromium": "^143.0.4",
+    "@stripe/stripe-js": "^8.6.1",
+    "@supabase/supabase-js": "^2.89.0",
+    "@types/node": "^25.0.3",
+    "@types/react": "^19.2.7",
+    "@vercel/og": "^0.8.6",
+    "d3-celestial": "^0.7.35",
+    "fabric": "^5.3.0",
+    "html2canvas": "^1.4.1",
+    "next": "^16.1.1",
+    "pdf-lib": "^1.17.1",
+    "puppeteer-core": "^24.35.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "replicate": "^1.4.0",
+    "sharp": "^0.34.5",
+    "stripe": "^20.1.0",
+    "suncalc": "^1.9.0",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/fabric": "^5.3.10",
+    "@types/suncalc": "^1.9.2",
+    "autoprefixer": "^10.4.23",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18"
+  }
+}

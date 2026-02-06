@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Template Preview Viewer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f0f0; padding: 20px; }
+    h1 { text-align: center; color: #333; margin-bottom: 30px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    button {
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover { background: #0056b3; }
+    button.active { background: #28a745; }
+    #preview {
+      width: 100%;
+      height: 600px;
+      border: 2px solid #333;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .template-info {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1>Template Preview Viewer (1080x1080)</h1>
+
+  <div class="container">
+    <div class="controls">
+      <button onclick="loadTemplate('template-rosa-gold.html')">Rosa Gold</button>
+      <button onclick="loadTemplate('template-beton-silber.html')">Beton Silber</button>
+      <button onclick="loadTemplate('template-botanical.html')">Botanical</button>
+      <button onclick="loadTemplate('template-marmor-gold.html')">Marmor Gold</button>
+      <button onclick="loadTemplate('template-ziegel-minimal.html')">Ziegel Minimal</button>
+      <button onclick="loadTemplate('template-midnight-stars.html')">Midnight Stars</button>
+      <button onclick="loadTemplate('template-terracotta-boho.html')">Terracotta Boho</button>
+      <button onclick="loadTemplate('template-sage-gold.html')">Sage Gold</button>
+      <button onclick="loadTemplate('template-lavendel-romantic.html')">Lavendel Romantic</button>
+      <button onclick="loadTemplate('template-showcase-triple.html')">Showcase Triple</button>
+    </div>
+
+    <iframe id="preview" src="template-rosa-gold.html"></iframe>
+
+    <div class="template-info">
+      <p>Viewport: 1080x1080px | Click buttons above to view different templates</p>
+    </div>
+  </div>
+
+  <script>
+    function loadTemplate(templateName) {
+      const preview = document.getElementById('preview');
+      preview.src = templateName;
+
+      // Update button states
+      document.querySelectorAll('button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+    }
+
+    // Load the first template on page load
+    window.addEventListener('load', () => {
+      document.querySelector('button').click();
+    });
+  </script>
+</body>
+</html>

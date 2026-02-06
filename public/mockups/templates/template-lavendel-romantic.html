@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lavendel Romantic - Lumeries Mockup</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      background: #d8c4e8;
+    }
+
+    .canvas {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #e6d9f0 0%, #d8c4e8 50%, #dccfea 100%);
+      overflow: hidden;
+    }
+
+    /* Subtle texture overlay */
+    .texture-overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(200, 180, 220, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(180, 160, 200, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Butterflies */
+    .butterfly {
+      position: absolute;
+      opacity: 0.7;
+    }
+
+    .butterfly.large {
+      width: 80px;
+      height: 80px;
+    }
+
+    .butterfly.medium {
+      width: 60px;
+      height: 60px;
+    }
+
+    .butterfly.small {
+      width: 40px;
+      height: 40px;
+    }
+
+    .butterfly.b1 {
+      top: 120px;
+      left: 100px;
+      animation: flutter 4s ease-in-out infinite;
+    }
+
+    .butterfly.b2 {
+      top: 200px;
+      right: 80px;
+      animation: flutter 5s ease-in-out infinite 0.5s;
+    }
+
+    .butterfly.b3 {
+      bottom: 180px;
+      left: 120px;
+      animation: flutter 4.5s ease-in-out infinite 1s;
+    }
+
+    .butterfly.b4 {
+      bottom: 120px;
+      right: 100px;
+      animation: flutter 5s ease-in-out infinite 1.5s;
+    }
+
+    .butterfly.b5 {
+      top: 400px;
+      left: 50px;
+      animation: flutter 6s ease-in-out infinite 2s;
+    }
+
+    @keyframes flutter {
+      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+      25% { transform: translateY(-20px) rotate(5deg); opacity: 0.8; }
+      50% { transform: translateY(-10px) rotate(-5deg); opacity: 0.6; }
+      75% { transform: translateY(-15px) rotate(3deg); opacity: 0.7; }
+    }
+
+    /* Ornamental frame with rounded corners */
+    .romantic-frame {
+      position: absolute;
+      width: 580px;
+      height: 800px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 3px solid rgba(200, 160, 220, 0.6);
+      border-radius: 50px;
+      box-shadow:
+        inset 0 0 30px rgba(200, 180, 220, 0.2),
+        0 0 40px rgba(200, 160, 220, 0.15);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* Floral line-art accents */
+    .flower-accent {
+      position: absolute;
+      opacity: 0.5;
+    }
+
+    .flower-accent.top-left {
+      top: 80px;
+      left: 60px;
+      width: 100px;
+      height: 100px;
+    }
+
+    .flower-accent.top-right {
+      top: 100px;
+      right: 70px;
+      width: 90px;
+      height: 90px;
+      transform: scaleX(-1);
+    }
+
+    .flower-accent.bottom-left {
+      bottom: 100px;
+      left: 80px;
+      width: 80px;
+      height: 80px;
+      opacity: 0.4;
+    }
+
+    .flower-accent.bottom-right {
+      bottom: 120px;
+      right: 60px;
+      width: 95px;
+      height: 95px;
+      opacity: 0.45;
+      transform: scaleX(-1);
+    }
+
+    /* Sparkle/glitter dots */
+    .sparkle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: rgba(200, 160, 220, 0.8);
+      border-radius: 50%;
+    }
+
+    .sparkle.s1 { top: 150px; left: 300px; animation: twinkle 2s ease-in-out infinite; }
+    .sparkle.s2 { top: 250px; right: 200px; animation: twinkle 2.5s ease-in-out infinite 0.3s; }
+    .sparkle.s3 { bottom: 250px; left: 250px; animation: twinkle 2.2s ease-in-out infinite 0.6s; }
+    .sparkle.s4 { bottom: 150px; right: 280px; animation: twinkle 2.7s ease-in-out infinite 0.9s; }
+    .sparkle.s5 { top: 400px; right: 100px; width: 2px; height: 2px; animation: twinkle 2.5s ease-in-out infinite 0.4s; }
+    .sparkle.s6 { bottom: 400px; left: 150px; width: 2px; height: 2px; animation: twinkle 2.3s ease-in-out infinite 0.7s; }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* Poster slot */
+    .poster-slot {
+      position: absolute;
+      width: 540px;
+      height: 720px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #f5f5f5;
+      z-index: 10;
+    }
+
+    .poster-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="texture-overlay"></div>
+
+    <!-- Butterflies -->
+    <svg class="butterfly large b1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#d4a5d4" opacity="0.8">
+        <!-- Left wings -->
+        <ellipse cx="35" cy="40" rx="20" ry="28"/>
+        <ellipse cx="30" cy="60" rx="15" ry="20" opacity="0.6"/>
+        <!-- Right wings -->
+        <ellipse cx="65" cy="40" rx="20" ry="28"/>
+        <ellipse cx="70" cy="60" rx="15" ry="20" opacity="0.6"/>
+        <!-- Body -->
+        <ellipse cx="50" cy="50" rx="8" ry="35" fill="#b08ab0"/>
+        <!-- Antenna -->
+        <line x1="50" y1="15" x2="45" y2="5" stroke="#b08ab0" stroke-width="2"/>
+        <line x1="50" y1="15" x2="55" y2="5" stroke="#b08ab0" stroke-width="2"/>
+      </g>
+      <!-- Wing details -->
+      <g fill="#e8c5e8" opacity="0.5">
+        <circle cx="35" cy="35" r="8"/>
+        <circle cx="65" cy="35" r="8"/>
+      </g>
+    </svg>
+
+    <svg class="butterfly medium b2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#f0d9f0" opacity="0.8">
+        <ellipse cx="35" cy="40" rx="20" ry="28"/>
+        <ellipse cx="30" cy="60" rx="15" ry="20" opacity="0.6"/>
+        <ellipse cx="65" cy="40" rx="20" ry="28"/>
+        <ellipse cx="70" cy="60" rx="15" ry="20" opacity="0.6"/>
+        <ellipse cx="50" cy="50" rx="8" ry="35" fill="#ddc0dc"/>
+        <line x1="50" y1="15" x2="45" y2="5" stroke="#ddc0dc" stroke-width="2"/>
+        <line x1="50" y1="15" x2="55" y2="5" stroke="#ddc0dc" stroke-width="2"/>
+      </g>
+      <g fill="#d4a5d4" opacity="0.5">
+        <circle cx="35" cy="35" r="8"/>
+        <circle cx="65" cy="35" r="8"/>
+      </g>
+    </svg>
+
+    <svg class="butterfly medium b3" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#f5e5f5" opacity="0.85">
+        <ellipse cx="35" cy="40" rx="20" ry="28"/>
+        <ellipse cx="30" cy="60" rx="15" ry="20" opacity="0.6"/>
+        <ellipse cx="65" cy="40" rx="20" ry="28"/>
+        <ellipse cx="70" cy="60" rx="15" ry="20" opacity="0.6"/>
+        <ellipse cx="50" cy="50" rx="8" ry="35" fill="#e8d5e8"/>
+        <line x1="50" y1="15" x2="45" y2="5" stroke="#e8d5e8" stroke-width="2"/>
+        <line x1="50" y1="15" x2="55" y2="5" stroke="#e8d5e8" stroke-width="2"/>
+      </g>
+      <g fill="#d4a5d4" opacity="0.4">
+        <circle cx="35" cy="35" r="7"/>
+        <circle cx="65" cy="35" r="7"/>
+      </g>
+    </svg>
+
+    <svg class="butterfly small b4" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#e8c5e8" opacity="0.8">
+        <ellipse cx="35" cy="40" rx="20" ry="28"/>
+        <ellipse cx="30" cy="60" rx="15" ry="20" opacity="0.6"/>
+        <ellipse cx="65" cy="40" rx="20" ry="28"/>
+        <ellipse cx="70" cy="60" rx="15" ry="20" opacity="0.6"/>
+        <ellipse cx="50" cy="50" rx="8" ry="35" fill="#d4a5d4"/>
+        <line x1="50" y1="15" x2="45" y2="5" stroke="#d4a5d4" stroke-width="2"/>
+        <line x1="50" y1="15" x2="55" y2="5" stroke="#d4a5d4" stroke-width="2"/>
+      </g>
+      <g fill="#f0d9f0" opacity="0.5">
+        <circle cx="35" cy="35" r="7"/>
+        <circle cx="65" cy="35" r="7"/>
+      </g>
+    </svg>
+
+    <svg class="butterfly small b5" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#f0d9f0" opacity="0.75">
+        <ellipse cx="35" cy="40" rx="20" ry="28"/>
+        <ellipse cx="30" cy="60" rx="15" ry="20" opacity="0.6"/>
+        <ellipse cx="65" cy="40" rx="20" ry="28"/>
+        <ellipse cx="70" cy="60" rx="15" ry="20" opacity="0.6"/>
+        <ellipse cx="50" cy="50" rx="8" ry="35" fill="#ddc0dc"/>
+        <line x1="50" y1="15" x2="45" y2="5" stroke="#ddc0dc" stroke-width="2"/>
+        <line x1="50" y1="15" x2="55" y2="5" stroke="#ddc0dc" stroke-width="2"/>
+      </g>
+      <g fill="#c68ac8" opacity="0.4">
+        <circle cx="35" cy="35" r="6"/>
+        <circle cx="65" cy="35" r="6"/>
+      </g>
+    </svg>
+
+    <!-- Floral line-art accents -->
+    <svg class="flower-accent top-left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <!-- Delicate flower line art -->
+      <g stroke="#c68ac8" stroke-width="1.5" fill="none">
+        <!-- Stem -->
+        <path d="M 50 100 Q 48 80 50 60"/>
+        <!-- Petals -->
+        <path d="M 50 60 Q 60 50 65 45"/>
+        <path d="M 50 60 Q 55 45 50 35"/>
+        <path d="M 50 60 Q 45 45 50 35"/>
+        <path d="M 50 60 Q 40 50 35 45"/>
+        <!-- Center -->
+        <circle cx="50" cy="60" r="5" fill="#c68ac8" opacity="0.6"/>
+      </g>
+    </svg>
+
+    <svg class="flower-accent top-right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#c68ac8" stroke-width="1.5" fill="none">
+        <path d="M 50 100 Q 48 80 50 60"/>
+        <path d="M 50 60 Q 60 50 65 45"/>
+        <path d="M 50 60 Q 55 45 50 35"/>
+        <path d="M 50 60 Q 45 45 50 35"/>
+        <path d="M 50 60 Q 40 50 35 45"/>
+        <circle cx="50" cy="60" r="5" fill="#c68ac8" opacity="0.6"/>
+      </g>
+    </svg>
+
+    <svg class="flower-accent bottom-left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#d4a5d4" stroke-width="1.5" fill="none">
+        <path d="M 50 100 Q 48 80 50 60"/>
+        <path d="M 50 60 Q 60 50 65 45"/>
+        <path d="M 50 60 Q 55 45 50 35"/>
+        <path d="M 50 60 Q 45 45 50 35"/>
+        <path d="M 50 60 Q 40 50 35 45"/>
+        <circle cx="50" cy="60" r="5" fill="#d4a5d4" opacity="0.5"/>
+      </g>
+    </svg>
+
+    <svg class="flower-accent bottom-right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#d4a5d4" stroke-width="1.5" fill="none">
+        <path d="M 50 100 Q 48 80 50 60"/>
+        <path d="M 50 60 Q 60 50 65 45"/>
+        <path d="M 50 60 Q 55 45 50 35"/>
+        <path d="M 50 60 Q 45 45 50 35"/>
+        <path d="M 50 60 Q 40 50 35 45"/>
+        <circle cx="50" cy="60" r="5" fill="#d4a5d4" opacity="0.5"/>
+      </g>
+    </svg>
+
+    <!-- Sparkle dots -->
+    <div class="sparkle s1"></div>
+    <div class="sparkle s2"></div>
+    <div class="sparkle s3"></div>
+    <div class="sparkle s4"></div>
+    <div class="sparkle s5"></div>
+    <div class="sparkle s6"></div>
+
+    <!-- Romantic frame -->
+    <div class="romantic-frame"></div>
+
+    <!-- Poster slot -->
+    <div class="poster-slot">
+      <img src="" alt="Poster" id="posterImage" style="display:none;">
+    </div>
+  </div>
+
+  <script>
+    const POSTER_URL = '';
+
+    // Load poster if provided
+    if (POSTER_URL) {
+      const img = document.getElementById('posterImage');
+      img.src = POSTER_URL;
+      img.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

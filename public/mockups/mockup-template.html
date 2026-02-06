@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumeries Poster Mockups</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+            background: #1a1a1a;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .mockups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .mockup-card {
+            background: #2a2a2a;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .mockup-title {
+            color: #888;
+            padding: 15px 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ========================================
+           MOCKUP 1: Minimalistisches Wohnzimmer
+           ======================================== */
+        .room-minimal {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(180deg,
+                #f5f5f0 0%,
+                #f5f5f0 70%,
+                #d4c4b0 70%,
+                #c9b89d 100%
+            );
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 40px;
+            position: relative;
+        }
+
+        .room-minimal .frame {
+            width: 200px;
+            height: 280px;
+            background: #1a1a2e;
+            border: 12px solid #2a2a2a;
+            box-shadow:
+                0 8px 30px rgba(0,0,0,0.3),
+                inset 0 0 0 1px rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .room-minimal .couch {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 350px;
+            height: 100px;
+            background: linear-gradient(180deg, #d4c4b0 0%, #c9b89d 100%);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .room-minimal .couch::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            height: 60px;
+            background: linear-gradient(180deg, #e8ddd0 0%, #d4c4b0 100%);
+            border-radius: 4px;
+        }
+
+        /* ========================================
+           MOCKUP 2: Dunkles Schlafzimmer
+           ======================================== */
+        .room-bedroom {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(180deg,
+                #2c2c35 0%,
+                #3a3a45 60%,
+                #4a4a55 100%
+            );
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 30px;
+            position: relative;
+        }
+
+        .room-bedroom .frame {
+            width: 180px;
+            height: 250px;
+            background: #1a1a2e;
+            border: 8px solid #111;
+            box-shadow:
+                0 10px 40px rgba(0,0,0,0.5),
+                0 0 0 1px rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .room-bedroom .bed {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 150px;
+        }
+
+        .room-bedroom .bed .headboard {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            height: 120px;
+            background: linear-gradient(180deg, #4a4a55 0%, #3a3a45 100%);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .room-bedroom .bed .mattress {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 380px;
+            height: 80px;
+            background: linear-gradient(180deg, #e8e4e0 0%, #d8d4d0 100%);
+            border-radius: 4px;
+        }
+
+        .room-bedroom .lamp {
+            position: absolute;
+            bottom: 150px;
+            right: 60px;
+            width: 30px;
+            height: 60px;
+        }
+
+        .room-bedroom .lamp::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 30px;
+            background: #f4d03f;
+            border-radius: 50% 50% 0 0;
+            box-shadow: 0 0 30px rgba(244, 208, 63, 0.4);
+        }
+
+        .room-bedroom .lamp::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 30px;
+            background: #666;
+        }
+
+        /* ========================================
+           MOCKUP 3: Skandinavisches Wohnzimmer
+           ======================================== */
+        .room-scandi {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(180deg,
+                #ffffff 0%,
+                #f8f8f5 60%,
+                #e8ddd0 100%
+            );
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 50px;
+            position: relative;
+        }
+
+        .room-scandi .frame {
+            width: 160px;
+            height: 220px;
+            background: #1a1a2e;
+            border: 20px solid #fff;
+            box-shadow:
+                0 4px 20px rgba(0,0,0,0.15),
+                0 0 0 1px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .room-scandi .plant {
+            position: absolute;
+            bottom: 40px;
+            right: 80px;
+            width: 60px;
+            height: 120px;
+        }
+
+        .room-scandi .plant::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 50px;
+            background: #c9b89d;
+            border-radius: 4px;
+        }
+
+        .room-scandi .plant::after {
+            content: '';
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #6b8e6b 0%, #4a6e4a 100%);
+            border-radius: 50%;
+        }
+
+        .room-scandi .shelf {
+            position: absolute;
+            bottom: 180px;
+            left: 60px;
+            width: 100px;
+            height: 8px;
+            background: #c9b89d;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* ========================================
+           MOCKUP 4: Galerie-Wand (3 Poster)
+           ======================================== */
+        .room-gallery {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(180deg,
+                #f0ebe5 0%,
+                #e8e3dd 100%
+            );
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            position: relative;
+        }
+
+        .room-gallery .frame {
+            background: #1a1a2e;
+            border: 10px solid #2a2a2a;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .room-gallery .frame.large {
+            width: 180px;
+            height: 250px;
+        }
+
+        .room-gallery .frame.small {
+            width: 120px;
+            height: 160px;
+        }
+
+        /* ========================================
+           Poster Bild (wird dynamisch geladen)
+           ======================================== */
+        .poster-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Placeholder wenn kein Bild */
+        .poster-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #f4d03f;
+            font-size: 12px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .poster-placeholder .moon {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 30% 30%, #f9e79f 0%, #f4d03f 50%, #d4ac0d 100%);
+            border-radius: 50%;
+            margin-bottom: 15px;
+            box-shadow: 0 0 30px rgba(244, 208, 63, 0.3);
+        }
+
+        /* ========================================
+           Pinterest Format (1000x1500)
+           ======================================== */
+        .pinterest-format {
+            width: 500px;
+            height: 750px;
+        }
+
+        .pinterest-format .room-minimal,
+        .pinterest-format .room-bedroom,
+        .pinterest-format .room-scandi {
+            height: 750px;
+        }
+
+        .pinterest-format .room-minimal .frame {
+            width: 300px;
+            height: 420px;
+        }
+
+        /* ========================================
+           Instagram Format (1080x1080)
+           ======================================== */
+        .instagram-format {
+            width: 500px;
+            height: 500px;
+        }
+
+        .instagram-format .room-minimal,
+        .instagram-format .room-bedroom,
+        .instagram-format .room-scandi {
+            height: 500px;
+        }
+
+        /* Download Button Styling */
+        .download-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: #f4d03f;
+            color: #1a1a1a;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #f9e79f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lumeries Poster Mockups</h1>
+
+    <div class="mockups-grid">
+        <!-- Mockup 1: Minimalistisches Wohnzimmer -->
+        <div class="mockup-card">
+            <div class="mockup-title">Minimalistisches Wohnzimmer</div>
+            <div class="room-minimal" id="mockup1">
+                <div class="frame">
+                    <div class="poster-placeholder">
+                        <div class="moon"></div>
+                        <span>Dein Poster hier</span>
+                    </div>
+                </div>
+                <div class="couch"></div>
+            </div>
+            <button class="download-btn" onclick="downloadMockup('mockup1', 'wohnzimmer-mockup.png')">
+                Download PNG
+            </button>
+        </div>
+
+        <!-- Mockup 2: Dunkles Schlafzimmer -->
+        <div class="mockup-card">
+            <div class="mockup-title">Dunkles Schlafzimmer</div>
+            <div class="room-bedroom" id="mockup2">
+                <div class="frame">
+                    <div class="poster-placeholder">
+                        <div class="moon"></div>
+                        <span>Dein Poster hier</span>
+                    </div>
+                </div>
+                <div class="bed">
+                    <div class="headboard"></div>
+                    <div class="mattress"></div>
+                </div>
+                <div class="lamp"></div>
+            </div>
+            <button class="download-btn" onclick="downloadMockup('mockup2', 'schlafzimmer-mockup.png')">
+                Download PNG
+            </button>
+        </div>
+
+        <!-- Mockup 3: Skandinavisch -->
+        <div class="mockup-card">
+            <div class="mockup-title">Skandinavisches Interior</div>
+            <div class="room-scandi" id="mockup3">
+                <div class="shelf"></div>
+                <div class="frame">
+                    <div class="poster-placeholder">
+                        <div class="moon"></div>
+                        <span>Dein Poster hier</span>
+                    </div>
+                </div>
+                <div class="plant"></div>
+            </div>
+            <button class="download-btn" onclick="downloadMockup('mockup3', 'scandi-mockup.png')">
+                Download PNG
+            </button>
+        </div>
+
+        <!-- Mockup 4: Galerie -->
+        <div class="mockup-card">
+            <div class="mockup-title">Galerie-Wand</div>
+            <div class="room-gallery" id="mockup4">
+                <div class="frame small">
+                    <div class="poster-placeholder">
+                        <div class="moon" style="width:40px;height:40px;"></div>
+                    </div>
+                </div>
+                <div class="frame large">
+                    <div class="poster-placeholder">
+                        <div class="moon"></div>
+                        <span>Dein Poster hier</span>
+                    </div>
+                </div>
+                <div class="frame small">
+                    <div class="poster-placeholder">
+                        <div class="moon" style="width:40px;height:40px;"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="download-btn" onclick="downloadMockup('mockup4', 'galerie-mockup.png')">
+                Download PNG
+            </button>
+        </div>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        // Poster-Bild URL (von lumeries.com oder lokal)
+        const POSTER_URL = 'https://lumeries.com/api/generate-moon-image?scale=2';
+
+        // Lade Poster in alle Frames
+        async function loadPoster() {
+            const frames = document.querySelectorAll('.frame');
+            frames.forEach(frame => {
+                const placeholder = frame.querySelector('.poster-placeholder');
+                if (placeholder) {
+                    // Erstelle img Element
+                    const img = document.createElement('img');
+                    img.src = POSTER_URL;
+                    img.className = 'poster-img';
+                    img.alt = 'Lumeries Moon Poster';
+                    img.onerror = () => {
+                        // Fallback: Behalte Placeholder
+                        console.log('Poster konnte nicht geladen werden');
+                    };
+                    img.onload = () => {
+                        placeholder.replaceWith(img);
+                    };
+                }
+            });
+        }
+
+        // Download Mockup als PNG
+        async function downloadMockup(elementId, filename) {
+            const element = document.getElementById(elementId);
+            try {
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: null
+                });
+
+                const link = document.createElement('a');
+                link.download = filename;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            } catch (err) {
+                console.error('Download error:', err);
+                alert('Download fehlgeschlagen. Versuche es erneut.');
+            }
+        }
+
+        // Initialisieren
+        // loadPoster(); // Auskommentiert - manuell aktivieren wenn Poster-URL funktioniert
+    </script>
+</body>
+</html>

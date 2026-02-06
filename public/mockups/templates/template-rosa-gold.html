@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumeries - Rosa Wand + Gold Hearts</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      background: #1a1a1a;
+    }
+
+    .canvas {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Background Layer - Dark Pink Textured Wall */
+    .background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #4a2c3e 0%, #5d3a4a 25%, #6b4455 50%, #5d3a4a 75%, #4a2c3e 100%);
+      z-index: 1;
+    }
+
+    .background::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px),
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.05) 10px, rgba(0,0,0,0.05) 20px);
+      z-index: 1;
+      mix-blend-mode: overlay;
+    }
+
+    .background::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.08) 0%, transparent 70%);
+      z-index: 2;
+    }
+
+    /* Vignette effect */
+    .vignette {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.3) 100%);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* Poster Slot */
+    .poster-slot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 540px;
+      height: 680px;
+      z-index: 10;
+      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      border-radius: 2px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+
+    .poster-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .poster-slot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 100%);
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    /* Brushstroke Frame SVG */
+    .frame-svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 580px;
+      height: 720px;
+      z-index: 9;
+      filter: drop-shadow(0 10px 30px rgba(0,0,0,0.4));
+    }
+
+    /* Gold Hearts Decoration */
+    .hearts-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 8;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      opacity: 0.85;
+      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.3));
+    }
+
+    .heart-1 {
+      top: 80px;
+      left: 100px;
+      width: 45px;
+      height: 45px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .heart-2 {
+      top: 150px;
+      right: 120px;
+      width: 35px;
+      height: 35px;
+      animation: float 4s ease-in-out infinite;
+      animation-delay: 0.5s;
+    }
+
+    .heart-3 {
+      bottom: 180px;
+      left: 90px;
+      width: 52px;
+      height: 52px;
+      animation: float 3.5s ease-in-out infinite;
+      animation-delay: 1s;
+    }
+
+    .heart-4 {
+      bottom: 120px;
+      right: 110px;
+      width: 40px;
+      height: 40px;
+      animation: float 4.2s ease-in-out infinite;
+      animation-delay: 1.5s;
+    }
+
+    .heart-5 {
+      top: 300px;
+      right: 60px;
+      width: 30px;
+      height: 30px;
+      animation: float 3.8s ease-in-out infinite;
+      animation-delay: 0.2s;
+    }
+
+    .heart-6 {
+      bottom: 300px;
+      left: 50px;
+      width: 38px;
+      height: 38px;
+      animation: float 4.5s ease-in-out infinite;
+      animation-delay: 1.2s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(5deg); }
+    }
+
+    /* Gold Splashes */
+    .splashes-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .splash {
+      position: absolute;
+      opacity: 0.6;
+    }
+
+    .splash-1 {
+      top: 120px;
+      right: 80px;
+      width: 60px;
+      height: 60px;
+    }
+
+    .splash-2 {
+      bottom: 150px;
+      right: 120px;
+      width: 50px;
+      height: 50px;
+      opacity: 0.5;
+    }
+
+    .splash-3 {
+      top: 200px;
+      left: 70px;
+      width: 40px;
+      height: 40px;
+      opacity: 0.4;
+    }
+
+    /* Glow effect on poster */
+    .poster-slot {
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.5),
+        inset 0 0 40px rgba(218, 165, 32, 0.1),
+        0 0 100px rgba(218, 165, 32, 0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <!-- Background -->
+    <div class="background"></div>
+    <div class="vignette"></div>
+
+    <!-- Gold Splashes -->
+    <div class="splashes-container">
+      <svg class="splash splash-1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="splashGold1">
+            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.8" />
+            <stop offset="100%" style="stop-color:#DAA520;stop-opacity:0.3" />
+          </radialGradient>
+        </defs>
+        <circle cx="30" cy="30" r="8" fill="url(#splashGold1)"/>
+        <circle cx="60" cy="25" r="6" fill="url(#splashGold1)"/>
+        <circle cx="70" cy="50" r="7" fill="url(#splashGold1)"/>
+        <circle cx="45" cy="65" r="5" fill="url(#splashGold1)"/>
+        <circle cx="20" cy="70" r="4" fill="url(#splashGold1)"/>
+      </svg>
+
+      <svg class="splash splash-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="splashGold2">
+            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.8" />
+            <stop offset="100%" style="stop-color:#DAA520;stop-opacity:0.3" />
+          </radialGradient>
+        </defs>
+        <circle cx="25" cy="35" r="7" fill="url(#splashGold2)"/>
+        <circle cx="55" cy="40" r="5" fill="url(#splashGold2)"/>
+        <circle cx="40" cy="70" r="6" fill="url(#splashGold2)"/>
+      </svg>
+
+      <svg class="splash splash-3" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="splashGold3">
+            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.8" />
+            <stop offset="100%" style="stop-color:#DAA520;stop-opacity:0.3" />
+          </radialGradient>
+        </defs>
+        <circle cx="35" cy="50" r="6" fill="url(#splashGold3)"/>
+        <circle cx="65" cy="30" r="4" fill="url(#splashGold3)"/>
+        <circle cx="50" cy="80" r="5" fill="url(#splashGold3)"/>
+      </svg>
+    </div>
+
+    <!-- Hearts Decoration -->
+    <div class="hearts-container">
+      <svg class="heart heart-1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="heartGold1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <path d="M50,90 C20,70 5,55 5,40 C5,25 15,15 25,15 C35,15 45,25 50,35 C55,25 65,15 75,15 C85,15 95,25 95,40 C95,55 80,70 50,90 Z" fill="url(#heartGold1)" stroke="#B8860B" stroke-width="1"/>
+      </svg>
+
+      <svg class="heart heart-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="heartGold2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <path d="M50,90 C20,70 5,55 5,40 C5,25 15,15 25,15 C35,15 45,25 50,35 C55,25 65,15 75,15 C85,15 95,25 95,40 C95,55 80,70 50,90 Z" fill="url(#heartGold2)" stroke="#B8860B" stroke-width="1"/>
+      </svg>
+
+      <svg class="heart heart-3" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="heartGold3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <path d="M50,90 C20,70 5,55 5,40 C5,25 15,15 25,15 C35,15 45,25 50,35 C55,25 65,15 75,15 C85,15 95,25 95,40 C95,55 80,70 50,90 Z" fill="url(#heartGold3)" stroke="#B8860B" stroke-width="1"/>
+      </svg>
+
+      <svg class="heart heart-4" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="heartGold4" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <path d="M50,90 C20,70 5,55 5,40 C5,25 15,15 25,15 C35,15 45,25 50,35 C55,25 65,15 75,15 C85,15 95,25 95,40 C95,55 80,70 50,90 Z" fill="url(#heartGold4)" stroke="#B8860B" stroke-width="1"/>
+      </svg>
+
+      <svg class="heart heart-5" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="heartGold5" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <path d="M50,90 C20,70 5,55 5,40 C5,25 15,15 25,15 C35,15 45,25 50,35 C55,25 65,15 75,15 C85,15 95,25 95,40 C95,55 80,70 50,90 Z" fill="url(#heartGold5)" stroke="#B8860B" stroke-width="1"/>
+      </svg>
+
+      <svg class="heart heart-6" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="heartGold6" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <path d="M50,90 C20,70 5,55 5,40 C5,25 15,15 25,15 C35,15 45,25 50,35 C55,25 65,15 75,15 C85,15 95,25 95,40 C95,55 80,70 50,90 Z" fill="url(#heartGold6)" stroke="#B8860B" stroke-width="1"/>
+      </svg>
+    </div>
+
+    <!-- Brushstroke Frame -->
+    <svg class="frame-svg" viewBox="0 0 600 750" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="brushstrokeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:1" />
+          <stop offset="40%" style="stop-color:#FFD700;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+        </linearGradient>
+        <filter id="brushstrokeFilter">
+          <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="4" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" />
+        </filter>
+      </defs>
+      <!-- Top-left corner brush -->
+      <path d="M 20,20 Q 40,25 60,18 Q 80,15 100,25 L 95,40 Q 75,35 55,38 Q 35,40 20,35 Z" fill="url(#brushstrokeGradient)" filter="url(#brushstrokeFilter)" opacity="0.9"/>
+      <!-- Top edge -->
+      <path d="M 120,15 Q 300,8 480,15 Q 520,18 560,22 L 555,45 Q 300,38 125,40 Z" fill="url(#brushstrokeGradient)" filter="url(#brushstrokeFilter)" opacity="0.85"/>
+      <!-- Top-right corner -->
+      <path d="M 560,22 Q 580,20 595,30 L 590,50 Q 570,40 550,45 Z" fill="url(#brushstrokeGradient)" filter="url(#brushstrokeFilter)" opacity="0.9"/>
+      <!-- Right edge -->
+      <path d="M 580,60 Q 590,200 585,350 Q 583,500 575,700 L 555,700 Q 560,500 565,350 Q 568,200 560,60 Z" fill="url(#brushstrokeGradient)" filter="url(#brushstrokeFilter)" opacity="0.8"/>
+      <!-- Bottom-right corner -->
+      <path d="M 575,700 Q 580,710 560,715 L 540,705 Q 560,700 575,700 Z" fill="url(#brushstrokeGradient)" filter="url(#brushstrokeFilter)" opacity="0.9"/>
+      <!-- Bottom edge -->
+      <path d="M 500,720 Q 300,730 100,715 Q 60,712 20,710 L 25,690 Q 70,695 110,698 Q 300,710 520,700 Z" fill="url(#brushstrokeGradient)" filter="url(#brushstrokeFilter)" opacity="0.85"/>
+      <!-- Bottom-left corner -->
+      <path d="M 20,710 Q 10,715 5,700 L 15,680 Q 25,695 40,698 Z" fill="url(#brushstrokeGradient)" filter="url(#brushstrokeFilter)" opacity="0.9"/>
+      <!-- Left edge -->
+      <path d="M 15,680 Q 8,500 12,350 Q 18,200 25,50 L 45,50 Q 35,200 30,350 Q 28,500 35,680 Z" fill="url(#brushstrokeGradient)" filter="url(#brushstrokeFilter)" opacity="0.8"/>
+    </svg>
+
+    <!-- Poster Slot -->
+    <div class="poster-slot" id="poster-slot" data-poster-url="">
+      <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%); color: #999; font-family: Arial, sans-serif; font-size: 14px; text-align: center;">
+        Poster Image
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const POSTER_URL = ''; // Set poster image URL here - e.g., 'https://example.com/poster.jpg'
+
+    function loadPoster() {
+      const posterSlot = document.getElementById('poster-slot');
+
+      if (POSTER_URL && POSTER_URL.trim() !== '') {
+        const img = document.createElement('img');
+        img.src = POSTER_URL;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        img.style.display = 'block';
+        posterSlot.innerHTML = '';
+        posterSlot.appendChild(img);
+      }
+    }
+
+    // Load poster on page load
+    window.addEventListener('load', loadPoster);
+
+    // Also try loading immediately in case image is cached
+    if (document.readyState === 'complete') {
+      loadPoster();
+    }
+
+    // For Etsy 3000x3000px sizing, uncomment the scale factor below
+    // This template is 1080x1080px. For 3000x3000px, multiply all values by 2.78
+    // ?size=3000 parameter can be added to URL for dynamic scaling
+  </script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terracotta Boho - Lumeries Mockup</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      background: #b8714f;
+    }
+
+    .canvas {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #a0613e 0%, #c8875f 50%, #9d5e3a 100%);
+      overflow: hidden;
+    }
+
+    /* Texture overlay */
+    .texture-overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-image:
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 1px,
+          rgba(255, 255, 255, 0.02) 1px,
+          rgba(255, 255, 255, 0.02) 2px
+        );
+      pointer-events: none;
+    }
+
+    /* Boho plants - pampas grass */
+    .plant {
+      position: absolute;
+      opacity: 0.7;
+    }
+
+    .plant.top-left {
+      top: 20px;
+      left: 20px;
+      width: 200px;
+      height: 250px;
+    }
+
+    .plant.bottom-right {
+      bottom: 30px;
+      right: 20px;
+      width: 180px;
+      height: 220px;
+      transform: scaleX(-1);
+    }
+
+    .plant.top-right {
+      top: 40px;
+      right: 30px;
+      width: 160px;
+      height: 200px;
+      opacity: 0.5;
+    }
+
+    /* Arch frame around poster */
+    .arch-frame {
+      position: absolute;
+      width: 580px;
+      height: 800px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 3px solid #d4a373;
+      border-radius: 60px;
+      box-shadow:
+        inset 0 0 30px rgba(0, 0, 0, 0.2),
+        0 0 40px rgba(212, 163, 115, 0.2);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* Poster slot */
+    .poster-slot {
+      position: absolute;
+      width: 540px;
+      height: 720px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #f5f5f5;
+      z-index: 10;
+    }
+
+    .poster-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Decorative sun/rainbow accents */
+    .sun-accent {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      opacity: 0.4;
+    }
+
+    .sun-accent.top-right {
+      top: 60px;
+      right: 80px;
+    }
+
+    .sun-accent.bottom-left {
+      bottom: 100px;
+      left: 60px;
+    }
+
+    /* Small decorative elements */
+    .dot-accent {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #d4a373;
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+
+    .dot-accent.accent-1 { top: 120px; left: 80px; }
+    .dot-accent.accent-2 { top: 140px; right: 100px; }
+    .dot-accent.accent-3 { bottom: 150px; right: 120px; }
+    .dot-accent.accent-4 { bottom: 180px; left: 90px; }
+
+    /* Subtle animation */
+    @keyframes gentle-sway {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-3px) rotate(0.5deg); }
+    }
+
+    .plant {
+      animation: gentle-sway 6s ease-in-out infinite;
+    }
+
+    /* Rainbow accent animation */
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .sun-accent {
+      animation: float-slow 5s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="texture-overlay"></div>
+
+    <!-- Boho plants -->
+    <svg class="plant top-left" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+      <!-- Pampas grass style plants -->
+      <g fill="none" stroke="#e8d4b8" stroke-width="2" stroke-linecap="round">
+        <path d="M 30 140 Q 25 100 28 50"/>
+        <path d="M 40 140 Q 35 95 40 40"/>
+        <path d="M 50 140 Q 50 100 52 30"/>
+        <path d="M 60 140 Q 65 95 62 45"/>
+        <path d="M 70 140 Q 75 105 70 55"/>
+      </g>
+      <!-- Fluffy tops -->
+      <circle cx="28" cy="50" r="12" fill="#e8d4b8" opacity="0.6"/>
+      <circle cx="40" cy="40" r="14" fill="#e8d4b8" opacity="0.6"/>
+      <circle cx="52" cy="30" r="13" fill="#e8d4b8" opacity="0.6"/>
+      <circle cx="62" cy="45" r="12" fill="#e8d4b8" opacity="0.6"/>
+      <circle cx="70" cy="55" r="11" fill="#e8d4b8" opacity="0.6"/>
+    </svg>
+
+    <svg class="plant bottom-right" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#e8d4b8" stroke-width="2" stroke-linecap="round">
+        <path d="M 30 140 Q 25 100 28 50"/>
+        <path d="M 40 140 Q 35 95 40 40"/>
+        <path d="M 50 140 Q 50 100 52 30"/>
+        <path d="M 60 140 Q 65 95 62 45"/>
+        <path d="M 70 140 Q 75 105 70 55"/>
+      </g>
+      <circle cx="28" cy="50" r="12" fill="#e8d4b8" opacity="0.6"/>
+      <circle cx="40" cy="40" r="14" fill="#e8d4b8" opacity="0.6"/>
+      <circle cx="52" cy="30" r="13" fill="#e8d4b8" opacity="0.6"/>
+      <circle cx="62" cy="45" r="12" fill="#e8d4b8" opacity="0.6"/>
+      <circle cx="70" cy="55" r="11" fill="#e8d4b8" opacity="0.6"/>
+    </svg>
+
+    <svg class="plant top-right" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#e8d4b8" stroke-width="2" stroke-linecap="round">
+        <path d="M 30 140 Q 25 100 28 50"/>
+        <path d="M 40 140 Q 35 95 40 40"/>
+        <path d="M 50 140 Q 50 100 52 30"/>
+        <path d="M 60 140 Q 65 95 62 45"/>
+        <path d="M 70 140 Q 75 105 70 55"/>
+      </g>
+      <circle cx="28" cy="50" r="12" fill="#e8d4b8" opacity="0.6"/>
+      <circle cx="40" cy="40" r="14" fill="#e8d4b8" opacity="0.6"/>
+      <circle cx="52" cy="30" r="13" fill="#e8d4b8" opacity="0.6"/>
+      <circle cx="62" cy="45" r="12" fill="#e8d4b8" opacity="0.6"/>
+      <circle cx="70" cy="55" r="11" fill="#e8d4b8" opacity="0.6"/>
+    </svg>
+
+    <!-- Sun/rainbow accents -->
+    <svg class="sun-accent top-right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <!-- Half sun with rainbow -->
+      <defs>
+        <linearGradient id="rainbowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#f4a460;stop-opacity:0.6" />
+          <stop offset="50%" style="stop-color:#daa520;stop-opacity:0.6" />
+          <stop offset="100%" style="stop-color:#cd853f;stop-opacity:0.6" />
+        </linearGradient>
+      </defs>
+      <circle cx="50" cy="50" r="40" fill="url(#rainbowGrad)"/>
+      <circle cx="50" cy="50" r="30" fill="#a0613e"/>
+    </svg>
+
+    <svg class="sun-accent bottom-left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="rainbowGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#f4a460;stop-opacity:0.6" />
+          <stop offset="50%" style="stop-color:#daa520;stop-opacity:0.6" />
+          <stop offset="100%" style="stop-color:#cd853f;stop-opacity:0.6" />
+        </linearGradient>
+      </defs>
+      <circle cx="50" cy="50" r="40" fill="url(#rainbowGrad2)"/>
+      <circle cx="50" cy="50" r="30" fill="#a0613e"/>
+    </svg>
+
+    <!-- Dot accents -->
+    <div class="dot-accent accent-1"></div>
+    <div class="dot-accent accent-2"></div>
+    <div class="dot-accent accent-3"></div>
+    <div class="dot-accent accent-4"></div>
+
+    <!-- Arch frame -->
+    <div class="arch-frame"></div>
+
+    <!-- Poster slot -->
+    <div class="poster-slot">
+      <img src="" alt="Poster" id="posterImage" style="display:none;">
+    </div>
+  </div>
+
+  <script>
+    const POSTER_URL = '';
+
+    // Load poster if provided
+    if (POSTER_URL) {
+      const img = document.getElementById('posterImage');
+      img.src = POSTER_URL;
+      img.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

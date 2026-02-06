@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sage Gold - Lumeries Mockup</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      background: #8b9a7f;
+    }
+
+    .canvas {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #7a8a70 0%, #9baa8f 50%, #708560 100%);
+      overflow: hidden;
+    }
+
+    /* Texture overlay */
+    .texture-overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-image:
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 2px,
+          rgba(255, 255, 255, 0.03) 2px,
+          rgba(255, 255, 255, 0.03) 4px
+        );
+      pointer-events: none;
+    }
+
+    /* Ornate gold frame */
+    .gold-frame {
+      position: absolute;
+      width: 580px;
+      height: 800px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 4px solid #d4af37;
+      box-shadow:
+        inset 0 0 20px rgba(212, 175, 55, 0.3),
+        0 0 50px rgba(212, 175, 55, 0.2),
+        0 4px 15px rgba(0, 0, 0, 0.3);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* Decorative corner elements */
+    .corner-ornament {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      z-index: 6;
+    }
+
+    .corner-ornament.top-left {
+      top: calc(50% - 400px - 30px);
+      left: calc(50% - 290px - 30px);
+    }
+
+    .corner-ornament.top-right {
+      top: calc(50% - 400px - 30px);
+      right: calc(50% - 290px - 30px);
+    }
+
+    .corner-ornament.bottom-left {
+      bottom: calc(50% - 400px - 30px);
+      left: calc(50% - 290px - 30px);
+    }
+
+    .corner-ornament.bottom-right {
+      bottom: calc(50% - 400px - 30px);
+      right: calc(50% - 290px - 30px);
+    }
+
+    /* Gold leaf accents */
+    .leaf-accent {
+      position: absolute;
+      opacity: 0.6;
+    }
+
+    .leaf-accent.left {
+      left: 80px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 120px;
+      height: 120px;
+    }
+
+    .leaf-accent.right {
+      right: 80px;
+      top: 50%;
+      transform: translateY(-50%) scaleX(-1);
+      width: 120px;
+      height: 120px;
+    }
+
+    /* Gold confetti dots */
+    .confetti {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #d4af37;
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+
+    .confetti.conf-1 { top: 150px; left: 150px; }
+    .confetti.conf-2 { top: 200px; right: 180px; }
+    .confetti.conf-3 { bottom: 200px; left: 160px; }
+    .confetti.conf-4 { bottom: 150px; right: 170px; }
+    .confetti.conf-5 { top: 400px; left: 50px; width: 4px; height: 4px; }
+    .confetti.conf-6 { top: 600px; right: 80px; width: 4px; height: 4px; }
+
+    /* Poster slot */
+    .poster-slot {
+      position: absolute;
+      width: 540px;
+      height: 720px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #f5f5f5;
+      z-index: 10;
+    }
+
+    .poster-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Subtle animation */
+    @keyframes gentle-float {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.7; }
+    }
+
+    .confetti {
+      animation: gentle-float 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3)); }
+      50% { filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5)); }
+    }
+
+    .gold-frame {
+      animation: pulse-glow 5s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="texture-overlay"></div>
+
+    <!-- Left leaf accent -->
+    <svg class="leaf-accent left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <!-- Olive branch style -->
+      <g fill="#d4af37" opacity="0.7">
+        <path d="M 50 10 Q 40 30 50 50 Q 60 70 50 90" fill="none" stroke="#d4af37" stroke-width="3"/>
+        <!-- Leaves -->
+        <ellipse cx="40" cy="25" rx="8" ry="12" transform="rotate(-30 40 25)"/>
+        <ellipse cx="35" cy="40" rx="8" ry="12" transform="rotate(-20 35 40)"/>
+        <ellipse cx="38" cy="60" rx="8" ry="12" transform="rotate(20 38 60)"/>
+        <ellipse cx="45" cy="75" rx="8" ry="12" transform="rotate(30 45 75)"/>
+        <ellipse cx="60" cy="30" rx="8" ry="12" transform="rotate(30 60 30)"/>
+        <ellipse cx="65" cy="45" rx="8" ry="12" transform="rotate(20 65 45)"/>
+        <ellipse cx="62" cy="65" rx="8" ry="12" transform="rotate(-20 62 65)"/>
+        <ellipse cx="55" cy="80" rx="8" ry="12" transform="rotate(-30 55 80)"/>
+      </g>
+    </svg>
+
+    <!-- Right leaf accent -->
+    <svg class="leaf-accent right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#d4af37" opacity="0.7">
+        <path d="M 50 10 Q 40 30 50 50 Q 60 70 50 90" fill="none" stroke="#d4af37" stroke-width="3"/>
+        <ellipse cx="40" cy="25" rx="8" ry="12" transform="rotate(-30 40 25)"/>
+        <ellipse cx="35" cy="40" rx="8" ry="12" transform="rotate(-20 35 40)"/>
+        <ellipse cx="38" cy="60" rx="8" ry="12" transform="rotate(20 38 60)"/>
+        <ellipse cx="45" cy="75" rx="8" ry="12" transform="rotate(30 45 75)"/>
+        <ellipse cx="60" cy="30" rx="8" ry="12" transform="rotate(30 60 30)"/>
+        <ellipse cx="65" cy="45" rx="8" ry="12" transform="rotate(20 65 45)"/>
+        <ellipse cx="62" cy="65" rx="8" ry="12" transform="rotate(-20 62 65)"/>
+        <ellipse cx="55" cy="80" rx="8" ry="12" transform="rotate(-30 55 80)"/>
+      </g>
+    </svg>
+
+    <!-- Corner ornaments -->
+    <svg class="corner-ornament top-left" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="30" cy="30" r="25" fill="none" stroke="#d4af37" stroke-width="2" opacity="0.7"/>
+      <circle cx="30" cy="30" r="20" fill="none" stroke="#d4af37" stroke-width="1" opacity="0.5"/>
+      <circle cx="15" cy="15" r="5" fill="#d4af37" opacity="0.6"/>
+      <circle cx="45" cy="15" r="4" fill="#d4af37" opacity="0.5"/>
+    </svg>
+
+    <svg class="corner-ornament top-right" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="30" cy="30" r="25" fill="none" stroke="#d4af37" stroke-width="2" opacity="0.7"/>
+      <circle cx="30" cy="30" r="20" fill="none" stroke="#d4af37" stroke-width="1" opacity="0.5"/>
+      <circle cx="45" cy="15" r="5" fill="#d4af37" opacity="0.6"/>
+      <circle cx="15" cy="15" r="4" fill="#d4af37" opacity="0.5"/>
+    </svg>
+
+    <svg class="corner-ornament bottom-left" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="30" cy="30" r="25" fill="none" stroke="#d4af37" stroke-width="2" opacity="0.7"/>
+      <circle cx="30" cy="30" r="20" fill="none" stroke="#d4af37" stroke-width="1" opacity="0.5"/>
+      <circle cx="15" cy="45" r="5" fill="#d4af37" opacity="0.6"/>
+      <circle cx="45" cy="45" r="4" fill="#d4af37" opacity="0.5"/>
+    </svg>
+
+    <svg class="corner-ornament bottom-right" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="30" cy="30" r="25" fill="none" stroke="#d4af37" stroke-width="2" opacity="0.7"/>
+      <circle cx="30" cy="30" r="20" fill="none" stroke="#d4af37" stroke-width="1" opacity="0.5"/>
+      <circle cx="45" cy="45" r="5" fill="#d4af37" opacity="0.6"/>
+      <circle cx="15" cy="45" r="4" fill="#d4af37" opacity="0.5"/>
+    </svg>
+
+    <!-- Confetti dots -->
+    <div class="confetti conf-1"></div>
+    <div class="confetti conf-2"></div>
+    <div class="confetti conf-3"></div>
+    <div class="confetti conf-4"></div>
+    <div class="confetti conf-5"></div>
+    <div class="confetti conf-6"></div>
+
+    <!-- Gold frame -->
+    <div class="gold-frame"></div>
+
+    <!-- Poster slot -->
+    <div class="poster-slot">
+      <img src="" alt="Poster" id="posterImage" style="display:none;">
+    </div>
+  </div>
+
+  <script>
+    const POSTER_URL = '';
+
+    // Load poster if provided
+    if (POSTER_URL) {
+      const img = document.getElementById('posterImage');
+      img.src = POSTER_URL;
+      img.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

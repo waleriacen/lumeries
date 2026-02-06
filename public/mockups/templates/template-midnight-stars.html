@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Midnight Stars - Lumeries Mockup</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      background: #0a0e27;
+    }
+
+    .canvas {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0a0e27 0%, #1a2847 50%, #0d1828 100%);
+      overflow: hidden;
+    }
+
+    /* Star field background */
+    .star-field {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+
+    .star.small { width: 1px; height: 1px; }
+    .star.medium { width: 2px; height: 2px; }
+    .star.large { width: 3px; height: 3px; }
+
+    .star.gold { background: #ffd700; }
+    .star.glow {
+      box-shadow: 0 0 8px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.4);
+    }
+
+    /* Nebula glow behind poster */
+    .nebula {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse at center, rgba(100, 150, 255, 0.15) 0%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    /* Constellation lines */
+    .constellations {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    /* Crescent moon */
+    .moon {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      top: 40px;
+      right: 60px;
+      opacity: 0.8;
+    }
+
+    .moon svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+    }
+
+    /* Poster slot */
+    .poster-slot {
+      position: absolute;
+      width: 540px;
+      height: 720px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #f5f5f5;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      box-shadow:
+        0 0 60px rgba(100, 150, 255, 0.2),
+        inset 0 0 30px rgba(255, 255, 255, 0.05);
+      z-index: 10;
+    }
+
+    .poster-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Decorative frame corners */
+    .frame-corner {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      z-index: 5;
+    }
+
+    .frame-corner.top-left {
+      top: calc(50% - 360px - 20px);
+      left: calc(50% - 270px - 20px);
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .frame-corner.top-right {
+      top: calc(50% - 360px - 20px);
+      right: calc(50% - 270px - 20px);
+      border-left: none;
+      border-bottom: none;
+    }
+
+    .frame-corner.bottom-left {
+      bottom: calc(50% - 360px - 20px);
+      left: calc(50% - 270px - 20px);
+      border-right: none;
+      border-top: none;
+    }
+
+    .frame-corner.bottom-right {
+      bottom: calc(50% - 360px - 20px);
+      right: calc(50% - 270px - 20px);
+      border-left: none;
+      border-top: none;
+    }
+
+    /* Subtle animations */
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes twinkle-slow {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 0.9; }
+    }
+
+    .star.anim-fast {
+      animation: twinkle 3s infinite;
+    }
+
+    .star.anim-slow {
+      animation: twinkle-slow 6s infinite;
+    }
+
+    /* Subtle floating animation for moon */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .moon {
+      animation: float 4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <!-- Nebula glow -->
+    <div class="nebula"></div>
+
+    <!-- Star field -->
+    <div class="star-field" id="starField"></div>
+
+    <!-- Constellation lines SVG -->
+    <svg class="constellations" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; left: 0;">
+      <!-- Subtle constellation lines -->
+      <line x1="100" y1="150" x2="200" y2="200" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <line x1="200" y1="200" x2="280" y2="120" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <line x1="900" y1="250" x2="950" y2="350" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+      <line x1="950" y1="350" x2="1000" y2="300" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+      <line x1="150" y1="900" x2="250" y2="950" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <line x1="900" y1="850" x2="1000" y2="900" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+      <line x1="1000" y1="900" x2="950" y2="1000" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    </svg>
+
+    <!-- Moon -->
+    <div class="moon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Crescent moon shape -->
+        <defs>
+          <mask id="moonMask">
+            <circle cx="50" cy="50" r="45" fill="white"/>
+            <circle cx="60" cy="40" r="45" fill="black"/>
+          </mask>
+        </defs>
+        <circle cx="50" cy="50" r="45" fill="#ffd700" mask="url(#moonMask)"/>
+      </svg>
+    </div>
+
+    <!-- Frame corners -->
+    <div class="frame-corner top-left"></div>
+    <div class="frame-corner top-right"></div>
+    <div class="frame-corner bottom-left"></div>
+    <div class="frame-corner bottom-right"></div>
+
+    <!-- Poster slot -->
+    <div class="poster-slot">
+      <img src="" alt="Poster" id="posterImage" style="display:none;">
+    </div>
+  </div>
+
+  <script>
+    const POSTER_URL = '';
+
+    // Generate star field
+    function generateStars() {
+      const starField = document.getElementById('starField');
+      const starCount = 150;
+      const sizes = ['small', 'medium', 'large'];
+      const colors = ['white', 'white', 'white', 'white', 'gold'];
+      const animations = ['anim-fast', 'anim-slow', ''];
+
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.className = 'star ' + sizes[Math.floor(Math.random() * sizes.length)];
+
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        if (color === 'gold') star.classList.add('gold');
+
+        if (Math.random() > 0.8) star.classList.add('glow');
+
+        const animation = animations[Math.floor(Math.random() * animations.length)];
+        if (animation) star.classList.add(animation);
+
+        star.style.left = Math.random() * 1080 + 'px';
+        star.style.top = Math.random() * 1080 + 'px';
+        star.style.opacity = 0.3 + Math.random() * 0.7;
+
+        starField.appendChild(star);
+      }
+    }
+
+    // Initialize
+    generateStars();
+
+    // Load poster if provided
+    if (POSTER_URL) {
+      const img = document.getElementById('posterImage');
+      img.src = POSTER_URL;
+      img.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

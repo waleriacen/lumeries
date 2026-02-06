@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumeries - Black Marble Luxury</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+
+    .canvas {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Background Layer - Black Marble */
+    .background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #0f0f0f 50%, #1a1a1a 75%, #0a0a0a 100%);
+      z-index: 1;
+    }
+
+    .background::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.08) 25%, rgba(255, 255, 255, 0.08) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.08) 75%, rgba(255, 255, 255, 0.08) 76%, transparent 77%, transparent),
+        linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.08) 25%, rgba(255, 255, 255, 0.08) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.08) 75%, rgba(255, 255, 255, 0.08) 76%, transparent 77%, transparent);
+      background-size: 60px 60px;
+      z-index: 1;
+      mix-blend-mode: overlay;
+      opacity: 0.4;
+    }
+
+    .background::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(ellipse at 20% 40%, rgba(255,255,255,0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 50%);
+      z-index: 2;
+    }
+
+    /* Veining effect for marble */
+    .marble-veins {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      pointer-events: none;
+      opacity: 0.5;
+      background-image:
+        linear-gradient(110deg, transparent 30%, rgba(200, 200, 200, 0.05) 32%, rgba(200, 200, 200, 0.05) 40%, transparent 42%),
+        linear-gradient(50deg, transparent 55%, rgba(200, 200, 200, 0.04) 57%, rgba(200, 200, 200, 0.04) 65%, transparent 67%),
+        linear-gradient(150deg, transparent 20%, rgba(220, 220, 220, 0.06) 22%, rgba(220, 220, 220, 0.06) 28%, transparent 30%);
+    }
+
+    /* Poster Slot */
+    .poster-slot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 540px;
+      height: 680px;
+      z-index: 11;
+      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 60px rgba(218, 165, 32, 0.2);
+    }
+
+    .poster-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .poster-slot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.1) 100%);
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .poster-slot::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      box-shadow: inset 0 0 50px rgba(0,0,0,0.15);
+      z-index: 21;
+      pointer-events: none;
+    }
+
+    /* Gold Frame */
+    .gold-frame-outer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 580px;
+      height: 720px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .gold-frame-outer::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+      background: linear-gradient(135deg, #FFE55C 0%, #FFD700 20%, #DAA520 50%, #B8860B 80%, #8B7500 100%);
+      z-index: 10;
+      filter: drop-shadow(0 15px 40px rgba(0,0,0,0.6));
+    }
+
+    .gold-frame-outer::after {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+      background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+      z-index: 11;
+      pointer-events: none;
+    }
+
+    /* Ornate Frame Border */
+    .frame-border {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 580px;
+      height: 720px;
+      z-index: 9;
+      pointer-events: none;
+    }
+
+    /* Gold Sparkles */
+    .sparkles-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 7;
+      pointer-events: none;
+    }
+
+    .sparkle {
+      position: absolute;
+      opacity: 0.8;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    .sparkle-1 {
+      top: 100px;
+      right: 100px;
+      width: 12px;
+      height: 12px;
+      animation-delay: 0s;
+    }
+
+    .sparkle-2 {
+      top: 200px;
+      left: 80px;
+      width: 8px;
+      height: 8px;
+      animation-delay: 0.5s;
+    }
+
+    .sparkle-3 {
+      bottom: 150px;
+      right: 90px;
+      width: 10px;
+      height: 10px;
+      animation-delay: 1s;
+    }
+
+    .sparkle-4 {
+      top: 350px;
+      left: 60px;
+      width: 9px;
+      height: 9px;
+      animation-delay: 1.5s;
+    }
+
+    .sparkle-5 {
+      bottom: 250px;
+      right: 110px;
+      width: 7px;
+      height: 7px;
+      animation-delay: 0.7s;
+    }
+
+    .sparkle-6 {
+      top: 500px;
+      right: 70px;
+      width: 8px;
+      height: 8px;
+      animation-delay: 1.2s;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* Corner Ornaments */
+    .corner-ornament {
+      position: absolute;
+      opacity: 0.85;
+      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.4));
+    }
+
+    .corner-top-left {
+      top: 60px;
+      left: 60px;
+      width: 80px;
+      height: 80px;
+    }
+
+    .corner-top-right {
+      top: 60px;
+      right: 60px;
+      width: 80px;
+      height: 80px;
+      transform: scaleX(-1);
+    }
+
+    .corner-bottom-left {
+      bottom: 60px;
+      left: 60px;
+      width: 80px;
+      height: 80px;
+      transform: scaleY(-1);
+    }
+
+    .corner-bottom-right {
+      bottom: 60px;
+      right: 60px;
+      width: 80px;
+      height: 80px;
+      transform: scale(-1);
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <!-- Background -->
+    <div class="background"></div>
+    <div class="marble-veins"></div>
+
+    <!-- Gold Sparkles -->
+    <div class="sparkles-container">
+      <svg class="sparkle sparkle-1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="sparkleGrad1">
+            <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0.3" />
+          </radialGradient>
+        </defs>
+        <circle cx="50" cy="50" r="45" fill="url(#sparkleGrad1)"/>
+        <polygon points="50,5 61,35 92,50 61,65 50,95 39,65 8,50 39,35" fill="#FFE55C" opacity="0.9"/>
+      </svg>
+
+      <svg class="sparkle sparkle-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="sparkleGrad2">
+            <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0.3" />
+          </radialGradient>
+        </defs>
+        <circle cx="50" cy="50" r="40" fill="url(#sparkleGrad2)"/>
+        <polygon points="50,10 58,32 82,50 58,68 50,90 42,68 18,50 42,32" fill="#FFE55C" opacity="0.85"/>
+      </svg>
+
+      <svg class="sparkle sparkle-3" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="sparkleGrad3">
+            <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0.3" />
+          </radialGradient>
+        </defs>
+        <circle cx="50" cy="50" r="42" fill="url(#sparkleGrad3)"/>
+        <polygon points="50,8 60,34 87,50 60,66 50,92 40,66 13,50 40,34" fill="#FFE55C" opacity="0.9"/>
+      </svg>
+
+      <svg class="sparkle sparkle-4" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="sparkleGrad4">
+            <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:0.9" />
+            <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0.2" />
+          </radialGradient>
+        </defs>
+        <circle cx="50" cy="50" r="38" fill="url(#sparkleGrad4)"/>
+        <polygon points="50,12 57,31 78,50 57,69 50,88 43,69 22,50 43,31" fill="#FFE55C" opacity="0.85"/>
+      </svg>
+
+      <svg class="sparkle sparkle-5" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="sparkleGrad5">
+            <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:0.85" />
+            <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0.2" />
+          </radialGradient>
+        </defs>
+        <circle cx="50" cy="50" r="36" fill="url(#sparkleGrad5)"/>
+        <polygon points="50,14 56,30 75,50 56,70 50,86 44,70 25,50 44,30" fill="#FFE55C" opacity="0.8"/>
+      </svg>
+
+      <svg class="sparkle sparkle-6" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="sparkleGrad6">
+            <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:0.9" />
+            <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0.25" />
+          </radialGradient>
+        </defs>
+        <circle cx="50" cy="50" r="39" fill="url(#sparkleGrad6)"/>
+        <polygon points="50,11 58,33 80,50 58,67 50,89 42,67 20,50 42,33" fill="#FFE55C" opacity="0.85"/>
+      </svg>
+    </div>
+
+    <!-- Corner Ornaments -->
+    <svg class="corner-ornament corner-top-left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ornamentGold">
+          <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <circle cx="20" cy="20" r="8" fill="url(#ornamentGold)"/>
+      <path d="M 20,5 L 25,15 L 35,20 L 25,25 L 20,35 L 15,25 L 5,20 L 15,15 Z" fill="url(#ornamentGold)" opacity="0.8"/>
+      <circle cx="50" cy="20" r="6" fill="url(#ornamentGold)" opacity="0.7"/>
+      <circle cx="20" cy="50" r="6" fill="url(#ornamentGold)" opacity="0.7"/>
+    </svg>
+
+    <svg class="corner-ornament corner-top-right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ornamentGold2">
+          <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <circle cx="80" cy="20" r="8" fill="url(#ornamentGold2)"/>
+      <path d="M 80,5 L 85,15 L 95,20 L 85,25 L 80,35 L 75,25 L 65,20 L 75,15 Z" fill="url(#ornamentGold2)" opacity="0.8"/>
+      <circle cx="50" cy="20" r="6" fill="url(#ornamentGold2)" opacity="0.7"/>
+      <circle cx="80" cy="50" r="6" fill="url(#ornamentGold2)" opacity="0.7"/>
+    </svg>
+
+    <svg class="corner-ornament corner-bottom-left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ornamentGold3">
+          <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <circle cx="20" cy="80" r="8" fill="url(#ornamentGold3)"/>
+      <path d="M 20,65 L 25,75 L 35,80 L 25,85 L 20,95 L 15,85 L 5,80 L 15,75 Z" fill="url(#ornamentGold3)" opacity="0.8"/>
+      <circle cx="50" cy="80" r="6" fill="url(#ornamentGold3)" opacity="0.7"/>
+      <circle cx="20" cy="50" r="6" fill="url(#ornamentGold3)" opacity="0.7"/>
+    </svg>
+
+    <svg class="corner-ornament corner-bottom-right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ornamentGold4">
+          <stop offset="0%" style="stop-color:#FFE55C;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <circle cx="80" cy="80" r="8" fill="url(#ornamentGold4)"/>
+      <path d="M 80,65 L 85,75 L 95,80 L 85,85 L 80,95 L 75,85 L 65,80 L 75,75 Z" fill="url(#ornamentGold4)" opacity="0.8"/>
+      <circle cx="50" cy="80" r="6" fill="url(#ornamentGold4)" opacity="0.7"/>
+      <circle cx="80" cy="50" r="6" fill="url(#ornamentGold4)" opacity="0.7"/>
+    </svg>
+
+    <!-- Frame Container -->
+    <div class="gold-frame-outer"></div>
+
+    <!-- Poster Slot -->
+    <div class="poster-slot" id="poster-slot" data-poster-url="">
+      <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%); color: #999; font-family: Arial, sans-serif; font-size: 14px; text-align: center;">
+        Poster Image
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const POSTER_URL = ''; // Set poster image URL here - e.g., 'https://example.com/poster.jpg'
+
+    function loadPoster() {
+      const posterSlot = document.getElementById('poster-slot');
+
+      if (POSTER_URL && POSTER_URL.trim() !== '') {
+        const img = document.createElement('img');
+        img.src = POSTER_URL;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        img.style.display = 'block';
+        posterSlot.innerHTML = '';
+        posterSlot.appendChild(img);
+      }
+    }
+
+    // Load poster on page load
+    window.addEventListener('load', loadPoster);
+
+    // Also try loading immediately in case image is cached
+    if (document.readyState === 'complete') {
+      loadPoster();
+    }
+
+    // For Etsy 3000x3000px sizing, multiply all values by 2.78
+    // ?size=3000 parameter can be added to URL for dynamic scaling
+  </script>
+</body>
+</html>

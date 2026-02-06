@@ -1,0 +1,40 @@
+KOSTENLOSE RAUM-BILDER VON UNSPLASH
+====================================
+Diese URLs funktionieren OHNE API-Key (Direct Download)
+
+1. MODERNES WOHNZIMMER (weisse Wand)
+   https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920&q=80
+   Koordinaten: [(580, 180), (920, 200), (910, 520), (590, 490)]
+
+2. MINIMALISTISCHES SCHLAFZIMMER
+   https://images.unsplash.com/photo-1540518614846-7eded433c457?w=1920&q=80
+   Koordinaten: [(750, 120), (1050, 130), (1045, 380), (755, 365)]
+
+3. SKANDINAVISCHES INTERIOR (mit Sofa)
+   https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1920&q=80
+   Koordinaten: [(400, 80), (700, 90), (695, 320), (405, 305)]
+
+4. GEMUETLICHE LESEECKE
+   https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1920&q=80
+   Koordinaten: [(520, 100), (820, 110), (815, 360), (525, 345)]
+
+5. HELLE WOHNUNG (grosse Fenster)
+   https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1920&q=80
+   Koordinaten: [(600, 150), (880, 160), (875, 390), (605, 375)]
+
+HINWEIS ZUR VERWENDUNG:
+-----------------------
+Die Koordinaten sind 4 Punkte im Uhrzeigersinn:
+  1. Oben-Links
+  2. Oben-Rechts
+  3. Unten-Rechts
+  4. Unten-Links
+
+Diese definieren wo das Poster im Bild platziert wird.
+Die Koordinaten koennen je nach genauer Bildversion angepasst werden.
+
+LIZENZ:
+-------
+Unsplash Bilder sind kostenlos fuer kommerzielle und nicht-kommerzielle Nutzung.
+Attribution ist nicht erforderlich, aber geschaetzt.
+https://unsplash.com/license

@@ -1,0 +1,25 @@
+{
+  "name": "Lumeries - Personalisiertes Mondposter",
+  "short_name": "Lumeries",
+  "description": "Erstelle dein kostenloses personalisiertes Mondposter mit der exakten Mondphase von eurem besonderen Tag.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a1a",
+  "theme_color": "#0a0a1a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-icon",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["lifestyle", "shopping", "personalization"],
+  "lang": "de",
+  "dir": "ltr"
+}

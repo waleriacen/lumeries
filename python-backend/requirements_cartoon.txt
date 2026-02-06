@@ -1,0 +1,13 @@
+# Requirements for CartoonGAN / AnimeGAN
+# Much better for photo-to-cartoon than Stable Diffusion!
+
+torch>=2.0.0
+torchvision>=0.15.0
+opencv-python>=4.8.0
+pillow>=10.0.0
+numpy>=1.24.0
+flask>=3.0.0
+flask-cors>=4.0.0
+
+# For downloading pre-trained models
+gdown>=4.7.0
