@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import MoonPoster from '@/components/MoonPoster';
-import { generatePosterPNG } from '@/lib/posterExport';
+import { generatePosterFromElement } from '@/lib/posterExport';
 
 // Scale factors for different print sizes (base is 500x700px)
 const POSTER_FORMATS = {
@@ -116,6 +116,7 @@ function DownloadPageContent() {
   const [selectedFormat, setSelectedFormat] = useState('50x70');
   const [isDownloading, setIsDownloading] = useState(false);
   const [region, setRegion] = useState<'eu' | 'us'>('eu');
+  const captureRef = useRef<HTMLDivElement>(null);
 
   // Get parameters from URL
   const title = searchParams.get('title') || '';
@@ -155,27 +156,23 @@ function DownloadPageContent() {
   }, []);
 
   const handleDownload = async () => {
+    if (!captureRef.current) return;
+
     setIsDownloading(true);
     setDownloadProgress(0);
 
     try {
-      // Get target dimensions for selected format
+      // Get target width for selected format
       const allFormats = [...POSTER_FORMATS.eu, ...POSTER_FORMATS.us];
       const format = allFormats.find(f => f.id === selectedFormat) || allFormats[3];
 
-      // Generate poster using client-side canvas
-      const blob = await generatePosterPNG(
-        {
-          title,
-          names,
-          coordinates,
-          date,
-          tagline,
-          style,
-          locale,
-        },
+      // Wait briefly for any pending renders (CelestialBackground canvas)
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      // Capture the actual MoonPoster DOM element using html2canvas
+      const blob = await generatePosterFromElement(
+        captureRef.current,
         format.width,
-        format.height,
         (progress) => setDownloadProgress(progress)
       );
 
@@ -206,6 +203,31 @@ function DownloadPageContent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#1a1f35] to-[#0a0e1a] text-white">
+      {/* Hidden poster element for high-res capture - rendered at 500x700 base size, no rounding */}
+      <div
+        ref={captureRef}
+        aria-hidden="true"
+        style={{
+          position: 'fixed',
+          left: '-9999px',
+          top: '0',
+          width: '500px',
+          height: '700px',
+          overflow: 'hidden',
+          pointerEvents: 'none',
+        }}
+      >
+        <MoonPoster
+          title={title}
+          names={names}
+          coordinates={coordinates}
+          date={date}
+          tagline={tagline}
+          style={style}
+          locale={locale}
+        />
+      </div>
+
       <div className="max-w-4xl mx-auto px-4 py-12">
         {/* Header */}
         <div className="text-center mb-12">
