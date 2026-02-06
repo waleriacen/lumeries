@@ -1,10 +1,11 @@
 import { MetadataRoute } from 'next';
+import { blogPosts } from '@/lib/blog-posts';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://lumeries.com';
   const currentDate = new Date().toISOString();
 
-  return [
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: currentDate,
@@ -32,6 +33,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/blog`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/ideas`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
@@ -50,4 +57,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
   ];
+
+  const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: post.publishedAt,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...blogPages];
 }

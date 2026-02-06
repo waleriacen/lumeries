@@ -4,7 +4,9 @@ import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import MoonPoster from '@/components/MoonPoster';
 import ChatWidget from '@/components/ChatWidget';
-import PinterestConnect from '@/components/PinterestConnect';
+import SocialShareButtons from '@/components/SocialShareButtons';
+import ExitIntentPopup from '@/components/ExitIntentPopup';
+import ReferralBanner from '@/components/ReferralBanner';
 import { translations, languageNames, type Language } from '@/lib/translations';
 
 // Preview Modal Component
@@ -86,24 +88,10 @@ function FreeMoonPosterPage() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [notificationCity, setNotificationCity] = useState('');
-  const [pinterestToken, setPinterestToken] = useState<string | null>(null);
-  const [pinterestUser, setPinterestUser] = useState<string | null>(null);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
 
   const t = translations[lang];
-
-  // Check for Pinterest OAuth callback
-  useEffect(() => {
-    const token = searchParams.get('pinterest_token');
-    const user = searchParams.get('pinterest_user');
-    if (token) {
-      setPinterestToken(token);
-      setPinterestUser(user);
-      // Clean up URL
-      window.history.replaceState({}, '', window.location.pathname);
-    }
-  }, [searchParams]);
 
   // Set today's date as default
   useEffect(() => {
@@ -314,9 +302,52 @@ function FreeMoonPosterPage() {
               {t.successTitle}
             </h1>
             <p className="text-gray-600 mb-6" dangerouslySetInnerHTML={{ __html: t.successText.replace('{email}', email) }} />
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 mb-8">
               {t.successSpamNote}
             </p>
+
+            {/* Share CTA */}
+            <div className="border-t border-gray-200 pt-6">
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">
+                {t.shareSuccessTitle}
+              </h2>
+              <p className="text-sm text-gray-500 mb-4">
+                {t.shareSuccessText}
+              </p>
+              <SocialShareButtons
+                shareUrl="https://lumeries.com"
+                shareTitle={t.heroTitle}
+                shareDescription={t.heroSubtitle}
+                pinterestDescription={t.pinterestDescription}
+                imageUrl="https://lumeries.com/opengraph-image"
+                t={{
+                  shareTitle: t.shareSuccessTitle,
+                  shareOnPinterest: t.shareOnPinterest,
+                  shareOnWhatsApp: t.shareOnWhatsApp,
+                  shareOnFacebook: t.shareOnFacebook,
+                  shareOnX: t.shareOnX,
+                  copyLink: t.copyLink,
+                  linkCopied: t.linkCopied,
+                }}
+                variant="success"
+              />
+            </div>
+
+            {/* Referral Banner */}
+            <div className="mt-6">
+              <ReferralBanner
+                referralCode={`MOON${firstName.toUpperCase().slice(0, 4)}20`}
+                shareUrl="https://lumeries.com"
+                t={{
+                  referralTitle: t.referralTitle,
+                  referralText: t.referralText,
+                  referralCode: t.referralCode,
+                  referralCopied: t.referralCopied,
+                  referralShare: t.referralShare,
+                  referralDiscount: t.referralDiscount,
+                }}
+              />
+            </div>
           </div>
         </div>
       </main>
@@ -410,22 +441,24 @@ function FreeMoonPosterPage() {
               }}>
                 {posterPreview}
               </div>
-              {/* Pinterest Connect/Share */}
-              <div className="mt-4 flex justify-center">
-                <PinterestConnect
-                  accessToken={pinterestToken}
-                  username={pinterestUser}
-                  posterImageUrl="https://lumeries.com/opengraph-image"
+              {/* Social Share Buttons */}
+              <div className="mt-4">
+                <SocialShareButtons
+                  shareUrl="https://lumeries.com"
+                  shareTitle={t.heroTitle}
+                  shareDescription={t.heroSubtitle}
+                  pinterestDescription={t.pinterestDescription}
+                  imageUrl="https://lumeries.com/opengraph-image"
                   t={{
-                    connectPinterest: t.connectPinterest,
-                    pinterestConnected: t.pinterestConnected,
-                    pinToBoard: t.pinToBoard,
-                    selectBoard: t.selectBoard,
-                    pinSuccess: t.pinSuccess,
-                    pinError: t.pinError,
-                    loadingBoards: t.loadingBoards,
-                    pinterestDescription: t.pinterestDescription,
+                    shareTitle: t.shareTitle,
+                    shareOnPinterest: t.shareOnPinterest,
+                    shareOnWhatsApp: t.shareOnWhatsApp,
+                    shareOnFacebook: t.shareOnFacebook,
+                    shareOnX: t.shareOnX,
+                    copyLink: t.copyLink,
+                    linkCopied: t.linkCopied,
                   }}
+                  variant="inline"
                 />
               </div>
             </div>
@@ -452,22 +485,24 @@ function FreeMoonPosterPage() {
                   {posterPreview}
                 </div>
                 <p className="text-center text-xs text-gray-500 mt-3">{t.tapToEnlarge}</p>
-                {/* Pinterest Connect/Share - Mobile */}
-                <div className="mt-3 flex justify-center" onClick={(e) => e.stopPropagation()}>
-                  <PinterestConnect
-                    accessToken={pinterestToken}
-                    username={pinterestUser}
-                    posterImageUrl="https://lumeries.com/opengraph-image"
+                {/* Social Share Buttons - Mobile */}
+                <div className="mt-3" onClick={(e) => e.stopPropagation()}>
+                  <SocialShareButtons
+                    shareUrl="https://lumeries.com"
+                    shareTitle={t.heroTitle}
+                    shareDescription={t.heroSubtitle}
+                    pinterestDescription={t.pinterestDescription}
+                    imageUrl="https://lumeries.com/opengraph-image"
                     t={{
-                      connectPinterest: t.connectPinterest,
-                      pinterestConnected: t.pinterestConnected,
-                      pinToBoard: t.pinToBoard,
-                      selectBoard: t.selectBoard,
-                      pinSuccess: t.pinSuccess,
-                      pinError: t.pinError,
-                      loadingBoards: t.loadingBoards,
-                      pinterestDescription: t.pinterestDescription,
+                      shareTitle: t.shareTitle,
+                      shareOnPinterest: t.shareOnPinterest,
+                      shareOnWhatsApp: t.shareOnWhatsApp,
+                      shareOnFacebook: t.shareOnFacebook,
+                      shareOnX: t.shareOnX,
+                      copyLink: t.copyLink,
+                      linkCopied: t.linkCopied,
                     }}
+                    variant="inline"
                   />
                 </div>
               </div>
@@ -761,6 +796,21 @@ function FreeMoonPosterPage() {
 
       {/* Support Chat Widget */}
       <ChatWidget lang={lang} />
+
+      {/* Exit Intent Popup */}
+      <ExitIntentPopup
+        t={{
+          exitTitle: t.exitTitle,
+          exitSubtitle: t.exitSubtitle,
+          exitCta: t.exitCta,
+          exitDismiss: t.exitDismiss,
+        }}
+        onCtaClick={() => {
+          // Scroll to the email form
+          const emailSection = document.querySelector('input[type="email"]');
+          emailSection?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }}
+      />
     </main>
   );
 }

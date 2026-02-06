@@ -106,16 +106,29 @@ export const translations = {
 
     // Share
     shareOnPinterest: 'Auf Pinterest teilen',
-    pinterestDescription: 'Mein personalisiertes Mondphasen-Poster von Lumeries - Erstelle dein eigenes kostenloses Poster!',
+    pinterestDescription: 'Personalisiertes Mondphasen-Poster kostenlos erstellen | Astronomisch exakter Mond deiner besonderen Nacht | Perfektes Geschenk Hochzeit Jahrestag Geburt | lumeries.com',
+    shareTitle: 'Teile dein Poster',
+    shareOnWhatsApp: 'Per WhatsApp teilen',
+    shareOnFacebook: 'Auf Facebook teilen',
+    shareOnX: 'Auf X teilen',
+    copyLink: 'Link kopieren',
+    linkCopied: 'Kopiert!',
+    shareSuccessTitle: 'Teile es mit Freunden!',
+    shareSuccessText: 'Zeig deinen Liebsten, wie besonders der Mond in eurer Nacht war.',
 
-    // Pinterest Connect
-    connectPinterest: 'Mit Pinterest verbinden',
-    pinterestConnected: 'Pinterest verbunden',
-    pinToBoard: 'Auf Board pinnen',
-    selectBoard: 'Board auswählen',
-    pinSuccess: 'Pin erfolgreich erstellt!',
-    pinError: 'Fehler beim Erstellen des Pins',
-    loadingBoards: 'Lade Boards...',
+    // Exit Intent
+    exitTitle: 'Warte! Dein Poster ist fast fertig',
+    exitSubtitle: 'Erstelle in 2 Minuten dein kostenloses Mondphasen-Poster – über 10.000 Paare haben es schon.',
+    exitCta: 'Kostenloses Poster erstellen',
+    exitDismiss: 'Nein danke, vielleicht später',
+
+    // Referral
+    referralTitle: 'Teile die Liebe!',
+    referralText: 'Teile Lumeries mit Freunden – ihr beide bekommt Rabatt auf Premium-Poster.',
+    referralCode: 'Code kopieren',
+    referralCopied: 'Kopiert!',
+    referralShare: 'Per WhatsApp teilen',
+    referralDiscount: '20% Rabatt für euch beide',
 
     // Email
     emailSubject: 'Dein Mondphasen-Poster',
@@ -229,16 +242,29 @@ export const translations = {
 
     // Share
     shareOnPinterest: 'Share on Pinterest',
-    pinterestDescription: 'My personalized moon phase poster from Lumeries - Create your own free poster!',
+    pinterestDescription: 'Create your free personalized moon phase poster | Astronomically accurate moon from your special night | Perfect gift for weddings anniversaries birthdays | lumeries.com',
+    shareTitle: 'Share your poster',
+    shareOnWhatsApp: 'Share on WhatsApp',
+    shareOnFacebook: 'Share on Facebook',
+    shareOnX: 'Share on X',
+    copyLink: 'Copy link',
+    linkCopied: 'Copied!',
+    shareSuccessTitle: 'Share it with friends!',
+    shareSuccessText: 'Show your loved ones how special the moon was on your night.',
 
-    // Pinterest Connect
-    connectPinterest: 'Connect with Pinterest',
-    pinterestConnected: 'Pinterest connected',
-    pinToBoard: 'Pin to board',
-    selectBoard: 'Select board',
-    pinSuccess: 'Pin created successfully!',
-    pinError: 'Error creating pin',
-    loadingBoards: 'Loading boards...',
+    // Exit Intent
+    exitTitle: 'Wait! Your poster is almost ready',
+    exitSubtitle: 'Create your free moon phase poster in 2 minutes – over 10,000 couples already have.',
+    exitCta: 'Create free poster',
+    exitDismiss: 'No thanks, maybe later',
+
+    // Referral
+    referralTitle: 'Spread the love!',
+    referralText: 'Share Lumeries with friends – you both get a discount on premium posters.',
+    referralCode: 'Copy code',
+    referralCopied: 'Copied!',
+    referralShare: 'Share via WhatsApp',
+    referralDiscount: '20% off for both of you',
 
     // Email
     emailSubject: 'Your Moon Phase Poster',
@@ -352,16 +378,29 @@ export const translations = {
 
     // Share
     shareOnPinterest: 'Partager sur Pinterest',
-    pinterestDescription: 'Mon poster personnalisé des phases lunaires de Lumeries - Créez votre poster gratuit!',
+    pinterestDescription: 'Poster personnalisé phases lunaires gratuit | Lune astronomiquement exacte de votre nuit spéciale | Cadeau parfait mariage anniversaire naissance | lumeries.com',
+    shareTitle: 'Partagez votre poster',
+    shareOnWhatsApp: 'Partager sur WhatsApp',
+    shareOnFacebook: 'Partager sur Facebook',
+    shareOnX: 'Partager sur X',
+    copyLink: 'Copier le lien',
+    linkCopied: 'Copié !',
+    shareSuccessTitle: 'Partagez avec vos amis !',
+    shareSuccessText: 'Montrez à vos proches la lune de votre nuit spéciale.',
 
-    // Pinterest Connect
-    connectPinterest: 'Se connecter avec Pinterest',
-    pinterestConnected: 'Pinterest connecté',
-    pinToBoard: 'Épingler sur le tableau',
-    selectBoard: 'Sélectionner le tableau',
-    pinSuccess: 'Pin créé avec succès !',
-    pinError: 'Erreur lors de la création du pin',
-    loadingBoards: 'Chargement des tableaux...',
+    // Exit Intent
+    exitTitle: 'Attendez ! Votre poster est presque prêt',
+    exitSubtitle: 'Créez votre poster lunaire gratuit en 2 minutes – plus de 10 000 couples l\'ont déjà fait.',
+    exitCta: 'Créer mon poster gratuit',
+    exitDismiss: 'Non merci, peut-être plus tard',
+
+    // Referral
+    referralTitle: 'Partagez l\'amour !',
+    referralText: 'Partagez Lumeries avec vos amis – vous recevez tous les deux une réduction sur les posters premium.',
+    referralCode: 'Copier le code',
+    referralCopied: 'Copié !',
+    referralShare: 'Partager via WhatsApp',
+    referralDiscount: '-20% pour vous deux',
 
     // Email
     emailSubject: 'Votre poster de phases lunaires',
@@ -475,16 +514,29 @@ export const translations = {
 
     // Share
     shareOnPinterest: 'Compartir en Pinterest',
-    pinterestDescription: 'Mi póster personalizado de fases lunares de Lumeries - ¡Crea tu póster gratis!',
+    pinterestDescription: 'Poster personalizado fases lunares gratis | Luna astronómicamente exacta de tu noche especial | Regalo perfecto boda aniversario cumpleaños | lumeries.com',
+    shareTitle: 'Comparte tu póster',
+    shareOnWhatsApp: 'Compartir en WhatsApp',
+    shareOnFacebook: 'Compartir en Facebook',
+    shareOnX: 'Compartir en X',
+    copyLink: 'Copiar enlace',
+    linkCopied: '¡Copiado!',
+    shareSuccessTitle: '¡Comparte con tus amigos!',
+    shareSuccessText: 'Muestra a tus seres queridos la luna de tu noche especial.',
 
-    // Pinterest Connect
-    connectPinterest: 'Conectar con Pinterest',
-    pinterestConnected: 'Pinterest conectado',
-    pinToBoard: 'Fijar en tablero',
-    selectBoard: 'Seleccionar tablero',
-    pinSuccess: '¡Pin creado con éxito!',
-    pinError: 'Error al crear el pin',
-    loadingBoards: 'Cargando tableros...',
+    // Exit Intent
+    exitTitle: '¡Espera! Tu póster está casi listo',
+    exitSubtitle: 'Crea tu póster lunar gratuito en 2 minutos – más de 10.000 parejas ya lo tienen.',
+    exitCta: 'Crear póster gratis',
+    exitDismiss: 'No gracias, quizás después',
+
+    // Referral
+    referralTitle: '¡Comparte el amor!',
+    referralText: 'Comparte Lumeries con amigos – ambos obtienen descuento en pósters premium.',
+    referralCode: 'Copiar código',
+    referralCopied: '¡Copiado!',
+    referralShare: 'Compartir por WhatsApp',
+    referralDiscount: '20% de descuento para ambos',
 
     // Email
     emailSubject: 'Tu poster de fases lunares',
