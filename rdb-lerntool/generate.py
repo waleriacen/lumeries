@@ -164,6 +164,51 @@ def parse_aufgaben(txt):
         out.append({"t":title,"f":frage,"l":loes})
     return out
 
+def parse_klausur(txt):
+    out=[]
+    blocks=re.split(r"(?m)^###\s+", txt)
+    for b in blocks:
+        b=b.strip()
+        if not b or b.startswith("#"): continue
+        nl=b.find("\n"); title=b[:nl].strip() if nl!=-1 else b; rest=b[nl+1:] if nl!=-1 else ""
+        parts=[p.strip() for p in title.split("|")]
+        nr=parts[0]; quelle=parts[1] if len(parts)>1 else ""; punkte=parts[2] if len(parts)>2 else ""
+        frage=""; loes=""
+        mf=re.search(r"(?m)^FRAGE:\s*",rest); ml=re.search(r"(?m)^LOESUNG:\s*",rest)
+        if mf and ml:
+            frage=rest[mf.end():ml.start()].strip(); loes=rest[ml.end():].strip()
+        out.append({"nr":nr,"quelle":quelle,"punkte":punkte,"f":frage,"l":loes})
+    return out
+
+# Themen, die in der Übungsklausur gefragt wurden -> Markierung in Karteikarten/Spickzettel
+KLAUSUR_PATTERNS = [
+    (r"Halbwertszeit|Halbwertzeit", "ÜK 1.1"),
+    (r"Formen der beruflichen Weiterbildung|Anpassungs- und Aufstiegsfortbildung|Anpassungsfortbildung|Lernen am Arbeitsplatz", "ÜK 1.2"),
+    (r"BGJ|BVJ|Berufsgrundbildungsjahr|Berufsvorbereitungsjahr", "ÜK 2.1"),
+    (r"(?<!nterkulturelle )Handlungskompetenz|vier Kompetenzen|aus welchen Bereichen", "ÜK 2.2"),
+    (r"Personalrat|Betriebsrat", "ÜK 2.3"),
+    (r"Regelungsbereiche", "ÜK 3.1"),
+    (r"Krankenh", "ÜK 3.2"),
+    (r"vorbehalten\w* Tätigkeit|Vorbehaltsaufgaben|vorbehaltene Aufgaben", "ÜK 3.3"),
+    (r"Treuepflicht", "ÜK 4.1"),
+    (r"Remonstration", "ÜK 4.2"),
+    (r"Schulentwicklung", "ÜK 4.3"),
+    (r"Modelle beruflicher Bildung|Marktmodell|Schulmodell|Kooperationsmodell|Kooperatives|Informelles Modell", "ÜK 5.1"),
+    (r"Diversit[aä]tskompetenz", "ÜK 5.2/5.3"),
+]
+def klausur_tags(text):
+    hits=[]
+    for pat,lab in KLAUSUR_PATTERNS:
+        if re.search(pat, text, re.I):
+            hits.append(lab)
+    return hits
+
+def klausur_badge(text):
+    hits=klausur_tags(text)
+    if not hits: return ""
+    return (f'<span class="src src-klausur" title="In der Übungsklausur gefragt: '
+            f'{", ".join(hits)}">⭐ Übungsklausur</span>')
+
 def parse_modelle(txt):
     out=[]
     for line in txt.split("\n"):
@@ -251,6 +296,13 @@ def build():
             "modelle":parse_modelle(secs.get("MODELLE_BILDER","")),
         }
 
+    # Übungsklausur laden
+    klausur=[]
+    kp=os.path.join(CONTENT,"UEBUNGSKLAUSUR.md")
+    if os.path.exists(kp):
+        with open(kp,encoding="utf-8") as fh:
+            klausur=parse_klausur(fh.read())
+
     tabs=[("start","ℹ️ Start")]
     for sb,nr,_,_ in BRIEFE:
         tabs.append((sb.lower(), f"📘 SB{nr}"))
@@ -293,8 +345,13 @@ def build():
     start.append('<li>📘 <strong>SB-Reiter:</strong> einfache Erklärungen mit Beispielen, Modell-Bilder und Karteikarten.</li>')
     start.append('<li>📇 <strong>Karteikarten:</strong> Antwort & „💡 Einfach erklärt" per Tipp aufklappen.</li>')
     start.append('<li>❓ <strong>Abfrage:</strong> nur Fragen sichtbar – Antwort erst aufklappen (deckungsgleich mit den Karteikarten).</li>')
-    start.append('<li>📝 <strong>Übungen:</strong> alle Aufgaben aus den Briefen mit vollständigen Musterlösungen.</li>')
+    start.append('<li>📝 <strong>Übungen:</strong> die <strong>HFH-Übungsklausur</strong> (Originalaufgaben) '
+                 '<em>und</em> alle Übungsaufgaben aus den Briefen – mit vollständigen Musterlösungen.</li>')
     start.append('<li>📋 <strong>Spickzettel:</strong> alle Definitionen & Modelle kompakt.</li>')
+    start.append('<li>⭐ <strong>Markierungen:</strong> Themen mit '
+                 '<span class="src src-klausur">⭐ Übungsklausur</span> wurden in der HFH-Übungsklausur gefragt – '
+                 'sie tauchen so auch in Karteikarten und Spickzettel auf. '
+                 'Im Übungen-Reiter zeigt <span class="src src-sb">📘 SB-Übungsaufgabe</span> die Herkunft aus dem Studienbrief.</li>')
     start.append('<li>🔊 <strong>Vorlesen:</strong> liest Abschnitte vor (nur im echten Browser mit JS; Vorschau ignoriert ihn).</li>')
     start.append('</ul>')
     start.append(f'<p class="meta">Insgesamt {total_cards} Karteikarten · {total_aufg} Übungsaufgaben.</p>')
@@ -333,8 +390,9 @@ def build():
         # Karteikarten
         sp.append('<h2 class="sech">📇 Karteikarten</h2>')
         for k,c in enumerate(d["cards"]):
-            sp.append('<div class="flash">')
-            sp.append(f'<div class="q">❓ {inline_md(c["q"])}</div>')
+            badge=klausur_badge(c["q"])
+            sp.append('<div class="flash'+(' isklausur' if badge else '')+'">')
+            sp.append(f'<div class="q">❓ {inline_md(c["q"])} {badge}</div>')
             sp.append(f'<div class="a">{block_to_html(c["a"])}</div>')
             if c["e"]:
                 sp.append('<details class="einfach"><summary>💡 Einfach erklärt</summary>'
@@ -353,7 +411,7 @@ def build():
         spk.append(f'<h2 class="sech">SB{nr} – {esc(titel)} {tts_btn("spick-"+sb)}</h2>')
         spk.append(f'<ul class="spick ttsblock" id="spick-{sb}">')
         for it in data[sb]["spick"]:
-            spk.append(f'<li>{inline_md(it)}</li>')
+            spk.append(f'<li>{inline_md(it)} {klausur_badge(it)}</li>')
         spk.append('</ul></div>')
     spk.append('</section>')
     parts.append("".join(spk))
@@ -366,7 +424,7 @@ def build():
     for sb,nr,titel,_ in BRIEFE:
         ab.append(f'<div class="card"><h2 class="sech">SB{nr} – {esc(titel)}</h2>')
         for c in data[sb]["cards"]:
-            ab.append('<details class="quiz"><summary>'+inline_md(c["q"])+'</summary>')
+            ab.append('<details class="quiz"><summary>'+inline_md(c["q"])+' '+klausur_badge(c["q"])+'</summary>')
             ab.append('<div class="qa">'+block_to_html(c["a"]))
             if c["e"]:
                 ab.append('<div class="qe"><strong>💡 Einfach erklärt:</strong> '+block_to_html(c["e"])+'</div>')
@@ -378,14 +436,42 @@ def build():
     # UEBUNG panel
     ue=['<section class="panel p-uebung"><div class="card">']
     ue.append('<h1>📝 Übungsaufgaben mit Musterlösungen</h1>')
-    ue.append('<p class="lead">Alle Aufgaben aus den Studienbriefen. Versuche es zuerst selbst, '
-              'dann klappe die Musterlösung auf.</p></div>')
+    ue.append('<p class="lead">Zwei Quellen, klar gekennzeichnet: die <strong>Übungsklausur der HFH</strong> '
+              '(beste Klausur-Vorbereitung) und die <strong>Übungsaufgaben aus den Studienbriefen</strong>. '
+              'Versuche es zuerst selbst, dann klappe die Musterlösung auf.</p>')
+    ue.append('<p class="legend"><span class="src src-klausur">⭐ Übungsklausur</span> = Originalfrage aus der HFH-Übungsklausur &nbsp; '
+              '<span class="src src-sb">📘 SB-Übungsaufgabe</span> = Aufgabe aus dem Studienbrief</p></div>')
+
+    # Übungsklausur-Block (oben)
+    if klausur:
+        kpunkte=sum(int(re.search(r"\d+",x["punkte"]).group()) for x in klausur if re.search(r"\d+",x["punkte"]))
+        ue.append('<div class="card klausurcard">')
+        ue.append('<h2 class="sech">⭐ Übungsklausur (HFH) – Originalaufgaben</h2>')
+        ue.append(f'<p class="lead">Offizielle HFH-Übungsklausur zur Prüfungsleistung MP00-RDB-PK1 · '
+                  f'Bearbeitungszeit 100 Minuten · 5 Aufgaben · 100 Punkte. '
+                  f'Jede Frage mit Quelle (Studienbrief/Seite) und Punkten.</p>')
+        for a in klausur:
+            ue.append('<div class="aufg isklausur">')
+            meta=[]
+            if a["quelle"]: meta.append(esc(a["quelle"]))
+            if a["punkte"]: meta.append(esc(a["punkte"]))
+            metahtml=f' <span class="pg">({" · ".join(meta)})</span>' if meta else ""
+            ue.append(f'<div class="at"><span class="src src-klausur">⭐ Übungsklausur</span> '
+                      f'Aufgabe {esc(a["nr"].replace("Aufgabe ",""))}{metahtml}</div>')
+            ue.append(f'<div class="af">{block_to_html(a["f"])}</div>')
+            if a["l"]:
+                ue.append('<details class="loes"><summary>✅ Musterlösung anzeigen</summary>'
+                          f'<div>{block_to_html(a["l"])}</div></details>')
+            ue.append('</div>')
+        ue.append('</div>')
+
+    # Studienbrief-Übungsaufgaben
     for sb,nr,titel,_ in BRIEFE:
         if not data[sb]["aufg"]: continue
-        ue.append(f'<div class="card"><h2 class="sech">SB{nr} – {esc(titel)}</h2>')
+        ue.append(f'<div class="card"><h2 class="sech">📘 SB{nr} – {esc(titel)} (Übungsaufgaben)</h2>')
         for a in data[sb]["aufg"]:
             ue.append('<div class="aufg">')
-            ue.append(f'<div class="at">{inline_md(a["t"])}</div>')
+            ue.append(f'<div class="at"><span class="src src-sb">📘 SB{nr}-Übungsaufgabe</span> {inline_md(a["t"])}</div>')
             ue.append(f'<div class="af">{block_to_html(a["f"])}</div>')
             if a["l"]:
                 ue.append('<details class="loes"><summary>✅ Musterlösung anzeigen</summary>'
@@ -528,6 +614,16 @@ figure{margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;
 figure img{display:block;width:100%;height:auto;background:#fff}
 figcaption{font-size:.82rem;color:#475569;padding:8px 10px;border-top:1px solid var(--line);background:#f8fafc}
 .pg{color:var(--muted);font-size:.8rem}
+/* Quellen-Badges */
+.src{display:inline-block;font:700 .68rem/1.3 inherit;padding:2px 8px;border-radius:999px;
+  white-space:nowrap;vertical-align:middle}
+.src-klausur{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+.src-sb{background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe}
+.flash.isklausur{border-left-color:#f59e0b;background:#fffdf5}
+.aufg.isklausur{border-color:#fde68a;background:#fffdf5}
+.klausurcard{border-color:#fde68a;box-shadow:0 0 0 2px #fef3c7 inset}
+.legend{font-size:.84rem;color:#475569;margin:.4em 0 0}
+details.quiz>summary .src{margin-left:4px}
 .tts{font:600 .72rem/1 inherit;color:#0369a1;background:#e0f2fe;border:1px solid #bae6fd;
   border-radius:999px;padding:5px 9px;cursor:pointer}
 .tts:hover{background:#bae6fd}
