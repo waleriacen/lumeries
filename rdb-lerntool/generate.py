@@ -203,11 +203,91 @@ def klausur_tags(text):
             hits.append(lab)
     return hits
 
-def klausur_badge(text):
-    hits=klausur_tags(text)
-    if not hits: return ""
-    return (f'<span class="src src-klausur" title="In der Übungsklausur gefragt: '
-            f'{", ".join(hits)}">⭐ Übungsklausur</span>')
+# Themen der SB-Übungsaufgaben -> Markierung in Erklärungen/Karteikarten/Spickzettel
+SB_PATTERNS = [
+    # SB1
+    (r"Berufsfunktion", "SB1: Berufsfunktionen"),
+    (r"Vor- und Nachteile.{0,8}Dualen|Kritik am Dualen|Kritikpunkte|Pro und Contra", "SB1: Kritik/Vor-Nachteile Duales System"),
+    (r"Arbeitsorientierung", "SB1: Berufs-/Arbeitsorientierung"),
+    (r"Kompetenzentwicklung|Kompetenzgesellschaft", "SB1: Kompetenzentwicklung"),
+    (r"Gestaltungskräfte|gesellschaftliche[ns]? Kräfte", "SB1: Gestaltungskräfte"),
+    (r"Erstausbildung und Weiterbildung|Leitbild .?3K|\b3K\b", "SB1: Erstausbildung/Weiterbildung (3K)"),
+    (r"Formen der beruflichen Weiterbildung|Anpassungsfortbildung|Aufstiegsfortbildung|Umschulung|Lernen am Arbeitsplatz", "SB1: Formen der Weiterbildung"),
+    # SB2
+    (r"Lernort", "SB2: Lernorte Betrieb/Berufsschule"),
+    (r"Betriebsrat|Personalrat", "SB2: Aufgaben Betriebs-/Personalrat"),
+    (r"Handlungskompetenz", "SB2: Handlungskompetenz"),
+    (r"Ausbildungsordnung", "SB2: Ausbildungsordnung"),
+    (r"Ausbildungsvertrag|Berufsausbildungsvertrag", "SB2: Ausbildungsvertrag"),
+    (r"Rahmenlehrplan", "SB2: Rahmenlehrplan"),
+    (r"Reform der Pflegeberufe|Pflegeberufereform", "SB2: Pflegeberufereform"),
+    (r"\bKammer", "SB2: Kammern"),
+    (r"\bDQR\b|Deutsche[rn] Qualifikationsrahmen", "SB2: DQR"),
+    (r"Handlungsfähigkeit", "SB2: Handlungsfähigkeit"),
+    (r"Pflichten.*(Auszubildend|Ausbildend)|(Auszubildend|Ausbildend).*Pflicht", "SB2: Pflichten Azubi/Ausbilder"),
+    (r"Ausbildungsverhältnis|Beendigung", "SB2: Beginn/Ende Ausbildungsverhältnis"),
+    (r"Jugend- und Auszubildendenvertretung|\bJAV\b", "SB2: JAV"),
+    (r"Diskriminierung|Benachteiligung|\bAGG\b", "SB2: Diskriminierung/AGG"),
+    # SB3
+    (r"konkurrierende Gesetzgebung", "SB3: konkurrierende Gesetzgebung"),
+    (r"Schulen des Gesundheitswesens", "SB3: Schulen des Gesundheitswesens"),
+    (r"Berufsfachschul", "SB3: Berufsfachschulen"),
+    (r"Gesundheitsfachberuf", "SB3: Gesundheitsfachberufe"),
+    (r"\bKMK\b|Kultusministerkonferenz", "SB3: KMK"),
+    (r"Praxisanleitung", "SB3: Praxisanleitung"),
+    (r"Lehrkräfte", "SB3: Lehrkräfteausbildung/-qualifikation"),
+    (r"Probezeit|Kündigung", "SB3: Probezeit/Kündigung"),
+    (r"akademisierung", "SB3: Voll-/Teilakademisierung"),
+    (r"Delegation|Heilkunde|G-?BA", "SB3: Delegation/Heilkunde (G-BA)"),
+    (r"PflStudStG|hochschulische Pflegeausbildung", "SB3: PflStudStG"),
+    # SB4
+    (r"Schulleitung", "SB4: Schulleitung"),
+    (r"Hausrecht", "SB4: Hausrecht"),
+    (r"Vorgesetzt|Dienstvorgesetzt", "SB4: Vorgesetzte/Dienstvorgesetzte"),
+    (r"Aufsicht", "SB4: Aufsichtspflicht"),
+    (r"\bEltern", "SB4: Elternmitwirkung"),
+    (r"Schülervertretung|Rechte und Pflichten der Schüler", "SB4: Schülerrechte/-vertretung"),
+    (r"Schulkosten|Schulbudget|Finanzmittel", "SB4: Schulfinanzierung"),
+    (r"Schulmonopol|Privatschul|Ersatzschul|Ergänzungsschul", "SB4: Privatschulen"),
+    (r"\bBeamt", "SB4: Beamtenverhältnis"),
+    (r"Pflichtverletzung|Amtshaftung", "SB4: Pflichtverletzung/Amtshaftung"),
+    (r"Datenschutz|informationelle Selbstbestimmung", "SB4: Datenschutz"),
+    # SB5
+    (r"Input.*Outcome|Outcomewelt|Inputwelt|outcomeorientiert", "SB5: Input-/Outcome-Orientierung"),
+    (r"Berufsbildungszusammenarbeit|systemisch|ganzheitlich", "SB5: Berufsbildungszusammenarbeit"),
+    # SB6
+    (r"Heterogenität", "SB6: Heterogenität"),
+    (r"Inklusion|Integration", "SB6: Inklusion/Integration"),
+    (r"Diagnose|Förderplan", "SB6: Diagnosen/Förderpläne"),
+    (r"gemeinsame[rn]? Gegenstand|Baummodell", "SB6: Gemeinsamer Gegenstand/Baummodell"),
+    (r"entwicklungslogisch", "SB6: entwicklungslogische Didaktik"),
+    (r"Fehlerkultur|Feedback", "SB6: Feedback/Fehlerkultur"),
+    (r"Leistungsbeurteilung|Lernerfolgskontrolle", "SB6: Leistungsbeurteilung"),
+    (r"Instinkt", "SB6: Instinktreduktion/Wahrnehmung"),
+]
+def sb_tags(text):
+    hits=[]
+    for pat,lab in SB_PATTERNS:
+        if re.search(pat, text, re.I):
+            hits.append(lab)
+    return hits
+
+def badges(sb_text, uk_text=None):
+    """📘 SB-Übungsaufgabe (sb_text) und ⭐ Übungsklausur (uk_text)."""
+    if uk_text is None: uk_text=sb_text
+    out=""
+    ukt=klausur_tags(uk_text)
+    if ukt:
+        out+=(f'<span class="src src-klausur" title="In der Übungsklausur gefragt: '
+              f'{", ".join(ukt)}">⭐ Übungsklausur</span>')
+    sbt=sb_tags(sb_text)
+    if sbt:
+        out+=(f'<span class="src src-sb" title="Thema einer Übungsaufgabe im Studienbrief: '
+              f'{esc("; ".join(sbt[:6]))}">📘 SB-Übungsaufgabe</span>')
+    return out
+
+def klausur_badge(text):  # rückwärtskompatibel
+    return badges(text, text)
 
 def parse_modelle(txt):
     out=[]
@@ -348,10 +428,10 @@ def build():
     start.append('<li>📝 <strong>Übungen:</strong> die <strong>HFH-Übungsklausur</strong> (Originalaufgaben) '
                  '<em>und</em> alle Übungsaufgaben aus den Briefen – mit vollständigen Musterlösungen.</li>')
     start.append('<li>📋 <strong>Spickzettel:</strong> alle Definitionen & Modelle kompakt.</li>')
-    start.append('<li>⭐ <strong>Markierungen:</strong> Themen mit '
-                 '<span class="src src-klausur">⭐ Übungsklausur</span> wurden in der HFH-Übungsklausur gefragt – '
-                 'sie tauchen so auch in Karteikarten und Spickzettel auf. '
-                 'Im Übungen-Reiter zeigt <span class="src src-sb">📘 SB-Übungsaufgabe</span> die Herkunft aus dem Studienbrief.</li>')
+    start.append('<li>⭐ <strong>Markierungen (in Erklärungen, Karteikarten & Spickzettel):</strong> '
+                 '<span class="src src-klausur">⭐ Übungsklausur</span> = Thema wurde in der HFH-Übungsklausur gefragt; '
+                 '<span class="src src-sb">📘 SB-Übungsaufgabe</span> = Thema ist Gegenstand einer Übungsaufgabe im Studienbrief. '
+                 'So erkennst du beim Lernen sofort die geprüften/geübten Themen. (Per Tippen/Hover zeigt das Badge die genaue Aufgabe.)</li>')
     start.append('<li>🔊 <strong>Vorlesen:</strong> liest Abschnitte vor (nur im echten Browser mit JS; Vorschau ignoriert ihn).</li>')
     start.append('</ul>')
     start.append(f'<p class="meta">Insgesamt {total_cards} Karteikarten · {total_aufg} Übungsaufgaben.</p>')
@@ -369,8 +449,9 @@ def build():
         sp.append('<h2 class="sech">📖 Erklärungen</h2>')
         for j,(t,body) in enumerate(d["erkl"]):
             bid=f"{sb}-erk-{j}"
+            eb=badges(t+" "+body)
             sp.append('<div class="card erk">')
-            sp.append(f'<h3>{inline_md(t)} {tts_btn(bid)}</h3>')
+            sp.append(f'<h3>{inline_md(t)} {eb} {tts_btn(bid)}</h3>')
             sp.append(f'<div class="ttsblock" id="{bid}">{block_to_html(body)}</div>')
             sp.append('</div>')
 
@@ -390,8 +471,9 @@ def build():
         # Karteikarten
         sp.append('<h2 class="sech">📇 Karteikarten</h2>')
         for k,c in enumerate(d["cards"]):
-            badge=klausur_badge(c["q"])
-            sp.append('<div class="flash'+(' isklausur' if badge else '')+'">')
+            badge=badges(c["q"])
+            hl=' isklausur' if klausur_tags(c["q"]) else ''
+            sp.append('<div class="flash'+hl+'">')
             sp.append(f'<div class="q">❓ {inline_md(c["q"])} {badge}</div>')
             sp.append(f'<div class="a">{block_to_html(c["a"])}</div>')
             if c["e"]:
