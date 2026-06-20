@@ -49,6 +49,8 @@ form.tabs > input{position:absolute;opacity:0;width:1px;height:1px;pointer-event
 #t-s09:checked ~ .tabbar label[for="t-s09"]{background:var(--brand);color:#fff;border-color:var(--brand)}
 #t-s10:checked ~ #p-s10{display:block}
 #t-s10:checked ~ .tabbar label[for="t-s10"]{background:var(--brand);color:#fff;border-color:var(--brand)}
+#t-klausur:checked ~ #p-klausur{display:block}
+#t-klausur:checked ~ .tabbar label[for="t-klausur"]{background:var(--brand);color:#fff;border-color:var(--brand)}
 #t-quiz:checked ~ #p-quiz{display:block}
 #t-quiz:checked ~ .tabbar label[for="t-quiz"]{background:var(--brand);color:#fff;border-color:var(--brand)}
 #t-spick:checked ~ #p-spick{display:block}
@@ -132,6 +134,17 @@ dl.cheat dd{margin:2px 0 6px;font-size:.93rem;color:#2c3a46}
 .hint{font-size:.82rem;color:#9fb3a6;text-align:center;margin:10px 0 0}
 footer.foot{color:#90a59a;text-align:center;font-size:.8rem;padding:20px 10px 40px}
 @media(min-width:560px){ body{font-size:17px} header.top h1{font-size:1.8rem} }
+
+.badge-sb{display:inline-block;background:#e7eef9;color:#234e8c;border:1px solid #c4d6f0;border-radius:6px;font-size:.68rem;font-weight:700;padding:1px 6px;margin-right:6px;vertical-align:middle;white-space:nowrap}
+.badge-k{display:inline-block;background:#fde8e8;color:#9b2a2a;border:1px solid #f3bcbc;border-radius:6px;font-size:.68rem;font-weight:700;padding:1px 6px;margin-right:6px;vertical-align:middle;white-space:nowrap}
+.exambox{background:#fff4e0;border:1px solid var(--warmline);border-left:4px solid #e08a2f;border-radius:10px;padding:10px 12px;margin:0 0 14px;font-size:.93rem}
+.exambox b{color:#9a5a12}
+.task.klausur > summary,.quiz.klausur > summary{background:#fdeaea;color:#7e2222}
+.amt{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+.qtext{font-style:italic;color:#33485a;margin:.2em 0 .6em}
+.examinfo{background:#eef4fb;border:1px solid var(--blueline);border-radius:8px;padding:8px 12px;font-size:.88rem;margin:8px 0 14px}
+.klausurcheat > summary{background:#fdeaea;color:#7e2222}
+.kpts{font-size:.8rem;color:#9b2a2a;font-weight:700}
 </style></head><body>
 <header class="top"><h1>📚 LIB – Klausur-Lerntool</h1><p>Lernbegleitung in der Berufsbildung · 10 Studienbriefe · Karteikarten, Abfrage, Übungen & Spickzettel · offline nutzbar</p></header>
 <div class="wrap"><form class="tabs">
@@ -145,6 +158,7 @@ footer.foot{color:#90a59a;text-align:center;font-size:.8rem;padding:20px 10px 40
 <input type=radio name=tab id="t-s08">
 <input type=radio name=tab id="t-s09">
 <input type=radio name=tab id="t-s10">
+<input type=radio name=tab id="t-klausur">
 <input type=radio name=tab id="t-quiz">
 <input type=radio name=tab id="t-spick">
 <nav class="tabbar">
@@ -158,10 +172,13 @@ footer.foot{color:#90a59a;text-align:center;font-size:.8rem;padding:20px 10px 40
 <label for="t-s08">8 · Pharma</label>
 <label for="t-s09">9 · Persönlichkeit</label>
 <label for="t-s10">10 · Gruppen</label>
+<label for="t-klausur">📝 Übungsklausur</label>
 <label for="t-quiz">🎯 Abfrage</label>
 <label for="t-spick">📋 Spickzettel</label>
 </nav>
 <section class="tabpanel" id="p-s01"><div class="panelcard">
+<div class="exambox"><b>ℹ️ Übungsklausur:</b> Dieser Brief wird in der Übungsklausur nicht direkt geprüft – laut Aufgabenhinweis können aber <i>alle</i> Studienbriefe des Moduls geprüft werden.</div>
+
 <h2 class="briefttl">1 · Wohlstand</h2>
 <p class="lead">Dieser Brief erklärt die gesamtwirtschaftlichen Grundlagen unserer Wirtschaftsordnung (Soziale Marktwirtschaft), zeigt, welche Grundwerte und Gerechtigkeitsfragen dahinterstehen, wie der Staat sozial absichert, was das gesamtwirtschaftliche Gleichgewicht bedeutet und wie man Wohlstand misst – mit dem klassischen Bruttoinlandsprodukt (BIP) und mit alternativen Indikatoren.</p>
 
@@ -543,135 +560,137 @@ footer.foot{color:#90a59a;text-align:center;font-size:.8rem;padding:20px 10px 40
   <h3>✍️ Übungsaufgaben mit Musterlösung</h3>
 
   <details class="task">
-    <summary>Aufgabe 1.1: Erläutern Sie, was man unter einem Markt versteht.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.1: Erläutern Sie, was man unter einem Markt versteht.</summary>
     <div class="sol"><b>Musterlösung:</b> Ein Markt ist ein Ort, an dem Angebot und Nachfrage aufeinandertreffen. Dadurch findet Preisbildung statt. Ein Markt entsteht durch Bedürfnisse → Bedarf → Nachfrage und Faktorkombination → Produktion → Angebot.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 1.2: Motivationssysteme und Beschränkungen für Anbietende und Nachfragende.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.2: Motivationssysteme und Beschränkungen für Anbietende und Nachfragende.</summary>
     <div class="sol"><b>Musterlösung:</b> Motivation durch Entlohnung und die Möglichkeit, durch Einkommen wieder zu konsumieren oder zu investieren. Mehrung des Kapitals durch unternehmerisches Risiko. Dabei stehen die Teilnehmenden im Wettbewerb und versuchen bei gegebenem Budget jeweils ihre Gewinne oder ihren Nutzen zu maximieren.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 1.3: Güter, die sinnvollerweise nur vom Staat bereitgestellt werden.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.3: Güter, die sinnvollerweise nur vom Staat bereitgestellt werden.</summary>
     <div class="sol"><b>Musterlösung:</b> Bspw. Verteidigung, Innere Sicherheit, Versorgungsnetzwerke, Umweltschutz, Altersversorgung, Bildung, Drogen, Medikamente (öffentliche Güter, Allmendegüter, meritorische und demeritorische Güter).</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 1.4: Ursachen für Störungen der Modelltheorie der Märkte.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.4: Ursachen für Störungen der Modelltheorie der Märkte.</summary>
     <div class="sol"><b>Musterlösung:</b> Bspw. keine vollständige Information/Informationsasymmetrie, mangelnde Vergleichbarkeit der Güter, räumliches und zeitliches Auseinanderfallen von Angebot und Nachfrage, besondere Eigenschaften der Güter, nicht moralisches Handeln der Akteure/Ausnutzen eines Vorteils in Situationen von Spezialwissen/Macht/Angst (moral hazard).</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 1.5: Aufgaben des Staates aus den Schwächen der Markttheorie.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.5: Aufgaben des Staates aus den Schwächen der Markttheorie.</summary>
     <div class="sol"><b>Musterlösung:</b> Umverteilung von Einkommen und Ressourcen, Preisbeeinflussung wie bspw. Mindestlöhne und Mietpreisbremsen. Jugendschutzgesetz bzgl. Alkohol, Betäubungsmittelgesetze, Rezeptpflicht, Apothekenpflicht usw.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 1.6: Nennen Sie konstituierende Prinzipien der Sozialen Marktwirtschaft.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.6: Nennen Sie konstituierende Prinzipien der Sozialen Marktwirtschaft.</summary>
     <div class="sol"><b>Musterlösung:</b> Förderung und Erhaltung des Privateigentums; freier Marktzugang, Berufswahl-, Arbeitsplatz- und Niederlassungsfreiheit; Sicherung der Vertragsfreiheit und Schutz des Wettbewerbs (u. a. Monopolkontrolle); funktionierendes Preissystem (freie Marktpreisbildung, offene Märkte), Gewerbe- und Niederlassungsfreiheit, keine Zutrittsbarrieren, schwacher Patentschutz; Sicherung der Geldwert- und Währungsstabilität; persönliche, möglichst unbeschränkte Haftung der Unternehmenseigentümer (keine Abwälzung auf die Allgemeinheit); Konstanz der staatlichen Wirtschaftspolitik; Zusammengehörigkeit von konstituierenden und regulierenden Prinzipien.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.1: Nennen Sie grundlegende gesellschaftliche Normen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.1: Nennen Sie grundlegende gesellschaftliche Normen.</summary>
     <div class="sol"><b>Musterlösung:</b> Freiheit, Fortschritt, soziale Sicherheit, Gerechtigkeit.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 2.2: Werturteil oder Sachurteil? (Aussagen a–h)</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.2: Werturteil oder Sachurteil? (Aussagen a–h)</summary>
     <div class="sol"><b>Musterlösung:</b> a) Kein Werturteil (nachgewiesener Sachzusammenhang). b) Werturteil (persönliche Meinung). c) Werturteil. d) Kein Werturteil. e) Kein Werturteil. f) Werturteil. g) Kein Werturteil. h) Kein Werturteil.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 2.3: Wissenschaftliche Aussage zur vermehrten Fotoapparat-Nachfrage formulieren.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.3: Wissenschaftliche Aussage zur vermehrten Fotoapparat-Nachfrage formulieren.</summary>
     <div class="sol"><b>Musterlösung:</b> Mögliche wissenschaftliche Aussage: „In der Urlaubszeit ist der Bedarf an Fotoapparaten höher als außerhalb der Reisesaison."</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 2.4: Warum ist „Es sollte Vollbeschäftigung herrschen" ein Werturteil, der Zusatz „… um das BIP zu erhöhen" aber nicht?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.4: Warum ist „Es sollte Vollbeschäftigung herrschen" ein Werturteil, der Zusatz „… um das BIP zu erhöhen" aber nicht?</summary>
     <div class="sol"><b>Musterlösung:</b> In der zweiten Aussage kommt es nicht (wie bei der ersten) auf eine persönliche Meinung an, sondern auf einen allgemein gültigen Sachzusammenhang.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 2.5: Warum ist „Gerechtigkeit" schwer erreichbar und welche Arten gibt es?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.5: Warum ist „Gerechtigkeit" schwer erreichbar und welche Arten gibt es?</summary>
     <div class="sol"><b>Musterlösung:</b> Der Gerechtigkeitsbegriff ist nicht eindeutig. Man kann z. B. Leistungsgerechtigkeit, Bedarfsgerechtigkeit oder allgemeine Gleichberechtigung unterscheiden. Die Bestimmung, was gerecht sei, ist also bereits ein Werturteil, und die Verfolgung verschiedener Gerechtigkeitsziele birgt Konkurrenz oder sogar Unvereinbarkeit unter den Zielen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.1: Nennen Sie Vor- und Nachteile der Arbeitsteilung.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.1: Nennen Sie Vor- und Nachteile der Arbeitsteilung.</summary>
     <div class="sol"><b>Musterlösung:</b> <b>Vorteile:</b> Produktivitätssteigerung → Einkommensverbesserung; Entfaltung spezieller Fähigkeiten/Spezialisierung; bessere Ausbildungsmöglichkeiten. <b>Nachteile:</b> gesundheitliche Schäden durch einseitige Belastung; anscheinende Sinnlosigkeit der Arbeit, Monotonie; gegenseitige Abhängigkeit der Arbeitenden/Unternehmen/Länder.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 3.2: Nennen Sie die fünf Säulen der Sozialversicherung.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.2: Nennen Sie die fünf Säulen der Sozialversicherung.</summary>
     <div class="sol"><b>Musterlösung:</b> Krankenversicherung, Pflegeversicherung, Arbeitslosenversicherung, Rentenversicherung, Unfallversicherung.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 3.3: Warum geht der Staat von einer gesetzlichen Pflichtversicherung aus?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.3: Warum geht der Staat von einer gesetzlichen Pflichtversicherung aus?</summary>
     <div class="sol"><b>Musterlösung:</b> Ziel ist es, den Lebensstandard und die gesellschaftliche Stellung der Versicherten in existenziellen Risikosituationen zu erhalten. Diese Vorsorge würden und könnten Einzelne ohne gesetzliche Verpflichtung wahrscheinlich nicht oder nicht ausreichend treffen (meritorisches Gut).</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 3.4: Unterscheiden und beschreiben Sie die beiden Arten von Prinzipien in der sozialen Sicherung.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.4: Unterscheiden und beschreiben Sie die beiden Arten von Prinzipien in der sozialen Sicherung.</summary>
     <div class="sol"><b>Musterlösung:</b> Gestaltungsprinzipien, die begründend für die Sozialversicherungen sind (Versicherungs-, Versorgungs-, Fürsorgeprinzip), und Wirkprinzipien, die die Umverteilung der Beiträge und Leistungen erklären (Äquivalenz-, Solidaritäts-, Subsidiaritätsprinzip).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.1: Ziele des § 1 StabG, Operationalisierung und mögliche Erweiterungen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.1: Ziele des § 1 StabG, Operationalisierung und mögliche Erweiterungen.</summary>
     <div class="sol"><b>Musterlösung:</b> <b>a)</b> Preisniveaustabilität: Inflationsrate (HVPI, Statistisches Bundesamt). Hoher Beschäftigungsstand: Arbeitslosenquote (Bundesagentur für Arbeit). Außenwirtschaftliches Gleichgewicht: Anteil des Außenbeitrags am BIP (Statistisches Bundesamt, Deutsche Bundesbank). Stetiges/angemessenes Wirtschaftswachstum: Veränderungsrate des realen BIP (Statistisches Bundesamt). <b>b)</b> Ökologische und soziale Ziele könnten das magische Viereck erweitern. Während die Ziele des Vierecks quantitativ gut operationalisierbar sind, gilt dies für die Erweiterungen nicht. Es ergeben sich zahlreiche Zielkonflikte und so viele denkbare Instrumente, dass dies nicht konsistent/praktikabel in ein Gesetz zu fassen wäre.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 4.2: Ist stetiges/angemessenes Wirtschaftswachstum ein geeignetes Ziel?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.2: Ist stetiges/angemessenes Wirtschaftswachstum ein geeignetes Ziel?</summary>
     <div class="sol"><b>Musterlösung:</b> Wachstumsziel = angemessene/stetige Zunahme des realen BIP (Ausdehnung des Produktionspotenzials). <b>Pro:</b> mehr Güter = höherer materieller Wohlstand; Sicherung/Schaffung von Arbeitsplätzen; erleichtert Umverteilung und Finanzierung der sozialen Sicherung. <b>Contra:</b> evtl. Ressourcenverschwendung; höhere Arbeitsnachfrage nur, wenn Wachstumsrate des realen BIP > Zunahme der Arbeitsproduktivität; steigende Qualifikationsanforderungen → strukturelle Arbeitslosigkeit; Umweltbelastung; Beseitigung von Umweltschäden erhöht BIP, aber nicht Wohlstand; Güter, die Lebensqualität mindern (z. B. verstopfte Straßen); Wohlfahrt erfordert weitere Faktoren (Freizeit, soziale Bedürfnisse). <b>Fazit:</b> Wirtschaftswachstum ist keine Garantie für steigende Wohlfahrt, nur unter bestimmten Bedingungen.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 4.3: Formen der Arbeitslosigkeit und wann von Vollbeschäftigung gesprochen wird.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.3: Formen der Arbeitslosigkeit und wann von Vollbeschäftigung gesprochen wird.</summary>
     <div class="sol"><b>Musterlösung:</b> Vollbeschäftigung liegt vor, wenn alle, die unter den gegebenen Marktbedingungen arbeiten wollen, auch Arbeit finden. Auch dann existiert Arbeitslosigkeit: freiwillige und natürliche Arbeitslosigkeit (darunter strukturelle, friktionelle, saisonale). Bei konjunktureller Arbeitslosigkeit (Mindestlohn-, Nachfrage- oder Kapitalmangelarbeitslosigkeit) ist das Ziel „hoher Beschäftigungsstand" nicht erreicht – keine Vollbeschäftigung.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 4.4: Warum ist Preisniveaustabilität so wichtig für ein marktwirtschaftliches System?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.4: Warum ist Preisniveaustabilität so wichtig für ein marktwirtschaftliches System?</summary>
     <div class="sol"><b>Musterlösung:</b> Die Antwort sollte die Folgen der Inflation umfassen: Kaufkraftverlust, Umverteilungswirkungen zwischen Gläubigern und Schuldnern, unternehmerische Fehlentscheidungen, Flucht in Sachwerte, steigende „Menu Costs", Verlust der Geldfunktionen, steuerliche Wirkungen.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 4.5: Warum wird das außenwirtschaftliche Gleichgewicht mit 1–2 % Außenbeitrag zum BIP operationalisiert?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.5: Warum wird das außenwirtschaftliche Gleichgewicht mit 1–2 % Außenbeitrag zum BIP operationalisiert?</summary>
     <div class="sol"><b>Musterlösung:</b> Bis 2 % Außenbeitrag zum BIP geht einher mit außenwirtschaftlichem Gleichgewicht, denn es müssen Devisenüberschüsse erwirtschaftet werden, um Übertragungen ins Ausland zu finanzieren. Bessere Orientierung: das Ziel der ausgeglichenen Devisenbilanz (dann keine Störungen von außen).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 5.1: Anhand welcher Kennzahl wird Wohlstand traditionell gemessen?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.1: Anhand welcher Kennzahl wird Wohlstand traditionell gemessen?</summary>
     <div class="sol"><b>Musterlösung:</b> Er wird traditionell am Bruttoinlandsprodukt (BIP) gemessen.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 5.2: Welche Kritik kann man an dieser Kennzahl üben?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.2: Welche Kritik kann man an dieser Kennzahl üben?</summary>
     <div class="sol"><b>Musterlösung:</b> Das BIP erfasst nur Transaktionen mit Marktpreis und aggregiert unreflektiert; wohlfahrtsmindernde und -stiftende Nutzen werden unter Informationsverlust aufsummiert. Informelle Wirtschaft/Schattenwirtschaft, Freiwilligen-/Familienarbeit werden nicht erfasst (kein Marktpreis). Qualität/steigende Komplexität von Produkten/Dienstleistungen bleibt unberücksichtigt. Wenig Aussage über Natur-/Humankapital; Bildungs-/Gesundheitsausgaben nur als Konsum, nicht als Investition; Naturkapitalveränderungen unberücksichtigt. Kein geeigneter Indikator für die Einkommensverteilung (BIP pro Kopf zeigt nur den Durchschnitt).</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 5.3: Welche Aspekte alternativer Kennzahlensysteme ermöglichen eine bessere Beschreibung?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.3: Welche Aspekte alternativer Kennzahlensysteme ermöglichen eine bessere Beschreibung?</summary>
     <div class="sol"><b>Musterlösung:</b> Die Einbeziehung der unter 5.2 genannten Aspekte (Verteilung, Bildungsstand, Ökologie, Zufriedenheit) wird in alternativen Kennzahlensystemen berücksichtigt und gibt ein genaueres Bild über Wohlstand und Zufriedenheit.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 5.4: Welche Schwierigkeiten gibt es bei den alternativen Kennzahlen?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.4: Welche Schwierigkeiten gibt es bei den alternativen Kennzahlen?</summary>
     <div class="sol"><b>Musterlösung:</b> Problem der Messbarkeit/Sichtbarkeit verschiedener Faktoren (Glück, Bildung, Umwelt) bzw. ihrer Beziehungen; es ist kaum möglich, eine Verteilung der nutzenstiftenden Güter/Einkommen darzustellen; ein Ländervergleich ist wegen kultureller Unterschiede oft noch nicht herstellbar.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 6.1: Benennen Sie die Menschenbilder wissenschaftlicher Theorien.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 6.1: Benennen Sie die Menschenbilder wissenschaftlicher Theorien.</summary>
     <div class="sol"><b>Musterlösung:</b> Homo oeconomicus, Homo sociologicus, Homo socio-oeconomicus und Homo heterogenus/cooperativus.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 6.2: Inwieweit sind diese Menschenbilder realistisch?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 6.2: Inwieweit sind diese Menschenbilder realistisch?</summary>
     <div class="sol"><b>Musterlösung:</b> Es sind abstrakte Stereotype; sie reduzieren Mensch/Verhalten auf wenige relevante Motive/Tatbestände in Entscheidungssituationen und unter kontrollierten Bedingungen. Sie sind modelltheoretisch, nicht realistisch. Neuere Ansätze der Verhaltensökonomik (insb. Spieltheorie) kommen evtl. zu realitätsnäheren Einschätzungen.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 6.3: Welche Aspekte werden bei den Menschenbildern außer Acht gelassen?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 6.3: Welche Aspekte werden bei den Menschenbildern außer Acht gelassen?</summary>
     <div class="sol"><b>Musterlösung:</b> Der Mensch handelt aus unterschiedlichsten, oft nicht wahrnehmbaren/bewussten Motiven; situative/emotionale Affekte und irrationales Verhalten sowie zahlreiche Abhängigkeiten werden in den Typisierungen nicht erfasst.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 7.1: Statistiken zu exemplarischen Zahlen (Arbeitsproduktivität, Verschuldung, Rüstung u. a.) ermitteln.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 7.1: Statistiken zu exemplarischen Zahlen (Arbeitsproduktivität, Verschuldung, Rüstung u. a.) ermitteln.</summary>
     <div class="sol"><b>Musterlösung:</b> Zahlenmaterial u. a. bei https://www.destatis.de/ oder https://www.deutschlandinzahlen.de; auch aufbereitetes/kommentiertes Material unter dem jeweiligen Stichwort. (Eigene Recherche zu Größenordnungen und Entwicklungen für Deutschland, Europa und global.)</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 7.2: Spende für Notre-Dame – Anreize und ethische Bewertung.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 7.2: Spende für Notre-Dame – Anreize und ethische Bewertung.</summary>
     <div class="sol"><b>Musterlösung:</b> <b>a)</b> Kulturelles Erbe, Wahrzeichen europäischer Geschichte und Religion. Die Möglichkeit, einen Schaden in absehbarer Zeit mit bestimmter Geldmenge zu beheben, ist – anders als bei den unlösbar scheinenden „Problemen der Welt" – tröstlich. Gemeinsam etwas bewegen / Solidarität in Europa (vgl. Wiederaufbau der Dresdner Frauenkirche). Weitere Fragen: Können Reiche „zu viel" spenden und durch Zurschaustellung des Reichtums ein gemeinschaftliches Symbol entwerten? Muss hinter einer Spende eine moralisch „reine" Absicht stecken? Ist die Frage zulässig, ob das Geld nicht sinnvoller für andere Zwecke eingesetzt werden könnte? <b>b)</b> Der Wiederaufbau ist ein erhebliches Bauprojekt, das zahlreichen Unternehmen und Mitarbeitenden Einkommen beschert. Alle Beteiligten können Zufriedenheit daraus schöpfen, an einem monumentalen, global sichtbaren, gemeinsam finanzierten Projekt mitgewirkt zu haben.</div>
   </details>
   <details class="task">
-    <summary>Aufgabe 7.3: Schließen sich ökonomische und ethische Überlegungen gegenseitig aus?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 7.3: Schließen sich ökonomische und ethische Überlegungen gegenseitig aus?</summary>
     <div class="sol"><b>Musterlösung:</b> Auf den ersten Blick ja, aber differenzierter zu betrachten: Nicht jede ökonomisch rationale Handlung muss ethischen Anforderungen entsprechen, daher müssen bei ökonomischen Entscheidungen zumindest die Folgen einbezogen werden (Folgenethik). Langfristig können Entscheidungen rational sein, auch wenn sie dem kurzfristigen Eigennutz-/Gewinnmaximierungskalkül zuwiderlaufen.</div>
   </details>
 </section>
 
 </div></section>
 <section class="tabpanel" id="p-s02"><div class="panelcard">
+<div class="exambox"><b>🎯 In der Übungsklausur dran (Aufgabe 1, 19 P):</b> drei Probleme des institutionellen Lernens · Binnendifferenzierung mit zwei Aspekten (Heterogenität/Matthäus-Effekt, Lerntempo 1:3 → 1:9).</div>
+<section class="block"><h3>📝 Übungsklausur-Aufgaben zu diesem Brief</h3><details class="task klausur"><summary><span class="badge-k">📝 Übungsklausur</span> Aufgabe 1 – Von der Unterweisung zur Lernbegleitung (19 P)</summary><div class="sol"><p class="qtext">1.1 (9 P) Erläutern Sie drei Probleme des institutionellen Lernens. — 1.2 (10 P) Begründen Sie anhand von zwei Aspekten, weshalb die (Binnen-)Differenzierung im Unterricht eine wesentliche Bedeutung für das Kompetenzlernen hat.</p><div class="amt"><b>Amtliche Musterlösung:</b><p><b>1.1 – drei Probleme des institutionellen Lernens (je 3 P):</b></p><ul><li>Die vielen <b>Übersetzungsschritte</b> sind hochgradig störanfällig – zwischen Arbeit und institutionellem Lernen besteht ein <b>Transferproblem</b>.</li><li>Die <b>Unvorhersehbarkeit und Komplexität der Praxis</b> lässt sich kaum in die Lehranstalt holen (z. B. Rollenspiel ≠ Wirklichkeit).</li><li>Institutionelles Lernen ist <b>„Lernen auf Vorrat“</b>, das später genutzt werden soll – heute oft veraltet oder schon wieder vergessen.</li><li>Der Prozess ist <b>schwerfällig</b>: Neuerungen aus der Berufspraxis kommen erst spät in der Ausbildung an; Gelerntes ist oft veraltet, bevor es angewendet wird.</li></ul><p><b>1.2 – zwei Aspekte der Binnendifferenzierung (je 5 P):</b></p><ul><li><b>Heterogenität & Vorkenntnisse:</b> Klassen sind sehr heterogen (Alter, Herkunft, Werte, Vorbildung). Vorkenntnisse sind zentral für den Lernerfolg (<b>Matthäus-Effekt</b>) → erfordert Differenzierung.</li><li><b>Lerntempo:</b> Unterschiede betragen in weiterführenden Schulen Faktor 1:3, in der Erwachsenenbildung bis 1:9. Ein gemeinsames Tempo ist unsinnig → Individualisierung durch Differenzierung.</li></ul></div></div></details></section>
 <h2 class="briefttl">2 · Lernbegleitung</h2>
 <p class="lead">Dieser Brief zeigt, wie sich die Rolle der Lehrenden in der beruflichen Bildung wandelt: weg von der reinen Wissensvermittlung (Unterweisung) hin zur Begleitung selbstorganisierter, kompetenzorientierter Lernprozesse (Lernbegleitung). Behandelt werden die neue Lehrendenrolle, die Professionalisierung des Bildungspersonals sowie das Lernen an den beiden Lernorten Betrieb und Berufsschule.</p>
 
@@ -1052,88 +1071,90 @@ footer.foot{color:#90a59a;text-align:center;font-size:.8rem;padding:20px 10px 40
   <h3>✍️ Übungsaufgaben mit Musterlösung</h3>
 
   <details class="task">
-    <summary>Aufgabe 1.1: Wie wirkt sich die Corona-Krise auf Lehrende aus und wie verändern sich Aufgabe und Rolle?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.1: Wie wirkt sich die Corona-Krise auf Lehrende aus und wie verändern sich Aufgabe und Rolle?</summary>
     <div class="sol"><b>Musterlösung:</b> Beispiele können sein: Lehrende müssen ihre Lernenden auf Distanz begleiten, z. B. via Telefon, Videokonferenz oder Face-Time. Lehrende müssen ihren Lernenden Unterlagen, Materialien und Medien zum Selbstlernen zuhause zur Verfügung stellen (Unterricht zum Selbstlernen für zuhause konzipieren, Lernvideos erstellen und onlinestellen, Lernplattformen bestücken und aufbereiten).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.2: Welche Kompetenzen benötigen Lehrende in diesen Situationen?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.2: Welche Kompetenzen benötigen Lehrende in diesen Situationen?</summary>
     <div class="sol"><b>Musterlösung:</b> Lehrende müssen in der Lage sein, selbstorganisierte Lernprozesse zu initiieren und zu begleiten; Lernende dabei begleiten, ihre Lernbedarfe zu erkennen und passende Lernwege für zuhause zu gestalten; digitale Lernmedien/Lernsettings gestalten (z. B. Lernvideos aufnehmen) und unter Berücksichtigung technischer wie datenschutzrechtlicher Gegebenheiten zur Verfügung stellen; Beziehung und Nähe auch über digitale Medien herstellen; Lernklippen (durch technische Probleme, fehlendes soziales Umfeld, Konzentrationsschwierigkeiten) auch aus der Distanz gemeinsam mit den Lernenden identifizieren und überwinden helfen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.1: Welche Qualifizierungsangebote würden Sie welcher Zielgruppe machen (drei Zielgruppen, begründet)?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.1: Welche Qualifizierungsangebote würden Sie welcher Zielgruppe machen (drei Zielgruppen, begründet)?</summary>
     <div class="sol"><b>Musterlösung:</b> Empfehlungen könnten z. B. lauten: <b>Nebenamtliche Ausbilder/innen</b> – ein individuell zusammengestelltes Weiterbildungsangebot, das insbesondere das Gestalten von Lernprozessbegleitung in den Blick nimmt, da sie Lernende direkt am Arbeitsplatz begleiten. <b>Hauptamtliche Ausbilder/innen</b> – AEVO und ergänzend die Fortbildung zum/zur Gepr. Aus- und Weiterbildungspädagogin/-pädagoge, da diese Gruppe auch in Planungsprozesse eingebunden ist. <b>Weiterbildner/innen</b> – je nach Zielsetzung Train-the-Trainer-Angebote mit Schwerpunkt Lernprozessbegleitung und digitale Lernsettings, bei beratenden Funktionen auch Gepr. Aus-/Weiterbildungs- bzw. Berufspädagoge oder passende Studiengänge. <b>Personalentwickler/innen</b> – Qualifizierung mit Fokus strategische Arbeit; Fortbildung zum/zur Gepr. Berufspädagogin/-pädagoge oder entsprechender Studiengang.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.1: Erklären Sie „berufliche Handlungskompetenz" in eigenen Worten.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.1: Erklären Sie „berufliche Handlungskompetenz" in eigenen Worten.</summary>
     <div class="sol"><b>Musterlösung:</b> Zum Beispiel: Berufliche Handlungskompetenz bedeutet, in handlungsoffenen und neuen Situationen im Beruf handlungsfähig zu sein und diese angemessen meistern zu können.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.2: Formulieren Sie ein kompetenzorientiertes Lernziel.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.2: Formulieren Sie ein kompetenzorientiertes Lernziel.</summary>
     <div class="sol"><b>Musterlösung:</b> Formulierungen, die „können" oder „in der Lage sein" beinhalten, deuten auf kompetenzorientierte Lernziele hin (z. B.: „Die Fachkräfte sind in der Lage, Pflegeprozesse … verantwortlich zu planen, organisieren, gestalten, steuern und evaluieren").</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.3: Nennen Sie die Vorteile des Lernfeldkonzeptes.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.3: Nennen Sie die Vorteile des Lernfeldkonzeptes.</summary>
     <div class="sol"><b>Musterlösung:</b> Die Vorteile (Abb. 3.1): Ein handlungsorientierter Unterricht wird begünstigt; die Fachtheorie wird bereits bei der Vermittlung in einen Anwendungskontext gestellt (statt loser deklarativer Wissensvermittlung); Orientierung am betrieblichen Arbeitsprozess und an der Erfahrungswelt der Auszubildenden; der Unterricht wird berufsrelevanter und interessanter; Erwerb von Kompetenzen durch Handeln (inkl. Methoden- und Sozialkompetenz) statt reiner Wissensanwendung; Förderung der Berufskompetenz.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.4: Wählen Sie die vier relevantesten Grundphänomene des Handlungslernens und reflektieren Sie sie an Ihrer Lernbiographie.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.4: Wählen Sie die vier relevantesten Grundphänomene des Handlungslernens und reflektieren Sie sie an Ihrer Lernbiographie.</summary>
     <div class="sol"><b>Musterlösung:</b> Hier finden sich die Grundphänomene des Handlungslernens, von denen individuell vier ausgewählt werden: Herausforderung; Anknüpfen an Bekanntes; unbefangenes Ausprobieren; Selbstreflexion; Selbstkorrektur; Fehler/Umwege/Versuch und Irrtum als unverzichtbar; Umdenken/neue Ideen; sinnvolle Lernunterstützung; pädagogisches Paradox; Herausforderungs-Bewältigungs-Paradigma; dosierte Überforderung. Für den zweiten Teil (eigene Lernbiographie) gibt es keine vorgegebene Lösung – sie ist individuell.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.1: Geben Sie Argumente an, die für das Lernen in der Arbeit sprechen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.1: Geben Sie Argumente an, die für das Lernen in der Arbeit sprechen.</summary>
     <div class="sol"><b>Musterlösung:</b> Beginnend mit der Industrialisierung wurden Arbeiten und Lernen zunehmend getrennt; häufig wurde Lernen vor das Arbeiten gestellt → zahlreiche Probleme des Instruktionslernens (Lernen auf Vorrat, Transferprobleme). Lernen in der Arbeit ermöglicht ohne didaktische Umwege und ohne die Nachteile des institutionellen Lernens den Erwerb beruflicher Handlungskompetenz. Wer in der Arbeit gelernt hat, ist mit Wissen/Können auf aktuellem Stand; hat es genau in der gebrauchten Form erworben und lernt Schlüsselkompetenzen/Arbeitstugenden mit; weiß, wie es im Unternehmen läuft (keine Einarbeitung nach der Ausbildung nötig); und entwickelt Selbstlernkompetenz durch immer neue Herausforderungen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.2: Warum ist es motivierend, im Geschäftsprozess/in der Echtarbeit zu lernen?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.2: Warum ist es motivierend, im Geschäftsprozess/in der Echtarbeit zu lernen?</summary>
     <div class="sol"><b>Musterlösung:</b> Lernende bekommen eine reale Aufgabe zur selbständigen Bearbeitung übergeben – es wird ihnen etwas zugetraut, das motiviert und das eigene Kompetenzerleben sowie die soziale Eingebundenheit in den Betrieb fördert. Im Zuge der Bearbeitung werden Kompetenz- und Autonomieerleben bedient; eigene Entscheidungen werden getroffen, man fühlt sich selbstwirksam. Das Erfolgserlebnis nach Bewältigung einer Herausforderung motiviert.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.3: Formulieren Sie eine Arbeitsaufgabe für das Lernen (Worauf kommt es an? Was soll nicht passieren?).</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.3: Formulieren Sie eine Arbeitsaufgabe für das Lernen (Worauf kommt es an? Was soll nicht passieren?).</summary>
     <div class="sol"><b>Musterlösung:</b> Die Aufgabe soll konkret und klar formuliert sein. Kurze Sätze und verständliche Formulierungen sind wichtig. Keinesfalls soll in der Aufgabenstellung schon die Lösung enthalten sein. Die Regel lautet: So viel Freiraum wie möglich, so viel Struktur wie nötig.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.4: Beschreiben Sie die Funktion von Erkundungsaufgaben und Zwischengesprächen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.4: Beschreiben Sie die Funktion von Erkundungsaufgaben und Zwischengesprächen.</summary>
     <div class="sol"><b>Musterlösung:</b> Sie geben Struktur und unterstützen die Lernenden dabei, sich auf eine Aufgabe vorzubereiten, die sie noch nie gemacht haben. Darüber hinaus sind Erkundungsaufgaben sowie Zwischengespräche Möglichkeiten der Individualisierung bzw. Differenzierung.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.5: Nennen Sie Rahmenbedingungen, die die geschäftsprozessorientierte Ausbildung braucht.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.5: Nennen Sie Rahmenbedingungen, die die geschäftsprozessorientierte Ausbildung braucht.</summary>
     <div class="sol"><b>Musterlösung:</b> Freiräume für Fehler, aus denen gelernt werden kann; Freiräume zum Experimentieren für Lernbegleitende und Lernende; Raum für Auswertung und Reflexion; Kompetenzfeststellung anstelle von Beurteilungen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 5.1: Wie fördert die Binnendifferenzierung Autonomie-, Kompetenzerleben und soziale Eingebundenheit?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.1: Wie fördert die Binnendifferenzierung Autonomie-, Kompetenzerleben und soziale Eingebundenheit?</summary>
     <div class="sol"><b>Musterlösung:</b> <b>Autonomieerleben:</b> Wahlmöglichkeiten, z. B. Wahl der Lernzeit, der Aufgaben, der Materialien. <b>Kompetenzerleben:</b> Durch Differenzierung entstehen bessere Lernerträge, z. B. dem eigenen Lerntempo entsprechend lernen und nicht abgehängt werden, dem eigenen Lernstil gemäß lernen (Methodenwahl); auch das Betrachten des individuellen Lernfortschritts erzeugt Kompetenzerleben. <b>Soziale Eingebundenheit:</b> Binnendifferenzierung trägt der Individualität Rechnung und fördert individuell optimal; dabei wird Lernen als sozialer Prozess verstanden – kooperatives Lernen in Gruppen statt isoliertem Selbstlernen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 5.2: Wie fördert der offene Unterricht Autonomie-, Kompetenzerleben und soziale Eingebundenheit?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.2: Wie fördert der offene Unterricht Autonomie-, Kompetenzerleben und soziale Eingebundenheit?</summary>
     <div class="sol"><b>Musterlösung:</b> <b>Autonomieerleben:</b> Wahlmöglichkeiten, z. B. Wahl der Lernzeit, der Aufgaben, der Materialien wie im Wochenplanunterricht. <b>Kompetenzerleben:</b> Zutrauen durch die Lehrperson, Erleben der Selbstwirksamkeit, Erfolgserlebnisse durch Zielerreichung. <b>Soziale Eingebundenheit:</b> Die Lernenden arbeiten in wechselnden Kooperationsformen, Entscheidungen werden im Klassenverband getroffen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 5.3: Überlegen Sie zu einem erlebten Frontalunterricht handlungsorientierte Alternativen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.3: Überlegen Sie zu einem erlebten Frontalunterricht handlungsorientierte Alternativen.</summary>
     <div class="sol"><b>Musterlösung:</b> Individuelle Lösung (orientiert an den Überlegungen aus Kapitel 5.3: komplexe Aufgabe, Theorie entlang der Lösung, Selbststeuerung, Kooperation, Lehrende als Lernprozessbegleitende).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 5.4: Worauf kommt es bei der Gestaltung von Handlungslernen im Unterricht an?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.4: Worauf kommt es bei der Gestaltung von Handlungslernen im Unterricht an?</summary>
     <div class="sol"><b>Musterlösung:</b> Es braucht eine komplexe Aufgabenstellung und ein Lernen in vollständigen Handlungen. Theorie wird entlang der Lösung der komplexen Aufgabe erarbeitet. Handlungslernen ist gekennzeichnet durch hohe Selbststeuerung und Freiheitsgrade sowie durch kooperatives und kommunikatives Lernen. Die oder der Lehrende agiert als Lernprozessbegleitende/r und schafft Möglichkeiten und Rahmenbedingungen, dass die Lernenden gut lernen können. Es braucht eine durchdachte Vorbereitung und situatives Handeln während der Begleitung.</div>
   </details>
 </section>
 
 </div></section>
 <section class="tabpanel" id="p-s03"><div class="panelcard">
+<div class="exambox"><b>🎯 In der Übungsklausur dran (Aufgabe 2, 25 P):</b> Geschäftsprozessanalyse in drei Schritten (Tätigkeiten → Anforderungen → Kompetenzen) am Beispiel „Bestellung von Büromaterial“.</div>
+<section class="block"><h3>📝 Übungsklausur-Aufgaben zu diesem Brief</h3><details class="task klausur"><summary><span class="badge-k">📝 Übungsklausur</span> Aufgabe 2 – Lernprozessbegleitung / Geschäftsprozessanalyse (25 P)</summary><div class="sol"><p class="qtext">Erstellen Sie eine Geschäftsprozessanalyse für den Prozess „Bestellung von Büromaterial“. Es kommt auf die Umsetzung des dreischrittigen Vorgehens an.</p><div class="amt"><b>Amtliche Musterlösung:</b><p><b>Schritt 1 – Beschreibung der Tätigkeiten:</b> Bestelltermin wahrnehmen; richtiges Bestellformular benutzen; Ist- mit Sollbestand vergleichen; im Lager Überblick verschaffen/zählen; auffällige Lücken prüfen; ggf. in Abteilungen nachfragen; ausgefülltes Formular per E-Mail an Lieferanten senden und Bestellung ablegen.</p><p><b>Schritt 2 – Analyse der Anforderungen:</b> trotz vieler Tätigkeiten den Bestelltermin nicht vergessen; richtiges Formular richtig ausfüllen; Bedarf abschätzen (Vergleich mit Vorwochen, Inventarlisten); aktuelle Entwicklungen berücksichtigen; korrekt versenden (Lesebestätigung); richtige Ablage.</p><p><b>Schritt 3 – Ableitung von Kompetenzen:</b> <b>Wissen</b> (welches Material, Menge, Prozessschritte); <b>Fertigkeiten/Kompetenzen</b> (Überblick verschaffen, Infos beschaffen & interpretieren, Entscheidung treffen, ausfüllen/versenden/ablegen); <b>Fachkompetenz</b> (selbstständig sachgerecht lösen); <b>Sozialkompetenz</b> (mit Kolleg*innen kommunizieren); <b>personale Kompetenz</b> (zuverlässig, Entscheidungen selbstverantwortlich treffen).</p></div></div></details></section>
 <h2 class="briefttl">3 · LPB</h2>
 <p class="lead">Dieser Brief erklärt, wie man Menschen beim Lernen direkt in der echten Arbeit begleitet (Lernprozessbegleitung). Statt fertiges Wissen vorzukauen, schafft man Gelegenheiten, an realen Aufgaben Kompetenzen zu entwickeln. Kernstücke sind das Erfahrungslernen nach Kolb, die sechs Schritte der Begleitung und die Geschäftsprozessanalyse als "Lernbrille".</p>
 
@@ -1419,32 +1440,32 @@ footer.foot{color:#90a59a;text-align:center;font-size:.8rem;padding:20px 10px 40
   <h3>✍️ Übungsaufgaben mit Musterlösung</h3>
 
   <details class="task">
-    <summary>Aufgabe 1.1: Vergleichen Sie die drei Kompetenz-Definitionen (KMK, BIBB, Weinert).</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.1: Vergleichen Sie die drei Kompetenz-Definitionen (KMK, BIBB, Weinert).</summary>
     <div class="sol"><b>Musterlösung:</b> <b>Befähigung oder Befähigung inkl. Bereitschaft?</b> Das BIBB setzt Kompetenz mit „in der Lage zu sein" gleich; KMK und Weinert schließen die <b>Bereitschaft</b> ein, die Befähigung tatsächlich umzusetzen (KMK knapp „Bereitschaft"; Weinert: motivationale, volitionale und soziale Bereitschaften). — <b>Handlungs- oder kognitive Problemlösekompetenz?</b> KMK und BIBB verstehen Kompetenz als <b>Handlungskompetenz</b> (alles zum angemessenen Handeln Nötige, auch handwerkliche/psychomotorische Fertigkeiten und Haltungen/Werte). Weinert engt auf <b>kognitive</b> Fertigkeiten/Fähigkeiten ein (Denkfähigkeiten), da er sich mit schulisch erworbenen kognitiven Leistungen befasste. — <b>Dimensionen:</b> KMK: Fach-, Human-, Sozialkompetenz; BIBB: Fach-, Methoden-, Sozial-, personale Kompetenz; Weinert: keine Gliederung. Übereinstimmung bei den dimensionierenden Definitionen: Unterscheidung von Kompetenzen für die Aufgabenbearbeitung (Fach-/Methoden), für die soziale Interaktion (Sozial) und für die eigene Weiterentwicklung (personale/Human). — <b>Gemeinsamer Kern:</b> Kompetentes Tun ist (a) der Sache <b>gerecht/erfolgreich</b> und (b) <b>verantwortungsvoll</b> – gegenüber der handelnden Person selbst und den anderen Beteiligten/Betroffenen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.1: Begründen Sie, warum Handeln zum Erwerb von Handlungskompetenzen unverzichtbar ist.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.1: Begründen Sie, warum Handeln zum Erwerb von Handlungskompetenzen unverzichtbar ist.</summary>
     <div class="sol"><b>Musterlösung:</b> Die Begründung liefert das <b>pädagogische Paradoxon</b>: Das, was Menschen können müssen, um etwas Bestimmtes zu tun, lernen sie, indem sie es tun – obwohl sie es eigentlich noch nicht können. Wer Handlungskompetenzen erwerben will (alles zum Handeln Notwendige: Wissen, Fertigkeiten/Fähigkeiten, Haltung/Werte), kann das nur durch genau die Handlung erwerben, die er lernen will. Eine rein gedankliche Beschäftigung fördert vielleicht die kognitiven Anteile, aber zum Handeln braucht es mehr als das kognitive Abbild – z. B. handwerkliche/psychomotorische Fertigkeiten und das Zusammenspiel <b>aller</b> Handlungsvoraussetzungen, umgesetzt in der jeweiligen Situation.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.2: Ordnen Sie vier Aktivitäten der Begleitperson (a–d) dem Lernprozessmodell von Kolb (1984) zu.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.2: Ordnen Sie vier Aktivitäten der Begleitperson (a–d) dem Lernprozessmodell von Kolb (1984) zu.</summary>
     <div class="sol"><b>Musterlösung:</b> <b>a)</b> Lernender erhält Aufgabe und macht ersten Lösungsversuch = <b>1. Schritt: Aktives Erfahrungen-Machen</b>. Er handelt ohne große Vorüberlegung und erlebt, ob es klappt oder etwas Unerwartetes passiert – Auslöser für das Nachdenken. <b>b)</b> Frage nach erkannten Prinzipien/Regeln nach erfolglosem Versuch = Unterstützung des <b>3. Schritts: Bildung abstrakter Theorien</b>. Die explizite Frage regt an, das Erlebte zu verallgemeinern und Thesen/Schlüsse zu ziehen (auch aus Misserfolg im Ausschlussprinzip). <b>c)</b> Gespräch darüber, was er im Einzelnen getan hat und was passiert ist = <b>2. Schritt: Nachdenken über das Erlebte</b>. Konkretisierende Fragen lenken auf wichtige Aspekte, aus denen dann Schlüsse gezogen werden. <b>d)</b> Hintergrundinformationen und Hinweise auf grundsätzliche Zusammenhänge = Unterstützung des <b>3. Schritts: Theoriebildung</b>. Auch wenn Kolb den Prozess ohne Steuerung beschreibt, können anschlussfähige Informationen die eigene Theoriebildung anregen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.1: Erstellen Sie eine Geschäftsprozessanalyse für „Bestellung von Pflegemitteln" (3 Schritte). (klausurrelevant)</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.1: Erstellen Sie eine Geschäftsprozessanalyse für „Bestellung von Pflegemitteln" (3 Schritte). (klausurrelevant)</summary>
     <div class="sol"><b>Musterlösung:</b> <b>1. Beschreibung der Tätigkeiten:</b> Wöchentlichen Termin im Auge behalten und wahrnehmen; richtiges Formular heraussuchen; Pflegemittelraum aufsuchen, Überblick verschaffen, ggf. zählen; Bestand mit Soll vergleichen; auffällige Lücken prüfen; ggf. besondere Bedarfe bei Stationsleitung/Kolleg*innen erfragen; Bestellung ins Formular eintragen; Formular per Fax versenden; Bestellung im Ordner abheften. <b>2. Analyse der Anforderungen:</b> Termin trotz vollem Alltag zuverlässig wahrnehmen; aktuelle Formularversion sicherstellen; genauen Überblick über vorhandene Mittel verschaffen und Lücken identifizieren; einschätzen, was in welchen Mengen nachzubestellen ist (Soll-Informationen wie Vorwochen-Bestellung/Inventarliste heranziehen); aktuelle Stationsentwicklungen und Budgetvorgaben berücksichtigen; entscheiden, ob weitere Personen einzubeziehen sind; Formular nachvollziehbar ausfüllen; an die richtige Stelle faxen und Ankunft (Sendestatus) prüfen; korrekt dokumentieren/einordnen. <b>3. Ableitung der Kompetenzen:</b> <i>Wissen</i> – Rolle/Bedarf der Pflegemittel, Prozessschritte und Zuständigkeiten, Budget, Informationsträger. <i>Fertigkeiten/Fähigkeiten</i> – Überblick verschaffen, Informationen besorgen und interpretieren, gezielte Abfragen, Entscheidungen treffen, Formular korrekt ausfüllen/weiterleiten/dokumentieren. <i>Kompetenzen</i> – fachlich: Überblick über Pflegeabläufe, Begleitprozesse angemessen durchführen; sozial: zielführend mit Kolleg*innen kommunizieren; personal: zuverlässig Aufgaben übernehmen, Genauigkeit walten lassen, selbstverantwortlich entscheiden.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.2: Formulieren Sie fünf Erkundungsaufgaben (als Fragen) zur Pflegemittelbestellung.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.2: Formulieren Sie fünf Erkundungsaufgaben (als Fragen) zur Pflegemittelbestellung.</summary>
     <div class="sol"><b>Musterlösung (Beispiele):</b> Worauf kommt es bei der Pflegemittelbestellung besonders an? · Welches Formular wird verwendet und wo finden Sie es? · Wie können Sie sicherstellen, dass Sie die aktuelle Version des Formulars verwenden? · Wie können Sie herausfinden, wieviel Sie von welchen Pflegemitteln bestellen müssen, und welche Informationen haben Sie dazu? · Welche Aspekte müssen Sie noch beachten (aktuelle Entwicklungen, Budget etc.)? · In welchen Fällen müssen Sie weitere Personen einbeziehen, und welche? · An wen muss die Bestellung weitergeleitet werden? · Wie stellen Sie sicher, dass die Bestellung die zuständige Stelle erreicht hat? · Wie wird die Bestellung dokumentiert? <i>(Die Fragen lenken den Blick auf Herausforderungen, enthalten aber keine Lösung.)</i></div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.3: Ordnen Sie die Formulierungen der Beispielaufgabe den Stellschrauben der Komplexität zu.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.3: Ordnen Sie die Formulierungen der Beispielaufgabe den Stellschrauben der Komplexität zu.</summary>
     <div class="sol"><b>Musterlösung (Zuordnungstabelle):</b>
       <table class="cmp">
         <tr><th>Stellschraube</th><th>gering</th><th>mittel</th><th>hoch</th></tr>
@@ -1456,18 +1477,20 @@ footer.foot{color:#90a59a;text-align:center;font-size:.8rem;padding:20px 10px 40
   </details>
 
   <details class="task">
-    <summary>Aufgabe 5.1: Entwickeln Sie zehn Fragen, mit denen Lernende die Lernfreundlichkeit ihrer Arbeitssituation einschätzen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.1: Entwickeln Sie zehn Fragen, mit denen Lernende die Lernfreundlichkeit ihrer Arbeitssituation einschätzen.</summary>
     <div class="sol"><b>Musterlösung (Beispiele):</b> Kann ich meine Arbeit selbst organisieren oder gibt es klare Anweisungen? · Werden unterschiedliche Vorgehensweisen zugelassen oder ist eine verpflichtend? · Liegt die Verantwortung für Ergebnisse bei mir, beim Team oder bei der Führungskraft? · Kann ich die Umsetzung selbst planen oder erfolgt das anderswo? · Wird Lernen als Teil der Arbeit oder als Privatsache verstanden? · Habe ich viele Entscheidungsspielräume oder kleinteilige Vorgaben? · Gibt es viele arbeitsbezogene Gespräche/Austausch? · Bin ich mit Überraschungen konfrontiert oder verläuft alles planbar? · Gelten Fehler als Lernchance oder als Katastrophe? · Bekomme ich gute Tipps von Kolleg*innen oder muss ich alles beim Chef nachfragen? · Gibt es spontane Kommunikation oder nur festgelegte Kanäle? · Darf ich Dinge ausprobieren? · Habe ich Zeit für Reflexion? · Kann ich eigene Ideen einbringen? · Bekomme ich konstruktive Rückmeldungen? · Kann ich offen zugeben, etwas nicht zu wissen? <i>Regel: Je mehr der jeweils erstgenannte Aspekt zutrifft, desto lernfreundlicher die Situation.</i></div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 5.2: Wenden Sie den Fragebogen auf eine bekannte Arbeitssituation an (auch das Fernstudium).</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.2: Wenden Sie den Fragebogen auf eine bekannte Arbeitssituation an (auch das Fernstudium).</summary>
     <div class="sol"><b>Musterlösung:</b> Keine Musterlösung notwendig – es handelt sich um eine individuelle Anwendungs-/Reflexionsaufgabe. <i>(Hinweis: Auch die Reflexionsaufgaben in Kap. 2 und Kap. 4 sind reine Selbstreflexionsaufgaben ohne Musterlösung.)</i></div>
   </details>
 </section>
 
 </div></section>
 <section class="tabpanel" id="p-s04"><div class="panelcard">
+<div class="exambox"><b>🎯 In der Übungsklausur dran (Aufgabe 3, 13 P):</b> Schritt 1 „Lernbedarf festlegen“ · sieben Auswertungsfragen zum Büromaterial-Beispiel.</div>
+<section class="block"><h3>📝 Übungsklausur-Aufgaben zu diesem Brief</h3><details class="task klausur"><summary><span class="badge-k">📝 Übungsklausur</span> Aufgabe 3 – Praxisbeispiele der Lernbegleitung (13 P)</summary><div class="sol"><p class="qtext">3.1 (6 P) Beschreiben Sie Schritt 1 „Lernbedarf festlegen“ und begründen Sie Ihr Vorgehen. — 3.2 (7 P) Formulieren Sie sieben Auswertungsfragen für das Beispiel „Bestellung von Büromaterial“.</p><div class="amt"><b>Amtliche Musterlösung:</b><p><b>3.1 – Lernbedarf festlegen:</b> Extern vorgegebene Lernziele (Ausbildungsordnung, Rahmenlehrplan) sind generell und abstrakt. Der <b>individuelle Lernbedarf</b> ist subjektbezogen und ermöglicht <b>entdeckendes Lernen</b>. Wichtig: Lernende formulieren ihren Lernbedarf <b>selbst</b> – über <b>Selbstreflexion</b> der Lernenden und <b>Beobachtungen</b> der Begleitperson. Die begleitende Person regt die Selbstreflexion an, sodass Lernende die Bereiche identifizieren, die sie verbessern möchten.</p><p><b>3.2 – sieben Auswertungsfragen (je 1 P):</b></p><ul><li>Wie sind Sie bei der Büromaterialbestellung vorgegangen?</li><li>Welche Herausforderungen waren mit der Aufgabe verbunden?</li><li>Worauf kam es besonders an?</li><li>Wo musste abgewogen werden?</li><li>Gab es Probleme? Gab es Fehler?</li><li>Wie haben sich die Kolleg*innen in den Abteilungen Ihnen gegenüber verhalten?</li><li>Was haben Sie gelernt?</li></ul></div></div></details></section>
 <h2 class="briefttl">4 · Praxis</h2>
 <p class="lead">Dieser Brief zeigt an fünf echten Fallbeispielen aus Pflege, Handwerk und kaufmännischer Ausbildung, wie Lernprozessbegleitung im Arbeitsalltag funktioniert. Du siehst konkret, wie Ausbildende reale Arbeitsaufgaben fürs Lernen aufbereiten, Verantwortung übergeben und vor allem das Loslassen üben.</p>
 
@@ -1798,83 +1821,85 @@ footer.foot{color:#90a59a;text-align:center;font-size:.8rem;padding:20px 10px 40
   <h3>✍️ Übungsaufgaben mit Musterlösung</h3>
 
   <details class="task">
-    <summary>Aufgabe 1.1: Beschreiben Sie, was PiAs bei der Unterweisung lernen können.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.1: Beschreiben Sie, was PiAs bei der Unterweisung lernen können.</summary>
     <div class="sol"><b>Musterlösung:</b> Lernchancen der Unterweisung – fachlich/methodisch: die eigentliche Blutdruckmessung; persönlich: Zuhören und Nachmachen; sozial: Umgang mit der Praxisanleiterin und den anderen PiAs. (Die Unterweisung deckt vor allem den reinen Messvorgang ab.)</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.2: Beschreiben Sie, was PiAs bei der Lernprozessbegleitung lernen können.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.2: Beschreiben Sie, was PiAs bei der Lernprozessbegleitung lernen können.</summary>
     <div class="sol"><b>Musterlösung:</b> Lernchancen der Lernprozessbegleitung – fachlich/methodisch: die eigentliche Blutdruckmessung; Anwendung von Hygienemaßnahmen; rückenschonendes Arbeiten; Beurteilung von Messergebnissen; ganzheitliches Arbeiten; Umgang mit Komplexität. Persönlich: Problemlösefähigkeit; Selbständigkeit; Entscheidungsfähigkeit; Umgang mit Stress und Nervosität; Umgang mit neuen Situationen; Frustrationstoleranz; Selbstlernkompetenz; Selbstreflexionsfähigkeit; Verantwortungsbewusstsein. Sozial: Umgang mit Patientinnen/Patienten; Kommunikationsfähigkeit; Sicherheit im Auftreten; Zuhören; Rücksicht nehmen; sich ggf. abgrenzen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.3: Erklären Sie, wann sich welche Methode eignet.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.3: Erklären Sie, wann sich welche Methode eignet.</summary>
     <div class="sol"><b>Musterlösung:</b> „Eine Unterweisung nach der 4-Stufen-Methode eignet sich dann, wenn innerhalb kurzer Zeit Handgriffe und Fertigkeiten erworben werden sollen. (Diese Methode wurde während des zweiten Weltkriegs in den USA entwickelt und wurde vor allem angewandt, um Mitarbeitende an Fließbändern schnell anzulernen.) Mithilfe der Lernprozessbegleitung lassen sich neben den notwendigen Fertigkeiten auch komplexe Handlungskompetenzen entwickeln."</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.1: Beschreiben Sie den Arbeitsprozess mit allen Schritten einschließlich Vorbereitung und Ergebniskontrolle (eigene Geschäftsprozessanalyse).</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.1: Beschreiben Sie den Arbeitsprozess mit allen Schritten einschließlich Vorbereitung und Ergebniskontrolle (eigene Geschäftsprozessanalyse).</summary>
     <div class="sol"><b>Musterlösung:</b> „Keine Musterlösung möglich" – die Aufgabe ist anhand eines selbst gewählten, gut bekannten Arbeitsprozesses durch eine eigene Geschäftsprozessanalyse zu bearbeiten (analog zum Maler-Beispiel: alle Schritte vom ersten Kontakt über Planung, Vorbereitung, Durchführung bis zur Ergebniskontrolle beschreiben).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.2: Identifizieren Sie die Schlüsselstellen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.2: Identifizieren Sie die Schlüsselstellen.</summary>
     <div class="sol"><b>Musterlösung:</b> Keine separate Musterlösung im Text – individuell anhand der eigenen Geschäftsprozessanalyse zu bearbeiten. Orientierung (Maler-Beispiel): Schlüsselstellen sind z. B. Umgang mit dem Kunden, Planung der Reihenfolge, Auswahl von Werkzeug/Material/Menge, sorgfältige Durchführung, Abnahme durch den Kunden – also Stellen, an denen leicht etwas falsch gemacht oder entschieden/abgewogen werden muss.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.3: Überlegen Sie, welche Fehler einer/einem Lernenden passieren könnten, und diskutieren Sie die Konsequenzen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.3: Überlegen Sie, welche Fehler einer/einem Lernenden passieren könnten, und diskutieren Sie die Konsequenzen.</summary>
     <div class="sol"><b>Musterlösung:</b> Keine separate Musterlösung im Text – individuell zu bearbeiten. Orientierung (Maler-Beispiel): zu viel/falsche oder zu wenig Farbe bestellt (behebbar/nachbestellbar), fehlendes Werkzeug vor Ort (lästig, aber Lerneffekt), nicht perfektes Arbeitsergebnis (nachbesserbar). Schwere Fehler: ernsthafte Kundenunzufriedenheit und Verstöße gegen die Arbeitssicherheit.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.4: Begründen Sie, welche Fehler Sie zulassen würden und welche Sie verhindern.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.4: Begründen Sie, welche Fehler Sie zulassen würden und welche Sie verhindern.</summary>
     <div class="sol"><b>Musterlösung:</b> Keine separate Musterlösung im Text – individuell zu bearbeiten. Leitlinie aus dem Brief: Zulassen, was behebbar ist und woraus gelernt werden kann (je schwerwiegender die Konsequenz, desto größer die Lernchance – Voraussetzung: der Lernende ist für die Behebung zuständig). Verhindern: nicht wiedergutzumachende Schäden, insbesondere ernsthafte Kundenunzufriedenheit (Schaden für den Betrieb) und Verstöße gegen die Arbeitssicherheit.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.1: Sammeln Sie mögliche Interpretationen für das Verhalten von Frau B. (Spalte 2). — KLAUSUR</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.1: Sammeln Sie mögliche Interpretationen für das Verhalten von Frau B. (Spalte 2). — KLAUSUR</summary>
     <div class="sol"><b>Musterlösung:</b> Mögliche Interpretationen: Frau B. ist schüchtern; sie ist unhöflich; sie hat keine Lust; sie muss sich erst an die neue Situation (Ausbildung) gewöhnen; ihr kultureller Hintergrund führt zu ihrem Verhalten; sie hat sprachliche Probleme (Deutsch als Fremdsprache); Frau B. ist intelligent; Frau B. ist fleißig; sie ist motiviert; sie ist ehrgeizig. (Hinweis: Beobachtung und Interpretation strikt trennen – eine Beobachtung kann zu sehr unterschiedlichen Deutungen führen.)</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.2: Sammeln Sie mögliche Hypothesen für den Lernbedarf von Frau B. (Spalte 3). — KLAUSUR</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.2: Sammeln Sie mögliche Hypothesen für den Lernbedarf von Frau B. (Spalte 3). — KLAUSUR</summary>
     <div class="sol"><b>Musterlösung:</b> Mögliche Lernbedarfe (Hypothesen): Frau B. möchte lernen, selbstbewusster aufzutreten; mehr Sicherheit im Umgang mit Kundinnen/Kunden gewinnen; lernen, von sich aus auf Kundinnen/Kunden zuzugehen; ihre Sprachkenntnisse verbessern. Erläuterung: „Bei der Feststellung des Lernbedarfs ist es notwendig, dass Ausbildende sehr sorgfältig zwischen ihren Beobachtungen und ihren Interpretationen unterscheiden, damit sie keinen Beurteilungsfehlern unterliegen. … Daher müssen die eigenen Hypothesen zum Lernbedarf immer erst in einem Gespräch mit dem Lernenden verifiziert (beziehungsweise verworfen) werden."</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.3: Erarbeiten Sie einen Lernweg, den Sie Frau B. vorschlagen können. — KLAUSUR</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.3: Erarbeiten Sie einen Lernweg, den Sie Frau B. vorschlagen können. — KLAUSUR</summary>
     <div class="sol"><b>Musterlösung:</b> „Ein möglicher Lernweg für Frau B. könnte lauten: Die eigenverantwortliche Entgegennahme aller Anrufe und der Empfang von Besucherinnen und Besuchern innerhalb eines bestimmten Zeitraums in diesem Büro."</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.1: Erklären Sie, welche wesentlichen Prinzipien die Ausbilderin leiten, und welche Wirkung diese entfalten.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.1: Erklären Sie, welche wesentlichen Prinzipien die Ausbilderin leiten, und welche Wirkung diese entfalten.</summary>
     <div class="sol"><b>Musterlösung:</b> Leitende Prinzipien und ihre Wirkung: <b>Augenhöhe</b> → die Auszubildende öffnet sich im Gespräch. <b>Vertrauensvoller Umgang</b> → sie spricht sehr persönliche Lernbedarfe an. <b>Zutrauen</b>, dass sie die Aufgabe bewältigt → sie gewinnt Selbstvertrauen und bewältigt sie. <b>Herausfordernde Aufgabe nach dem Prinzip der dosierten Überforderung</b> → sie ist motiviert, das Erfolgserlebnis stärkt nachhaltig ihr Selbstbewusstsein. <b>Loslassen und handeln lassen</b> → sie findet eigene Lösungen und hat gerade dadurch ein echtes Erfolgserlebnis. <b>Sich zurückhalten</b> → sie findet tatsächlich eigene Lösungen. <b>Gewissheit, dass Lernprozesse ihre eigenen Gesetzmäßigkeiten haben und Zeit brauchen</b> → die Ausbilderin bringt die notwendige Gelassenheit ein. (Das Fazit ist individuell zu ziehen.)</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.2: Bereiten Sie die zentralen Argumente vor, mit denen Sie Ihren Chef für die Einführung der Lernprozessbegleitung gewinnen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.2: Bereiten Sie die zentralen Argumente vor, mit denen Sie Ihren Chef für die Einführung der Lernprozessbegleitung gewinnen.</summary>
     <div class="sol"><b>Musterlösung:</b> Mögliche Argumente: Aufgabe der Ausbildung ist die Entwicklung von Handlungskompetenzen – diese gelingt nur an Aufgaben, an denen tatsächlich gelernt werden kann; Lernprozessbegleitung unterstützt genau das und bringt der echten Kompetenzentwicklung deutlich näher. Auszubildende sind <b>motivierter</b> bei herausfordernden Aufgaben; bewältigte Aufgaben bringen echte Erfolgserlebnisse, die die Motivation weiter stärken. Lernprozessbegleitung stärkt <b>Selbstlernkompetenzen</b> – eine Investition in zukünftige Mitarbeitende, die ohnehin stetig weiterlernen müssen. Sie lässt sich zudem als <b>Aushängeschild im Ausbildungsmarketing</b> nutzen, weil überzeugte Auszubildende auf Bewerber/innen überzeugend wirken.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 5.1: Benennen Sie die Vorteile von „Fragen statt sagen" für neue Mitarbeitende, Patinnen/Paten und die Einrichtung.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.1: Benennen Sie die Vorteile von „Fragen statt sagen" für neue Mitarbeitende, Patinnen/Paten und die Einrichtung.</summary>
     <div class="sol"><b>Musterlösung:</b> <b>Neue Mitarbeitende:</b> passgenaue Einarbeitung, Unterstützung genau dort, wo sie gebraucht wird; durch selbständige Einarbeitung schnell selbstverantwortlich arbeitsfähig, dadurch schnelle Unterstützung des Teams und schnelleres Hineinwachsen; motivierend, vorhandenes Wissen/Können einbringen zu können. <b>Patinnen/Paten:</b> weniger zeitaufwändige Begleitung, nur kurze, fokussierte Gespräche zu noch Unklarem; das Team erhält schneller Unterstützung. <b>Einrichtung:</b> neue Mitarbeitende schneller eingearbeitet, früher verantwortungsfähig; es wird schneller deutlich, ob die Passung zwischen Mitarbeitenden und Aufgaben besteht.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 5.2: Nennen Sie die Herausforderungen dieses Vorgehens.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.2: Nennen Sie die Herausforderungen dieses Vorgehens.</summary>
     <div class="sol"><b>Musterlösung:</b> Neue Mitarbeitende müssen sich von Beginn an zeigen, indem sie gleich Aufgaben übernehmen – dabei können Fehler passieren. Patinnen/Paten müssen sich mit einem neuen Modell auseinandersetzen, bei dem es nicht um erklären, zeigen und kontrollieren geht, sondern darum, die neue Person in der selbständigen Vorbereitung v. a. durch Fragen zu unterstützen. Das Unternehmen muss zunächst Ressourcen investieren (Erstellung der Einarbeitungsmappe mit Lernaufgaben; Freistellung einer Fachkraft als Patin/Pate).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 5.3: Überlegen Sie, wie mit diesen Herausforderungen umgegangen werden kann.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.3: Überlegen Sie, wie mit diesen Herausforderungen umgegangen werden kann.</summary>
     <div class="sol"><b>Musterlösung:</b> Neue Mitarbeitende brauchen auf der Beziehungsebene Zutrauen von Patinnen/Paten, Kolleg/innen und Führungskräften; mit den unvermeidlichen Fehlern ist konstruktiv umzugehen. Regelmäßige Treffen zum Erfahrungsaustausch helfen sowohl den neuen Mitarbeitenden als auch den Patinnen/Paten. Auf Einrichtungsebene hilft es, sich bewusst zu machen, wie viele Ressourcen schlechte Einarbeitung verbraucht, und gerade zu Beginn genügend Ressourcen einzusetzen. Patinnen/Paten brauchen nicht nur den Auftrag, sondern auch die <b>Zeit</b> zum Einarbeiten – diese ist in der Arbeitsplanung zu berücksichtigen.</div>
   </details>
 </section>
 
 </div></section>
 <section class="tabpanel" id="p-s05"><div class="panelcard">
+<div class="exambox"><b>🎯 In der Übungsklausur dran (Aufgabe 4, 18 P):</b> Lebenslinie als Diagnostikinstrument · drei Charaktermerkmale beratender Personen (Empathie, Distanzierung, Introversion).</div>
+<section class="block"><h3>📝 Übungsklausur-Aufgaben zu diesem Brief</h3><details class="task klausur"><summary><span class="badge-k">📝 Übungsklausur</span> Aufgabe 4 – Pädagogisch-psychologische Beratung (18 P)</summary><div class="sol"><p class="qtext">4.1 (9 P) Erläutern Sie den Einsatz der Lebenslinie als Diagnostikinstrument in der Beratung von Erwachsenen. — 4.2 (9 P) Beschreiben Sie drei Charaktermerkmale, die Menschen prädestinieren, als beratende Person von Erwachsenen zu arbeiten.</p><div class="amt"><b>Amtliche Musterlösung:</b><p><b>4.1 – Lebenslinie (je 3 P):</b></p><ul><li>Aufgabe der Klientin/des Klienten: <b>bedeutsame Lebensereignisse</b> darstellen (emotional aufwühlende positive und negative Erlebnisse, biografische Umbrüche).</li><li>Ziel der beratenden Person: <b>Ressourcen und allgemeine Problemlösefähigkeiten</b> anhand der Ereignisse aufdecken und für die aktuelle Lebenssituation (z. B. die Krankheit) und die nahe Zukunft nutzbar machen.</li><li>Die beratende Person stellt Fragen, wie die Person zurückliegende Ereignisse <b>erlebt und bewältigt</b> hat (z. B. Beziehungsende, Umzug, Stress/Druck) → daraus Lösungsoptionen für derzeitige Probleme.</li></ul><p><b>4.2 – drei Charaktermerkmale (je 3 P):</b></p><ul><li><b>Empathie:</b> emotionaler und kognitiver Nachvollzug von Gefühlen, Motiven und Gedanken der Ratsuchenden – Mitgefühl, nicht Mitleid.</li><li><b>Fähigkeit zur Distanzierung:</b> immer wieder die Balance zwischen Nähe und Distanz finden.</li><li><b>Introversion:</b> Empathie erfordert ein Sich-Zurücknehmen; das Hineinversetzen fällt introvertierten Menschen leichter als extrovertierten.</li></ul></div></div></details></section>
 <h2 class="briefttl">5 · Beratung</h2>
 <p class="lead">Dieser Brief erklärt die pädagogisch-psychologische Beratung Erwachsener: Sie ist „Hilfe zur Selbsthilfe“ – die Ratsuchenden finden ihre Lösungen selbst. Behandelt werden der typische Vier-Phasen-Ablauf, qualitative Diagnostikinstrumente (u. a. die Lebenslinie) und die Persönlichkeit, das Wissen und das Handwerkszeug guter Beratender.</p>
 
@@ -2295,37 +2320,37 @@ footer.foot{color:#90a59a;text-align:center;font-size:.8rem;padding:20px 10px 40
   <h3>✍️ Übungsaufgaben mit Musterlösung</h3>
 
   <details class="task">
-    <summary>Aufgabe 1.1: Beratung von anderen akademischen Experten unterscheiden</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.1: Beratung von anderen akademischen Experten unterscheiden</summary>
     <div class="sol"><b>Musterlösung:</b> In der pädagogisch-psychologischen Beratung entwickeln die Klientinnen bzw. die Klienten die Lösungen ihrer Probleme während des Beratungsprozesses selbst und setzen diese dann in ihrem Lebensumfeld um. Bei vielen anderen akademischen Beratungsformen beschreiben die Beraterinnen und Berater aufgrund ihres Fachwissens mögliche Lösungen und führen diese an den Ratsuchenden (z. B. in der Medizin eine Operation) oder für die Ratsuchenden (z. B. in der Steuerberatung) durch. Pädagogisch-psychologische Beratende sehen sich als Expertinnen bzw. Experten für den Beratungsprozess, nicht für Lösungen. Letzteres gilt aber für viele andere akademische Beratungsangebote in den Bereichen Jura, Medizin und Technik.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.2: Die vier Phasen und die Aufgaben der Beratenden je Phase</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.2: Die vier Phasen und die Aufgaben der Beratenden je Phase</summary>
     <div class="sol"><b>Musterlösung:</b> Die vier Hauptphasen und die damit verbundenen Aufgaben lauten: <b>Bestandsaufnahme</b> – gemeinsames Herausarbeiten der Problemkonstellation mit den Klienten; dazu werden die aktuelle Lebenssituation und Teile der Biografie unter die Lupe genommen. <b>Zielvereinbarung</b> – gemeinsam mit den Ratsuchenden Visionen möglicher Problemlösungen erarbeiten; diese Ziele werden genau dokumentiert. <b>Beratungsprozess und Problemlösung</b> – mit den Ratsuchenden werden Problemlösungen entwickelt, durchdacht und durchgespielt; besprochen werden auch Erfahrungen und Hindernisse, die einer dauerhaften Lösung im Wege stehen. <b>Abschluss und Bewertung</b> – die beratende Person bewertet die eigene Arbeit (Qualität und Wirkung von Beratung/Interventionen); die Ratsuchenden erhalten Gelegenheit zu ausführlichem schriftlichem oder mündlichem Feedback; wurden die anvisierten Ziele nicht erreicht, geht der Prozess auf Wunsch der Klienten weiter.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.3: Die drei Haltungen der klientenzentrierten Beratung</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.3: Die drei Haltungen der klientenzentrierten Beratung</summary>
     <div class="sol"><b>Musterlösung:</b> <b>Kongruenz:</b> Die beratende Person kann sich aller ihrer Erfahrungen, die beim Versuch des Einfühlens in ihr aufsteigen, bewusst werden und muss sie nicht verbergen. Die Übereinstimmung von Erfahrung und Selbstkonzept wird als Kongruenz bezeichnet. <b>Wertschätzung:</b> Die beratende Person zeigt den Erfahrungen und Aussagen der Ratsuchenden gegenüber Wertschätzung, ohne sie an Bedingungen zu knüpfen (z. B. dass Ratsuchende immer höflich sein müssen); spürt sie fehlende unbedingte Wertschätzung, versucht sie das bei sich zu verstehen, um die unbedingte Wertschätzung wiederherzustellen. <b>Empathie:</b> Die beratende Person versteht auf dem Wege der Einfühlung das subjektive Erleben der Ratsuchenden und teilt das Verstandene so mit, dass die Ratsuchenden es zumindest in Ansätzen wahr- und annehmen können.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.1: Merkmale gemeinschaftlicher psychologischer Diagnostik</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.1: Merkmale gemeinschaftlicher psychologischer Diagnostik</summary>
     <div class="sol"><b>Musterlösung:</b> Verlauf und Ergebnisse der Diagnostik ermöglichen Klientinnen/Klienten und Beratenden, miteinander ins Gespräch zu kommen. Die diagnostische Untersuchung fungiert als Selbstklärung für die Klienten und unterstützt die Zielbestimmung. Die gemeinschaftliche Diagnostik nimmt Alltagserfahrungen in den Blick und verzichtet weitgehend auf psychologische und psychiatrische Fachtermini. Statt einer Zuweisung zu Behandlungssettings geht es um eine Schärfung des psychologischen Problems in der Perspektive der Klienten. Das kommt auch den Beratenden zugute, denn ihr Blick auf Probleme, Wünsche und Ziele wird ebenfalls klarer. Es kommen deshalb überwiegend qualitative Verfahren zum Einsatz, wie z. B. die Lebenslinie.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.2: Funktionen der Lebenslinie als Diagnostikinstrument</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.2: Funktionen der Lebenslinie als Diagnostikinstrument</summary>
     <div class="sol"><b>Musterlösung:</b> Die Klientinnen bzw. Klienten sollen sich bewusst werden, welche Problemlösestrategien sie in kritischen Lebensereignissen, biografischen Umbrüchen und psychologischen Problemkonstellationen angewendet haben. Die Beraterinnen und Berater haben das Ziel, Ressourcen und allgemeine Problemlösefähigkeiten anhand der in der Lebenslinie beschriebenen Ereignisse aufzudecken und für die aktuelle Lebenssituation der Klientin bzw. des Klienten und die nahe Zukunft nutzbar zu machen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.1: Die beiden Teile des Arbeitsprozesswissens</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.1: Die beiden Teile des Arbeitsprozesswissens</summary>
     <div class="sol"><b>Musterlösung:</b> Die beiden Teile des Arbeitsprozesswissens sind das im Studium erworbene theoretische Wissen, vor allem aus der Pädagogischen Psychologie, sowie das implizite Wissen, das sich aus den Erfahrungen mit den Fällen in der Beratungspraxis formt. Das wissenschaftliche Wissen dient als Erklärung, Begründung und Legitimation des Beraterhandelns. Das implizite Wissen ist das im Beratungsprozess zumeist intuitiv zur Anwendung kommende Steuerungswissen für gelingende Beratungsprozesse.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.2: Hauptthemen des wissenschaftlich geprägten Wissensteils</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.2: Hauptthemen des wissenschaftlich geprägten Wissensteils</summary>
     <div class="sol"><b>Musterlösung:</b> Die durch die wissenschaftliche Ausbildung, vor allem in der Pädagogischen Psychologie, vermittelten Wissensaspekte sind: Menschenbilder als theoretische Orientierungen für Wirkungsweise und generelle Ziele der Beratung; Beratungsmodelle als theoretische Orientierung für den Verlauf von Beratungsprozessen; qualitative und biografische Verfahren der psychologischen Diagnostik zur Ermittlung der persönlichen Ausgangslagen; Kenntnisse von Techniken und Tools der Intervention, um den Problemlösungs- und Beratungsprozess voranzubringen; Kenntnisse der Kommunikationstheorie und Kommunikationspsychologie, um das eigene Kommunikationsverhalten und den Prozess zu steuern; Kenntnisse aus der Klinischen Psychologie (psychische Störungen und Ressourcen) und der Entwicklungspsychologie (Umgang mit kritischen Lebensereignissen), um Kontexte der Probleme wissenschaftlich einordnen zu können.</div>
   </details>
 
@@ -2333,6 +2358,8 @@ footer.foot{color:#90a59a;text-align:center;font-size:.8rem;padding:20px 10px 40
 
 </div></section>
 <section class="tabpanel" id="p-s06"><div class="panelcard">
+<div class="exambox"><b>🎯 In der Übungsklausur dran (Aufgabe 5, 25 P):</b> Grafik Top-5-Ausbildungsberufe beschreiben · drei Einflussfaktoren der Berufswahl · 360-Grad-Feedback mit Vor- und Nachteil.</div>
+<section class="block"><h3>📝 Übungsklausur-Aufgaben zu diesem Brief</h3><details class="task klausur"><summary><span class="badge-k">📝 Übungsklausur</span> Aufgabe 5 – Laufbahnberatung und berufliche Entwicklung (25 P)</summary><div class="sol"><p class="qtext">5.1a (8 P) Beschreiben Sie die Grafik (Top-5-Ausbildungsberufe von Frauen und Männern). — 5.1b (9 P) Erläutern Sie anhand von drei Einflussfaktoren, weshalb Frauen/Männer frauen-/männertypische Ausbildungsberufe wählen. — 5.2 (8 P) Beschreiben Sie das 360-Grad-Feedback als Methode der Potenzialanalyse und nennen Sie je einen Vor- und Nachteil.</p><div class="amt"><b>Amtliche Musterlösung:</b><p><b>5.1a – Grafik (je 2 P):</b> Die Grafik (2016) zeigt die Top-5-Ausbildungsberufe von Frauen und Männern. Männer wählen weiterhin klassische Männerberufe (Mechatroniker, Elektroniker, Mechaniker). Frauen wählen klassische Frauenberufe (kaufmännische Berufe, Gesundheitswesen). Ausgeglichen sind beide bei Verkäufer/in und Kauffrau/-mann im Einzelhandel.</p><p><b>5.1b – drei Einflussfaktoren (je 3 P):</b></p><ul><li><b>Elternhaus:</b> Kinder werden durch Eltern und deren Berufe beeinflusst (Modelllernen, Eltern als Vorbild).</li><li><b>Selbst-/Rollenbilder:</b> Wahl gemäß typisch weiblicher/männlicher Rollenschemata.</li><li><b>Peers:</b> Gleichaltrige haben großen Einfluss auf die Berufswahl.</li></ul><p><b>5.2 – 360-Grad-Feedback (4 P + je 2 P):</b> Beurteilungsmethode, bei der sich eine Person <b>selbst einschätzt</b> und zusätzlich Feedback von relevanten Dritten eingeholt wird → <b>Rundum-Perspektive</b>, die das Selbstbild mit verschiedenen Fremdbildern ergänzt. <b>Vorteil:</b> Transparenz der Leistungs-/Beurteilungskriterien, bessere Teamarbeit, effektivere Mitarbeitendengespräche. <b>Nachteil:</b> gibt nicht zwingend ein zutreffendes Bild (beurteilt eher die Beziehung zu den Feedbackgebenden), fördert Anpassertum / „Schönheitswettbewerbe“ – „A fool with a tool is still a fool“.</p></div></div></details></section>
 <h2 class="briefttl">6 · Laufbahn</h2>
 <p class="lead">Dieser Brief erklärt, warum heute kaum jemand einen einmal erlernten Beruf bis zur Rente ausübt. Er zeigt, welche Anforderungen (demografischer Wandel, Digitalisierung, New Work) auf Berufsverläufe wirken, wie Menschen ihren Beruf wählen, wie man sie in Eingangsphase und im laufenden Berufsleben berät und wie man die eigene Beschäftigungsfähigkeit (Employability) sichert.</p>
 
@@ -2754,103 +2781,105 @@ footer.foot{color:#90a59a;text-align:center;font-size:.8rem;padding:20px 10px 40
   <h3>✍️ Übungsaufgaben mit Musterlösung</h3>
 
   <details class="task">
-    <summary>Aufgabe 1.1: Schildern Sie kurz, inwieweit der demografische Wandel die aktuellen und zukünftigen Berufsverläufe beeinflusst.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.1: Schildern Sie kurz, inwieweit der demografische Wandel die aktuellen und zukünftigen Berufsverläufe beeinflusst.</summary>
     <div class="sol"><b>Musterlösung:</b> Durch den demografischen Wandel wird sich die Anzahl an älteren Menschen in der Gesellschaft, für die Rentenbezüge gezahlt werden, weiter erhöhen. Gleichzeitig wird die Zahl derjenigen, die erwerbstätig sind, nicht wesentlich steigen, sodass hier eine Versorgungslücke entsteht. Als Konsequenz davon kann damit gerechnet werden, dass das Renteneintrittsalter weiterhin nach hinten rücken wird, sodass ältere Menschen länger im Erwerbsleben bleiben. Dies bedeutet ein Umdenken beim Einsatz älterer Personen in Betrieben und eine Berücksichtigung bei den Themen Arbeitsplatzgestaltung, Weiterbildung und Zusammenarbeit von Jung und Alt. Für jüngere Menschen heißt dies, dass schon jetzt damit gerechnet werden muss, länger zu arbeiten als die Generationen zuvor und sich auch darauf einzustellen, dass im beruflichen Leben viele Änderungen eintreten werden, die ein gewisses Maß an Anpassungsfähigkeit erfordern.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.2: Nennen Sie positive und negative angenommene Konsequenzen auf das Arbeitsleben, die durch Digitalisierungsprozesse erwartet werden.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.2: Nennen Sie positive und negative angenommene Konsequenzen auf das Arbeitsleben, die durch Digitalisierungsprozesse erwartet werden.</summary>
     <div class="sol"><b>Musterlösung:</b> Einerseits können durch Digitalisierungsprozesse Arbeitsabläufe erleichtert und beschleunigt werden, was für die Menschen bedeutet, dass ihnen viele Arbeiten abgenommen werden und somit mehr Zeit für andere Tätigkeiten/Freizeit zur Verfügung steht. Als Nachteil befürchten viele Menschen, dass ihre Jobs wegfallen, dass sie nicht mehr in ausreichender Stundenzahl gebraucht werden und somit auch nicht mehr ausreichend Geld verdienen können. Zudem sind viele Weiterbildungen und Anpassungsprozesse, individuell als auch organisational, erforderlich, um die durch Digitalisierung hervorgerufenen Änderungen erfolgreich zu bewältigen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.3: New Work beinhaltet viele verschiedene Facetten. Nennen Sie drei Neuerungen der Arbeitsgestaltung oder des Berufsverlaufs, die unter dem Label New Work gefasst werden.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.3: New Work beinhaltet viele verschiedene Facetten. Nennen Sie drei Neuerungen der Arbeitsgestaltung oder des Berufsverlaufs, die unter dem Label New Work gefasst werden.</summary>
     <div class="sol"><b>Musterlösung:</b> Flexibilität bei Arbeitszeit und -ort; selbstorganisierte Teams statt klassischer Führung; projektbezogene Aufgaben mit Entscheidungs-/Produktverantwortung; häufigerer Wechsel des Arbeitgebers; wechselnde Tätigkeiten.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.1: Erläutern Sie, inwieweit beispielsweise Eltern und Freunde die individuelle Berufs- und Studienwahl beeinflussen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.1: Erläutern Sie, inwieweit beispielsweise Eltern und Freunde die individuelle Berufs- und Studienwahl beeinflussen.</summary>
     <div class="sol"><b>Musterlösung:</b> Eltern und Freunde stellen einerseits Vorbildmodelle dar, an denen sich Menschen orientieren. Insbesondere das Elternhaus bietet dabei die erste Orientierung, kann teilweise aber auch zu gegenteiligen Lebensentwürfen und beruflichen Ambitionen führen, wenn beispielsweise negative Erfahrungen Zuhause gemacht wurden. Auch stellen Eltern und Freunde einen sozialen Einfluss dar, weil sie wichtige Bezugspersonen für das Individuum darstellen, von denen man Anerkennung erhält, die die eigenen Einstellungen prägen und bewerten.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.2: Die Bundesagentur für Arbeit bietet für Schülerinnen und Schüler einige Hilfestellungen an. Benennen Sie diverse Angebote.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.2: Die Bundesagentur für Arbeit bietet für Schülerinnen und Schüler einige Hilfestellungen an. Benennen Sie diverse Angebote.</summary>
     <div class="sol"><b>Musterlösung:</b> Persönliche face-to-face-Beratung; Berufsinformationszentren, in denen man sich über Berufe, Ausbildungen und Voraussetzungen informieren kann; Apps zur Orientierung und zur Ausbildungsplatzsuche; Testverfahren online, um die eigenen Stärken und Interessen herauszufinden.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.3: Begründen Sie, weshalb gesellschaftliche Normen die eigene persönliche Berufswahl lenken.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.3: Begründen Sie, weshalb gesellschaftliche Normen die eigene persönliche Berufswahl lenken.</summary>
     <div class="sol"><b>Musterlösung:</b> Gesellschaftliche Normen können die eigene persönliche Berufswahl dahingehend lenken, dass sie als Norm vorgeben, was von einem Individuum erwartet wird, wenn es beispielsweise einer bestimmten Kategorie angehört. So wird von Mädchen nicht unbedingt erwartet, dass sie sich für technische Themen interessieren, weil man davon ausgeht, dass sie es auch nicht so gut verstehen. Je nach Umgebung gelten aber auch allgemeingültige Normen, die etwas mit der aktuellen Zeit und der Situation in der Gesellschaft zu tun haben: So würden heute beispielsweise schon viele junge Menschen die Stirn runzeln, wenn jemand sagt, er oder sie suche einen festen Job, bei dem er oder sie für immer bleiben kann, wo man um 8 Uhr morgens anfangen muss und immer Präsenzpflicht besteht.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.1: Erklären Sie, was unter Potenzial im Gegensatz zu Kompetenz verstanden wird.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.1: Erklären Sie, was unter Potenzial im Gegensatz zu Kompetenz verstanden wird.</summary>
     <div class="sol"><b>Musterlösung:</b> Unter Potenzial wird das verstanden, was in einem Menschen angelegt sein könnte bzw. was sich an Fähigkeiten noch entwickeln könnte. Im Gegensatz dazu beschreibt der Begriff Kompetenz das, was bereits im Jetzt schon vorhanden ist und was die Person kann.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.2: Nennen Sie gängige Optionen der Potenzialanalyse.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.2: Nennen Sie gängige Optionen der Potenzialanalyse.</summary>
     <div class="sol"><b>Musterlösung:</b> Assessment Center, Interviews, Vorgesetztengespräche, Testdiagnostik, 360°-Feedback etc.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.3: Benennen Sie die Unterstützungshilfe in der Berufseingangsphase für Lehrerinnen und Lehrer (Hamburger Beispiel).</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.3: Benennen Sie die Unterstützungshilfe in der Berufseingangsphase für Lehrerinnen und Lehrer (Hamburger Beispiel).</summary>
     <div class="sol"><b>Musterlösung:</b> In der Berufseingangsphase wird Lehrerinnen und Lehrern in Hamburg folgendes angeboten: Beratung, Fortbildungen, Broschüren, Downloads (z. B. Arbeitsmaterial), Fragestellungen nach den eigenen Interessen, Anregungen zu „Umwegen" (vor dem Schuldienstantritt vielleicht noch etwas anderes arbeiten, ins Ausland etc.).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.1: Nennen Sie drei unterschiedliche Ereignisse bzw. Veränderungen, die in der betroffenen Person liegen und Auswirkungen auf ihr Berufsleben haben.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.1: Nennen Sie drei unterschiedliche Ereignisse bzw. Veränderungen, die in der betroffenen Person liegen und Auswirkungen auf ihr Berufsleben haben.</summary>
     <div class="sol"><b>Musterlösung:</b> Altersbedingte Gründe (Nachlassen der physischen Konstitution, der Konzentration, der Sehstärke, des Gedächtnisses etc.); Geburt von Kindern; Scheidung/Trennung; schwere physische/psychische Erkrankungen; …</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.2: Benennen Sie organisationale Veränderungen, die sich auch auf die Arbeitnehmerin bzw. den Arbeitnehmer auswirken.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.2: Benennen Sie organisationale Veränderungen, die sich auch auf die Arbeitnehmerin bzw. den Arbeitnehmer auswirken.</summary>
     <div class="sol"><b>Musterlösung:</b> Fusionen; Internationalisierung; Stellenstreichungen oder Stundenkürzungen durch Digitalisierungsprozesse; neue Vorgesetzte; andere fachliche/inhaltliche Ausrichtungen mit anderen Anforderungen, die Beschäftigte nicht mehr erfüllen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.3: Beschreiben Sie, wann die Methode des Tetralemmas sinnvoll ist.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.3: Beschreiben Sie, wann die Methode des Tetralemmas sinnvoll ist.</summary>
     <div class="sol"><b>Musterlösung:</b> Die Methode des Tetralemmas ist insbesondere dann zu empfehlen, wenn die Klientinnen bzw. Klienten zwischen zwei Entscheidungsoptionen schwanken und bereits rational alles durchdacht und mit Freundinnen und Freunden gesprochen haben.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.4: Benennen Sie mindestens drei Optionen, wie berufliche Veränderung konkret aussehen kann.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.4: Benennen Sie mindestens drei Optionen, wie berufliche Veränderung konkret aussehen kann.</summary>
     <div class="sol"><b>Musterlösung:</b> Jobwechsel; Stundenaufstockung/-reduzierung; Weiterbildung; Home-Office; horizontale Laufbahnentwicklung; Umschulung; …</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 5.1: Erläutern Sie die Begriffe Weiterbildung und Fortbildung.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.1: Erläutern Sie die Begriffe Weiterbildung und Fortbildung.</summary>
     <div class="sol"><b>Musterlösung:</b> Weiterbildung wird zumeist als ein Oberbegriff verwendet und umfasst den Begriff der Fortbildung. Unter Fortbildung verstehen manche, dass vorher bereits eine abgeschlossene Ausbildung besteht, zu der nun konkret eine aufbauende Bildung vorgenommen wird. Weiterbildung kann sich im weitesten Sinne auf private wie berufliche/betriebliche Weiterbildungsmaßnahmen jeglicher Art beziehen (Seminare, autodidaktische Bildung, Mentoring, Coaching, Hochschulstudien, E-Learning etc.).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 5.2: Geben Sie Gründe an, weshalb Unternehmen interne Weiterbildung in hauseigenen Akademien anbieten.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.2: Geben Sie Gründe an, weshalb Unternehmen interne Weiterbildung in hauseigenen Akademien anbieten.</summary>
     <div class="sol"><b>Musterlösung:</b> Interne Weiterbildungen durch hauseigene Akademien bieten die Option des schnellen Agierens auf hauseigene Bedarfe und können passgenauer auf den eigenen Betrieb zugeschnitten werden als Weiterbildungsmaßnahmen externer Anbieter. Zudem können durch interne Akademien Austausch und Netzwerken, Wissensweitergabe und Mentoring besser gefördert und betrieben werden.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 6.1: Listen Sie Optionen des Individuums (des Arbeitnehmers) auf, um die eigene Beschäftigungsfähigkeit zu sichern.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 6.1: Listen Sie Optionen des Individuums (des Arbeitnehmers) auf, um die eigene Beschäftigungsfähigkeit zu sichern.</summary>
     <div class="sol"><b>Musterlösung:</b> Finanzielle Absicherung; berufliche und persönliche Weiterentwicklung; Interesse an bestimmten Themen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 6.2: Begründen Sie, warum die Basis für Beschäftigungsfähigkeit im Unternehmen liegt.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 6.2: Begründen Sie, warum die Basis für Beschäftigungsfähigkeit im Unternehmen liegt.</summary>
     <div class="sol"><b>Musterlösung:</b> Die Basis für Beschäftigungsfähigkeit liegt im Unternehmen, weil die individuellen Kompetenzen der Beschäftigten immer nur im vorgegebenen Rahmen der Organisation wirksam sein können. Die Organisation hat also die Aufgabe, eine lebensereignisbasierte Kompetenzentwicklung ihres Personals aufzubauen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 6.3: Beschreiben Sie, was unter horizontaler Laufbahngestaltung (z. B. bei Service-Technikern) verstanden wird.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 6.3: Beschreiben Sie, was unter horizontaler Laufbahngestaltung (z. B. bei Service-Technikern) verstanden wird.</summary>
     <div class="sol"><b>Musterlösung:</b> Horizontale Laufbahngestaltung, z. B. bei Service-Technikern, bedeutet, dass sich Beschäftigte nicht wie in klassischen Führungslaufbahnen vertikal „nach oben" entwickeln, sondern dass sie sich beispielsweise in ihrem Fachgebiet wie die Service-Techniker weniger im Kundenkontakt und Außendienst bewegen, dafür beratend und wie ein Mentor die jüngeren, unerfahreneren Beschäftigten unterstützen. Solche Laufbahnen werden auch Expertenlaufbahnen genannt, die älteren Beschäftigten weitere Entwicklungsmöglichkeiten in ihrem Betrieb bieten.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 6.4: Nennen Sie den Kerngedanken beim Kompetenzmodell Service LernLab.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 6.4: Nennen Sie den Kerngedanken beim Kompetenzmodell Service LernLab.</summary>
     <div class="sol"><b>Musterlösung:</b> Der Kerngedanke beim Kompetenzmodell Service LernLab liegt darin, das Erfahrungswissen erfahrener Beschäftigter an jüngere, weniger erfahrene Service-Technikerinnen und -techniker weiterzugeben, und gleichzeitig den älteren Beschäftigten Perspektiven im Unternehmen zu geben. Somit wird Wissen im Unternehmen erhalten und der Arbeitgeber selbst wird attraktiver, weil es langfristige Perspektiven der Beschäftigung sowie Entwicklungsmöglichkeiten gibt. Den spezifischen Anforderungen der jeweiligen Lebensphasen wird besser Rechnung getragen und die Kompetenzen werden besser in das Unternehmen integriert.</div>
   </details>
 </section>
 
 </div></section>
 <section class="tabpanel" id="p-s07"><div class="panelcard">
+<div class="exambox"><b>ℹ️ Übungsklausur:</b> Dieser Brief wird in der Übungsklausur nicht direkt geprüft – laut Aufgabenhinweis können aber <i>alle</i> Studienbriefe des Moduls geprüft werden.</div>
+
 <h2 class="briefttl">7 · Gesellschaft</h2>
 <p class="lead">Dieser Studienbrief stellt sechs große Herausforderungen heutiger Gesellschaften vor: Klimawandel, globale Transformationsprozesse, Europäisierung, Rechtsextremismus, Wirtschaftskrisen und soziale Ungleichheit. Im Mittelpunkt steht meist die Frage, worin das Problem besteht und wie man ihm begegnen kann (Policy-Dimension im Sinne der Problemorientierung nach Hilligen).</p>
 
@@ -3271,123 +3300,125 @@ footer.foot{color:#90a59a;text-align:center;font-size:.8rem;padding:20px 10px 40
   <h3>✍️ Übungsaufgaben mit Musterlösung</h3>
 
   <details class="task">
-    <summary>Aufgabe 1.1: Klimatologische Phänomene nennen und unterscheiden.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.1: Klimatologische Phänomene nennen und unterscheiden.</summary>
     <div class="sol"><b>Musterlösung:</b> Zu den klimatologischen Phänomenen zählen Wetter und Klima. Wetter ist ein regionales, relativ wechselhaftes Geschehen, wahrnehmbar durch Temperatur, Niederschlag, Luftfeuchtigkeit und Wind. Klima ist eine relativ regelmäßige Ausprägung dieser Komponenten, durch Wetterbeobachtungen über einen längeren Zeitraum ermittelt (z. B. Mittelwerte), beschreibbar für Jahreszeiten und Regionen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.2: Treibhauseffekt und seine Rolle für das Leben erläutern.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.2: Treibhauseffekt und seine Rolle für das Leben erläutern.</summary>
     <div class="sol"><b>Musterlösung:</b> Die auf die Erde treffende Sonnenstrahlung wird auf der Oberfläche in langwellige Wärmestrahlung umgewandelt, die wieder Richtung Atmosphäre verlässt. Sie kann nicht vollständig entweichen, weil die Atmosphäre einen großen Teil absorbiert und in alle Richtungen wieder emittiert – einen Teil zurück auf die Erdoberfläche, die sich dadurch zusätzlich erwärmt usw. Das ist der Treibhauseffekt. Ohne ihn wäre Leben nicht möglich: Die Temperatur läge bei −18 °C statt bei +15 °C.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.3: Rolle der Klimaveränderungen in der Erdgeschichte und ihre Faktoren herausarbeiten.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.3: Rolle der Klimaveränderungen in der Erdgeschichte und ihre Faktoren herausarbeiten.</summary>
     <div class="sol"><b>Musterlösung:</b> Klimaveränderungen sind erdgeschichtlich ein natürlicher Vorgang, abhängig von drei Faktoren: (1) ankommende Sonnenstrahlung; (2) Anteil der reflektierten Sonnenstrahlung (Atmosphäre/Wolken, Erdoberfläche); (3) Anteil absorbierender Treibhausgase und Aerosole. Das Klima hat sich mehrfach drastisch verändert (Frühzeit: schwächere Sonne, höherer Treibhausgasanteil; letzte ~2 Mio. Jahre: zyklische Eiszeiten). Seit der Industrialisierung im 19. Jahrhundert (CO2-Zunahme) ist zusätzlich ein menschengemachter Klimawandel nachweisbar; dem CO2 wird die zentrale Rolle zugewiesen (Verdopplung → +3 ± 1 °C).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.4: Folgen des Klimawandels für Umwelt und Menschheit beschreiben.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.4: Folgen des Klimawandels für Umwelt und Menschheit beschreiben.</summary>
     <div class="sol"><b>Musterlösung:</b> Umwelt: Rückkopplungseffekte verstärken den Temperaturanstieg – Abschmelzen des Meereises, Erwärmung der Ozeane, Meeresspiegelanstieg, veränderte Meeresströmungen, Auftauen des Permafrostbodens (Methan/CO2), verändertes regionales Wetter. Menschheit: Unsicherheiten der landwirtschaftlichen Versorgung (Extremwetter), Ausbreitung von Krankheitserregern (z. B. Stechmücken), Folgen für wetterabhängige Branchen (Tourismus, Landwirtschaft, Binnenschifffahrt, Industrie) sowie soziale Spannungen (Trinkwasser, schrumpfende Siedlungsgebiete, Migration).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.5: Anpassungs- und Vermeidungsstrategie erläutern.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.5: Anpassungs- und Vermeidungsstrategie erläutern.</summary>
     <div class="sol"><b>Musterlösung:</b> Anpassung umfasst alle kostengünstigen Maßnahmen, die negative Folgen abschwächen und positive verstärken (Hochwasserschutz, neue Pflanzenarten, angepasste Städteplanung) – man kommt mit dem Klimawandel besser zurecht. Vermeidung begrenzt den Klimawandel selbst, vor allem durch Reduktion der CO2-Emissionen. Beide dienen dem zentralen Ziel der Klimapolitik, den Klimawandelschaden so gering wie möglich zu halten.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.1: Merkmale des Globalisierungsprozesses beschreiben.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.1: Merkmale des Globalisierungsprozesses beschreiben.</summary>
     <div class="sol"><b>Musterlösung:</b> Globalisierung ist ein „Prozess des Bedeutungsschwunds nationaler Grenzen für menschliche Aktivitäten […], der mit einem Bedeutungsgewinn für globale Bezugspunkte einhergeht" (Scherrer &amp; Kunze, 2011, S. 12). Vier Merkmale: (1) Veränderung der Bedeutung des Nationalstaates zugunsten freier globaler Märkte und multinationaler Unternehmen; (2) Veränderung kultureller Gewohnheiten; (3) Verdichtung von Raum und Zeit; (4) Bedeutungsverlust von Territorialität.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.2: Den Begriff der „Globalisierungspause" erläutern.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.2: Den Begriff der „Globalisierungspause" erläutern.</summary>
     <div class="sol"><b>Musterlösung:</b> Mit Erstem Weltkrieg, Weltwirtschaftskrise 1929 und Zweitem Weltkrieg kam die wirtschaftliche Globalisierung an ein vorläufiges Ende; die Katastrophen beförderten globale politische Bemühungen. Der Zeitraum nach 1945 bis in die 1970er war von Blockkonfrontation und Austausch innerhalb der Blöcke geprägt, mit starker Orientierung auf nationale Binnenmärkte → „Pause" der Globalisierung (gleichwohl Dynamik des Welthandels in der westlichen Welt).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.3: Dimensionen globaler Transformation schildern.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.3: Dimensionen globaler Transformation schildern.</summary>
     <div class="sol"><b>Musterlösung:</b> Neben wirtschaftlichen gibt es politische, kulturelle und soziale Dimensionen. Wirtschaftlich: Handel/Außenhandel, Abbau von Handelshemmnissen, ungleiches Profitieren, transnationale Unternehmen, Direktinvestitionen, globaler Finanzkapitalismus. Politisch: Auswirkungen auf den Nationalstaat, fehlender Zugriff des Gewaltmonopols, schwindende Output-Legitimität, Mehrebenensystem. Sozial: Urbanisierung/Global Cities, Arbeitsmigration (reißt Familien auseinander), aufgeweichte Identitätskonzepte, Chancen wie ein Altersruhesitz im Ausland. Kulturell: Kontakte zwischen Weltregionen durch transnationale Unternehmen und Kulturindustrie – wechselseitig, nicht einseitig.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.4: Herausforderungen und Krisenerscheinungen der Globalisierung darstellen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.4: Herausforderungen und Krisenerscheinungen der Globalisierung darstellen.</summary>
     <div class="sol"><b>Musterlösung:</b> Globalisierung kennt Gewinner:innen und Verlierer:innen → ungleiche Wohlstandsverteilung ist nicht beseitigt, die Gerechtigkeitskrise teils verschärft. Die ökologische Krise entsteht durch hohen Treibhausgasausstoß und Naturausbeutung. Die Identitätskrise zeigt sich v. a. in westlichen Ländern als Wunsch nach nationalem Schutz und Begrenzung kultureller Pluralisierung; klassische Fähigkeiten in Industrie und Handwerk verlieren durch Automatisierung und Standortverlagerung an Bedeutung – das begünstigt den Aufstieg des Nationalpopulismus.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.1: Motive der Idee eines geeinten Europas erläutern.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.1: Motive der Idee eines geeinten Europas erläutern.</summary>
     <div class="sol"><b>Musterlösung:</b> Die Idee eines geeinten Europas erfuhr nach dem Zweiten Weltkrieg einen Aufschwung (Sehnsucht nach Frieden und Wohlstand, Erkenntnis der Notwendigkeit enger Zusammenarbeit), geprägt durch Churchills Züricher Rede („Vereinigte Staaten von Europa"). Die tatsächlichen ersten Schritte beruhten vor allem auf realpolitischen Bedingungen (Frankreich wollte den Kriegsgegner einhegen und Zugriff auf deutsche Kohle; Deutschland sah die Chance auf Rückkehr in die europäische Politik) und nicht nur auf europäischem Hochgefühl.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.2: Die Kopenhagener Kriterien erklären.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.2: Die Kopenhagener Kriterien erklären.</summary>
     <div class="sol"><b>Musterlösung:</b> Der Europäische Rat verständigte sich 1993 in Kopenhagen auf konkrete Kriterien: das politische Kriterium (institutionelle Stabilität, demokratische/rechtsstaatliche Ordnung, Menschenrechte, Minderheitenschutz); das wirtschaftliche Kriterium (funktionsfähige Marktwirtschaft, Standhalten im Binnenmarkt); das Acquis-Kriterium (Annahme des gesamten EU-Rechtswerks – Primär- und Sekundärrecht, Erklärungen der Institutionen, EuGH-Urteile, Verträge mit Drittstaaten).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.3: Möglichkeiten des Bundestages bei europäischem Sekundärrecht aufzeigen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.3: Möglichkeiten des Bundestages bei europäischem Sekundärrecht aufzeigen.</summary>
     <div class="sol"><b>Musterlösung:</b> Die beste Möglichkeit ist die frühe Einflussnahme im Entstehungsprozess des Sekundärrechts. Instrumente: (a) Informationsrecht gegenüber der EU-Kommission (qualifizierte Mehrheit nationaler Parlamente kann eine Überarbeitung verlangen); (b) Informations- und Mitwirkungsrechte gegenüber der Bundesregierung (frühzeitige Stellungnahme, Einfluss auf das Stimmverhalten im Rat); (c) EU-Ausschuss (Verfassungsrang, praktisch untergeordnet); (d) Verbindungsbüro in Brüssel (Sichtung, Priorisierung, Weiterleitung von EU-Vorlagen).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.4: Zusammenhang von Europäisierung und erstarkendem Nationalpopulismus diskutieren.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.4: Zusammenhang von Europäisierung und erstarkendem Nationalpopulismus diskutieren.</summary>
     <div class="sol"><b>Musterlösung:</b> Kritik an EU und Europäisierung ist ein zentrales Thema des Nationalpopulismus. Beispiel Ungarn: EU-Richtlinien und -Verordnungen werden als Übergriffe auf nationale Besonderheiten zurückgewiesen; das Land beschreitet den Weg der illiberalen Demokratie. In der Migrationsfrage stilisiert sich die Regierung als Beschützer des „abendländischen Europas" und – in Abgrenzung zu Deutschland – als die „eigentlich wahren" Europäer:innen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.1: Die drei Ansätze der Rechtsextremismusforschung vergleichen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.1: Die drei Ansätze der Rechtsextremismusforschung vergleichen.</summary>
     <div class="sol"><b>Musterlösung:</b> Normative Extremismusforschung: bestimmt Rechtsextremismus durch seine Beziehung zur Demokratie; Extremismus richtet sich gegen zentrale Prinzipien des Verfassungsstaates (Konstitutionalismus, Volkssouveränität); auch Sicht des Verfassungsschutzes; Rechtsextremismus als eine Variante der Demokratiegefährdung. Einstellungsforschung: untersucht das Ausmaß rechtsextremer Einstellungen in der Bevölkerung und Zusammenhänge (Bildung, Alter); Rechtsextremismus als Bündel von Einstellungen in definierter Intensität, verbunden durch die Vorstellung menschlicher Ungleichwertigkeit. Politikwissenschaftlich (Jaschke): vermittelnde Position; Definition als „Gesamtheit von Einstellungen, Verhaltensweisen und Aktionen […], die von der rassisch oder ethnisch bedingten sozialen Ungleichheit […] ausgehen, nach ethnischer Homogenität […] verlangen […] und Demokratisierung rückgängig machen wollen" – eine „antimodernistische […] Protestform" (Jaschke, 2001, S. 30).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.2: Erscheinungsformen des heutigen Rechtsextremismus nennen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.2: Erscheinungsformen des heutigen Rechtsextremismus nennen.</summary>
     <div class="sol"><b>Musterlösung:</b> (a) Gründung rechtsextremer Parteien (Einflussnahme auf das parlamentarische System); (b) Aktivitäten in außerparlamentarischen Organisationen (Zusammenhalt stärken, Angst verbreiten; Übergänge von Gewaltbereitschaft über Militanz bis Terror); (c) Intellektualisierung und Diskursbeeinflussung durch die Neue Rechte; (d) Beeinflussung der Lebenswelt (auch Jugendlicher) durch Musik, Videokanäle und Konzerte.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.3: Erläutern, inwiefern Schule eine Präventionsinstitution ist.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.3: Erläutern, inwiefern Schule eine Präventionsinstitution ist.</summary>
     <div class="sol"><b>Musterlösung:</b> Schule wirkt als Präventionsinstitution mit fünf Strategien: (1) diskriminierungs- und abwertungsfreier Diskursraum (inklusive Diskursregeln, Gegenpol zu anderen Sozialisationsinstanzen); (2) funktionierende Anerkennungskultur (keine Demütigung oder Beschämung); (3) Stärkung partizipativer Erfahrungen (Partizipation und Konflikt üben); (4) Lerngelegenheiten zur Schulung sozial-kognitiver Fähigkeiten (Perspektivenübernahme, multiple Kategorisierung; interkulturelles Lernen, Rollenspiele, Fall- und Konfliktanalysen, reale Kontakte); (5) politischer Fachunterricht zur Vermittlung konzeptuellen Wissens über Demokratie und Menschenrechte.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 5.1: Konjunkturelle Grundbegriffe nennen und erläutern.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.1: Konjunkturelle Grundbegriffe nennen und erläutern.</summary>
     <div class="sol"><b>Musterlösung:</b> Konjunktur ist Verlauf und Entwicklung der Wirtschaft (positiv oder negativ), gemessen an Indikatoren. Wichtigster Indikator ist das BIP (Wert aller Waren und Dienstleistungen), zudem Produktionspotential (bei voller Auslastung erreichbares BIP) und Volkseinkommen (Einkommen aus dem Wirtschaftsprozess). Phasen: Aufschwung (BIP-Wachstum steigt), Boom (längere Phase hoher Wachstumsraten), Abschwung (BIP stabil, geringere Raten), Rezession (schrumpfende Wirtschaft, 2–3 Quartale negativ), Depression (mehrjährig negatives Wachstum, umgangssprachlich Wirtschaftskrise). Verschiedene Konjunkturzyklen unterscheiden sich vor allem in der Dauer (längere umfassen kürzere): Kitchin (3–5 J.), Junglar (~8 J.), Kondratieff (40–60 J.).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 5.2: Monetäre Konjunkturtheorien erläutern und einordnen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.2: Monetäre Konjunkturtheorien erläutern und einordnen.</summary>
     <div class="sol"><b>Musterlösung:</b> Konjunkturtheorien erklären Konjunkturverläufe (Ursachen, Folgen, Interventionen). Unterscheidung in exogene (Wirkfaktoren außerhalb des Wirtschaftsprozesses: Kriege, Natureinflüsse, Stimmungen, Bevölkerungswachstum) und endogene (Ursache innerhalb; nicht-monetär = Investitions-/Konsumverhalten). Untergruppe der endogenen sind die monetären Theorien (Zins- und Geldmengenentwicklung; EZB-Leitzins). Höherer Zins → weniger Kredite → Geldmenge sinkt; niedrigerer Zins → mehr Kredite, höhere Konsum-/Investitionsneigung → die Wirtschaft wächst. Aufschwung = Zins-/Kreditexpansion; Abschwung = Ende des „billigen Geldes".</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 5.3: „Realwirtschaftlicher Schock" der Corona-Krise im Vergleich zur Finanzkrise 2007 diskutieren.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 5.3: „Realwirtschaftlicher Schock" der Corona-Krise im Vergleich zur Finanzkrise 2007 diskutieren.</summary>
     <div class="sol"><b>Musterlösung:</b> Der „realwirtschaftliche Schock" der Corona-Krise findet seine Ursache nicht in Blasenbildung am Immobilien-/Hypothekenmarkt und untätiger Finanzaufsicht (wie 2007), sondern in den Irritationen des Wirtschaftskreislaufs durch Schutzbestimmungen der Regierungen (Schließung von Läden, Reisebeschränkungen, Schulschließungen). Folgen für die Realwirtschaft: (a) Verhinderung des Konsums (Schließungen) → Nachfragerückgang; (b) Verunsicherung der Konsument:innen → Nachfragerückgang; (c) Unterbrechung von Lieferketten → Produktionseinschränkung; (d) Einschränkung von Berufstätigkeit durch Schulschließungen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 6.1: Rolle der sozialen Ungleichheit in der Gesellschaft erläutern.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 6.1: Rolle der sozialen Ungleichheit in der Gesellschaft erläutern.</summary>
     <div class="sol"><b>Musterlösung:</b> Soziale Ungleichheit ist ein offenkundiges Merkmal der Gesellschaft und Thema für Wissenschaft und Politik. Es geht um Unterschiede zwischen Menschen und Gruppen, die unterschiedliche Lebenschancen eröffnen – Abweichungen in Ressourcen, die ermöglichen oder davon abhalten, sich ein bestimmtes Leben aufzubauen. Beispiel: PISA-Studien zeigen den Zusammenhang von beruflichem sozioökonomischem Status der Eltern und schwächeren Kompetenzen der Kinder.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 6.2: Marx' Verständnis der gesellschaftlichen Klassen erläutern.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 6.2: Marx' Verständnis der gesellschaftlichen Klassen erläutern.</summary>
     <div class="sol"><b>Musterlösung:</b> Karl Marx entwickelte die einflussreichste Klassentheorie; Geschichte ist Geschichte von Klassenkämpfen (Widerspruch von Unterdrückern und Unterdrückten mit revolutionärem Potential). Das 19. Jahrhundert ist durch den Gegensatz von Bourgeoisie (besitzt Fabriken/Land, schlägt Profit) und Proletariat (verfügt nur über die eigene Arbeitskraft) gekennzeichnet. Zentrales Kriterium ist das Eigentum an Produktionsmitteln; das Verhältnis ist Ausbeutung (Mehrwert) und Abhängigkeit (Hungerlöhne, Verelendung). Die ökonomischen Verhältnisse prägen Denken und Handeln → Bedeutung der Weckung des Klassenbewusstseins für die proletarische Revolution.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 6.3: Modelltypen zur Erfassung sozialer Ungleichheit nennen und erläutern.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 6.3: Modelltypen zur Erfassung sozialer Ungleichheit nennen und erläutern.</summary>
     <div class="sol"><b>Musterlösung:</b> (a) Klassen-/Schichtmodelle (Marx: Hauptwiderspruch Bourgeoisie/Proletariat; Schichtmodelle z. B. Geißler – objektive Bedingungen an sozioökonomischen Kriterien wie Beruf, Verdienst, Bildung auf vertikaler Achse, horizontale Merkmale wie Geschlecht/Ethnie); (b) Modelle der sozialen Lage (neben Beruf weitere Kriterien: Bildung, soziale Integration, Wohnbedingungen); (c) Milieumodelle (Zugehörigkeit aufgrund der Lebensweise; berücksichtigt die individuelle Seite – volleres Bild); (d) Exklusions-/Inklusions-Modelle (normativer Ausgangspunkt Inklusion; Beobachtung wachsender Exklusion = Ausschluss von Teilhabe).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 6.4: Lessenichs These (Ungleichheit als konstituierendes Merkmal) konkretisieren.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 6.4: Lessenichs These (Ungleichheit als konstituierendes Merkmal) konkretisieren.</summary>
     <div class="sol"><b>Musterlösung:</b> Demokratie als Versprechen von Gleichberechtigung findet an realen Ungleichheiten eine Grenze. Lessenich rekonstruiert soziale Ungleichheit als konstituierendes Merkmal moderner Demokratie in vier Dimensionen: (1) Klassengegensätze (Marx) bleiben konstitutiv (Besitzende schränken Beteiligungsrechte der Nicht-Besitzenden ein); (2) die Wettbewerbs-/Marktlogik führt zu Abgrenzung unter den Nicht-Besitzenden; (3) die Spaltungslinie verläuft entlang der nationalen Zugehörigkeit (der Geburtsort bestimmt Lebenschancen); (4) Abgrenzung aller gegen das natürliche Ökosystem, das die Kosten trägt. Leitfrage: „Lässt sich Demokratie sozial entgrenzen – und ökologisch begrenzen?"</div>
   </details>
 </section>
 
 </div></section>
 <section class="tabpanel" id="p-s08"><div class="panelcard">
+<div class="exambox"><b>ℹ️ Übungsklausur:</b> Dieser Brief wird in der Übungsklausur nicht direkt geprüft – laut Aufgabenhinweis können aber <i>alle</i> Studienbriefe des Moduls geprüft werden.</div>
+
 <h2 class="briefttl">8 · Pharma</h2>
 <p class="lead">Dieser Brief erklärt, was der Körper mit einem Arzneistoff macht (Pharmakokinetik) und was der Arzneistoff mit dem Körper macht (Pharmakodynamik). Dazu kommen die klinische Pharmakologie (Dosisanpassung, Interaktionen, Nebenwirkungen) und der Weg eines neuen Medikaments durch die klinische Arzneimittelentwicklung.</p>
 
@@ -3905,73 +3936,75 @@ Konz.
   <h3>✍️ Übungsaufgaben mit Musterlösung</h3>
 
   <details class="task">
-    <summary>Aufgabe 1.1: Welche Patienten benötigen deutlich kleinere Ladedosierungen?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.1: Welche Patienten benötigen deutlich kleinere Ladedosierungen?</summary>
     <div class="sol"><b>Musterlösung:</b> Patientinnen und Patienten mit geringeren Verteilungsvolumina, üblicherweise besonders kleine und leichte Patientinnen und Patienten wie Kinder und mehrfach Amputierte.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.2: Welche Patienten benötigen verringerte Erhaltungsdosen?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.2: Welche Patienten benötigen verringerte Erhaltungsdosen?</summary>
     <div class="sol"><b>Musterlösung:</b> Patientinnen und Patienten mit eingeschränkter Eliminationskapazität, z. B. Enzym- oder Effluxtransporterhemmung, Niereninsuffizienz, finale Leberinsuffizienz.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.3: Wann wird bei Dauergabe ein Fließgleichgewicht erreicht?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.3: Wann wird bei Dauergabe ein Fließgleichgewicht erreicht?</summary>
     <div class="sol"><b>Musterlösung:</b> Nach 5 Halbwertzeiten.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.4: Codein-Fall – warum starb das Neugeborene über die Muttermilch?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.4: Codein-Fall – warum starb das Neugeborene über die Muttermilch?</summary>
     <div class="sol"><b>Musterlösung:</b> Codein wird durch CYP2D6 zum aktiven, obstipationsauslösendem Morphin metabolisiert. Beide Arzneistoffe können sich als Basen gut in der leicht sauren Muttermilch anreichern (Ionenfalle). CYP2D6 ist ein hochpolymorphes Enzym. Diese Mutter ist ein CYP2D6-Ultra-rapid-Metabolizer und hat deutlich mehr Morphin aus Codein gemacht, als man bei einem Normal-Metabolizer (90 % der Patientinnen und Patienten) erwarten würde.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.1: Nenne typische anticholinerge UAW.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.1: Nenne typische anticholinerge UAW.</summary>
     <div class="sol"><b>Musterlösung:</b> Das cholinerge System transportiert alle Flüssigkeiten nach außen. Umgekehrt kommt es also, insbesondere bei empfindlichen, älteren Patientinnen und Patienten, zu Mundtrockenheit, trockenen Augen, überwärmter, trockener Haut, Obstipation und Harnverhalt.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.2: Zielstruktur und Einsatzgebiet von „Phantasiotinib"?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.2: Zielstruktur und Einsatzgebiet von „Phantasiotinib"?</summary>
     <div class="sol"><b>Musterlösung:</b> -tinib ist die Endung für Tyrosinkinaseinhibitoren, die im onkologischen Bereich und gegen Autoimmunerkrankungen eingesetzt werden.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.1: Sättigungsdosis berechnen (Kind 10 kg, Clarithromycin, V = 4 l/kg, Ziel 2 mg/l)?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.1: Sättigungsdosis berechnen (Kind 10 kg, Clarithromycin, V = 4 l/kg, Ziel 2 mg/l)?</summary>
     <div class="sol"><b>Musterlösung:</b> C = D/V → D = C·V: 2 mg/l · 4 l/kg KG · 10 kg = 80 mg.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.2: Erhaltungsdosis bei Niereninsuffizienz (Kind 10 kg, Q0 = 0,8, 15 mg/kg/d, GFR = 50 ml/min)?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.2: Erhaltungsdosis bei Niereninsuffizienz (Kind 10 kg, Q0 = 0,8, 15 mg/kg/d, GFR = 50 ml/min)?</summary>
     <div class="sol"><b>Musterlösung:</b> Clarithromycin wird nur zu 20 % renal eliminiert. Dieser Weg ist zu 50 % eingeschränkt. Somit können 80 % unverändert und vom Rest nur die Hälfte (= 10 %) pro Zeiteinheit eliminiert werden. Somit reduziert sich die geplante Dosis um 10 %: 15 mg/kg KG/d · 10 kg · 90 % = 145 mg/d.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.3: Welches Medikament ist beim Neuansetzen von Rifampicin oder Clarithromycin anders zu dosieren?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.3: Welches Medikament ist beim Neuansetzen von Rifampicin oder Clarithromycin anders zu dosieren?</summary>
     <div class="sol"><b>Musterlösung:</b> Rifampicin induziert, Clarithromycin inhibiert CYP3A4, worüber beispielsweise Simvastatin (Cholesterinsenker) oder Ciclosporin (Immunsuppressivum im Rahmen von Transplantationen) metabolisiert wird/dosisrelevant ist.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.4: Sollte eine mit Lithium behandelte Mutter stillen?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.4: Sollte eine mit Lithium behandelte Mutter stillen?</summary>
     <div class="sol"><b>Musterlösung:</b> Lithium hat einen hohen Milch-/Plasma-Quotienten und erreicht fast therapeutische Dosen im Säugling. Stillen unter Lithiumtherapie sollte vermieden werden.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.1: Welche Hürden stellt das AMG an die Zulassung eines neuen Arzneistoffs?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.1: Welche Hürden stellt das AMG an die Zulassung eines neuen Arzneistoffs?</summary>
     <div class="sol"><b>Musterlösung:</b> Pharmazeutische Qualität, Unbedenklichkeit, Wirksamkeit.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.2: Vorrangige Ziele der Phasen 1, 2 und 3?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.2: Vorrangige Ziele der Phasen 1, 2 und 3?</summary>
     <div class="sol"><b>Musterlösung:</b> Erste Daten zur PK und Verträglichkeit (UAW) (Phase 1), Dosisfindung (Phase 2), Dosiskonfirmation und seltenere UAW (Phase 3).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.3: Welche Institution bewertet das Studienprotokoll?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.3: Welche Institution bewertet das Studienprotokoll?</summary>
     <div class="sol"><b>Musterlösung:</b> Die Ethikkommissionen prüfen das Studienprotokoll.</div>
   </details>
 </section>
 
 </div></section>
 <section class="tabpanel" id="p-s09"><div class="panelcard">
+<div class="exambox"><b>ℹ️ Übungsklausur:</b> Dieser Brief wird in der Übungsklausur nicht direkt geprüft – laut Aufgabenhinweis können aber <i>alle</i> Studienbriefe des Moduls geprüft werden.</div>
+
 <h2 class="briefttl">9 · Persönlichkeit</h2>
 <p class="lead">Dieser Studienbrief der Politischen Psychologie fragt, warum Menschen so unterschiedlich denken, wählen und sich politisch verhalten. Er zeigt, welche Persönlichkeitsmerkmale (von Autoritarismus über die Big Five bis zu Grundwerten) politische Einstellung, Beteiligung und Führung prägen.</p>
 
@@ -4472,83 +4505,85 @@ Konz.
   <h3>✍️ Übungsaufgaben mit Musterlösung</h3>
 
   <details class="task">
-    <summary>Aufgabe 1.1: Was bedeutet „relativ stabil" bei den untersuchten Mustern?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.1: Was bedeutet „relativ stabil" bei den untersuchten Mustern?</summary>
     <div class="sol"><b>Musterlösung:</b> Damit ist gemeint, dass die untersuchten Muster und Strukturen „transsituational" sind, also nicht auf eine spezifische Situation begrenzt, sondern ihr zeitlich vor- und nachgelagert sind, und dass sie in unterschiedlichen Situationen über einen längeren Zeitraum eine vergleichbare Wirkung entfalten. Mit der Einschränkung „relativ" stabil umfassen die wesentlichen Persönlichkeitsmerkmale jedoch nicht nur biologisch determinierte Traits, die dauerhaft Verhalten beeinflussen, sondern auch Persönlichkeitsaspekte wie individuelle Überzeugungssysteme oder Grundwerte, die zwar über längere Zeitspannen bestehen bleiben, aber durchaus auch Sozialisations- und Lernprozessen in verschiedenen Lebensabschnitten unterliegen können.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.1: Welche Gründe sieht die Autoritarismusforschung für die Ausprägung einer autoritären Persönlichkeit?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.1: Welche Gründe sieht die Autoritarismusforschung für die Ausprägung einer autoritären Persönlichkeit?</summary>
     <div class="sol"><b>Musterlösung:</b> Die theoretischen Überlegungen sind am Anfang der Forschung überwiegend an Sigmund Freud orientiert. Die wesentlichen Einflüsse entstehen demnach im Verlauf der kindlichen Erziehung im familiären Umfeld. Insbesondere eine gefühlskalte, dominante Erziehung der Eltern (vor allem der Väter) führe zu einer positiven Identifikation mit dem Starken und Machtvollen (z. B. eines totalitären Regimes) und zu einer negativen Identifikation mit dem (vermeintlich) Schwachen. Der RWA-Ansatz sieht die autoritäre Persönlichkeit allgemeiner als Produkt einer individuellen Geschichte sozialen Lernens, also soziale Kognition durch Beobachtung von Verhalten und dessen Konsequenzen; prägend ist v. a. das Kindes- und Jugendalter (Unterwerfung unter Elternregeln, Imitation), aber auch Bildungsgeschichte und Bedrohungserleben im Erwachsenenalter. Oesterreich (2005) konzentriert sich erneut auf Kindheit/Erziehung, sieht aber empirisch keinen Zusammenhang mit kaltem/repressivem Erziehungsstil, sondern eine Korrelation mit überfürsorglichem und kontrollierendem elterlichen Verhalten.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.2: Um welche Aspekte hat die neuere Autoritarismusforschung die klassische weiterentwickelt?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.2: Um welche Aspekte hat die neuere Autoritarismusforschung die klassische weiterentwickelt?</summary>
     <div class="sol"><b>Musterlösung:</b> Die klassische Forschung nahm an, die autoritäre Persönlichkeit sei eine Modalpersönlichkeit, ein weit verbreiteter, prägender Sozialtypus. Tatsächlich sind „Highs" eine gesellschaftliche Randerscheinung; autoritäre Strukturen ließen sich nicht mit der Häufigkeit autoritärer Persönlichkeiten erklären. Die neuere Forschung brach die reduktionistische Perspektive auf (die nur das Potenzial betrachtete) und fragte, welche Faktoren dieses Potenzial aktivieren. Ein wesentlicher Schritt war die Erfassung des Autoritarismus als Gruppenphänomen und die Verbindung der Persönlichkeitsforschung mit der sozialpsychologischen Erforschung von Intra- und Intergruppenbeziehungen. So ließen sich Annahmen der Social Identity Theory integrieren, wonach vor allem Bedrohungswahrnehmungen für die eigene Gruppe ein wichtiger Auslöser für autoritäres Verhalten sind. Die neuere Literatur macht dabei sichtbar, dass der Anstieg in Bedrohungssituationen kein generelles Phänomen ist, sondern in einer Wechselwirkung mit autoritären Persönlichkeitsdispositionen begründet liegt.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.3: Wie wirkt sich die SDO im politischen Kontext aus?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.3: Wie wirkt sich die SDO im politischen Kontext aus?</summary>
     <div class="sol"><b>Musterlösung:</b> Die SDO bezeichnet eine allgemeine Einstellung zu den Beziehungen zwischen Gruppen, die bestimmt, ob man diese als gleichwertig oder hierarchisch ansieht. Individuen mit ausgeprägter SDO sind anfällig für Legitimierungsmythen willkürlich hierarchischer Gesellschaftsordnungen, die auf struktureller Benachteiligung aufgrund willkürlicher Merkmale (z. B. Nationalität, Religion, sozialer Status) beruhen. Im politischen Kontext sind hohe SDO-Werte prädiktiv für eine negative Einstellung gegenüber Politiken der „positiven Diskriminierung" und der Bekämpfung sozialer Ungleichheiten – oft nicht explizit, sondern implizit, z. B. in einer meritokratischen Sicht auf das Gleichheitsprinzip. Pratto et al. (1994) wiesen zudem nach, dass mit hohen SDO-Werten u. a. die Unterstützung einer aggressiven Außenpolitik sowie die Befürwortung der Todesstrafe einhergeht.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.4: Gibt es Traits, die mit politischen Einstellungen verbunden sind? Welche?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.4: Gibt es Traits, die mit politischen Einstellungen verbunden sind? Welche?</summary>
     <div class="sol"><b>Musterlösung:</b> Ja. Früh wurde eine wichtige negative Korrelation zwischen dem Trait „Offenheit für Erfahrungen" und dem politischen Konservatismus festgestellt; umgekehrt sind hohe Offenheitswerte mit linksliberalen Einstellungen verbunden. McCrae (1996) hält Unterschiede bei „Offenheit" für die entscheidende psychologische Determinante zwischen Konservatismus und linkem Liberalismus. Ein weiterer prädiktiver Trait ist „Gewissenhaftigkeit": Konservative erreichen hier statistisch signifikant höhere Werte als Linksliberale. Umstrittener ist die Bedeutung der drei anderen Traits „Extraversion", „Verträglichkeit" und „Neurotizismus": Einige Studien finden keine Korrelation, andere zeichnen ein differenzierteres Bild, wobei die Korrelationen geringer ausfallen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.5: Nennen Sie die zehn Grundwerte nach Schwartz et al. (2010). Wie spiegeln sie sich in liberalen Ländern (z. B. Deutschland) wider?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.5: Nennen Sie die zehn Grundwerte nach Schwartz et al. (2010). Wie spiegeln sie sich in liberalen Ländern (z. B. Deutschland) wider?</summary>
     <div class="sol"><b>Musterlösung:</b> Die zehn motivationalen Grundwerte sind: Macht, Leistung, Hedonismus, Stimulation, Selbststeuerung (Selbstbestimmung), Universalismus, Benevolenz, Tradition, Konformität und Sicherheit. Welche Werte für die politische Orientierung entscheidend sind, hängt von der kulturellen und sozioökonomischen Grundausrichtung eines Landes sowie den vorrangig diskutierten Themen ab. In liberalen Ländern wie Deutschland zeigt sich mit Blick auf die Selbsteinschätzung als „rechts" oder „links" eine hohe Kovarianz der Grundwerte Tradition, Konformität, Macht und Sicherheit mit rechten Einstellungen und – auf der anderen Seite – zwischen Universalismus und (in weniger starker Ausprägung) Benevolenz mit linken Einstellungen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.6: Beschreiben Sie den NfCC. Beispiel für eine herausfordernde Situation?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.6: Beschreiben Sie den NfCC. Beispiel für eine herausfordernde Situation?</summary>
     <div class="sol"><b>Musterlösung:</b> Mit NfCC wird ein dispositionelles Konstrukt beschrieben, das sich durch den Wunsch nach Vorhersehbarkeit, die Vorliebe für Ordnung und Struktur, das Unbehagen gegenüber Mehrdeutigkeit (Ambiguität) und die Tendenz zu Entschlossenheit und Engstirnigkeit auszeichnet. Im politischen Kontext bringen einige Studien NfCC insbesondere mit rechts-konservativen Einstellungen in Verbindung. Dagegen wird argumentiert, dass motivierte soziale Kognition wie NfCC eher eine ideologische Starrheit zum Ausdruck bringt, die bei Menschen sowohl mit rechts- als auch linksgerichteten Einstellungen zu finden ist. NfCC ist auch jenseits des Links-Rechts-Schemas prädiktiv (umweltfreundliche Haltung, Glaube an Verschwörungstheorien, ethnozentrisches Geschichtsverständnis). Ein passendes aktuelles Beispiel ist eine plötzliche, hochgradig ambige Krisensituation wie die COVID-19-Pandemie, in der NfCC bei Studierenden Stress und Angst vorhersagte (White, 2022).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.7: Welche Zwischenschritte zwischen Genetik und politischer Einstellung beschreibt das Modell von Smith et al. (2011)?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.7: Welche Zwischenschritte zwischen Genetik und politischer Einstellung beschreibt das Modell von Smith et al. (2011)?</summary>
     <div class="sol"><b>Musterlösung:</b> Smith et al. (2011) entwickelten ein Modell, das die vermittelten Zwischenschritte zwischen Genetik und politischer Einstellung in Beziehung setzt. Es zeigt, dass Gene keinen direkten Einfluss auf die Einstellung zu einem politischen Thema haben. Vielmehr nehmen sie Einfluss auf biologische Systeme, die wiederum kognitive Verarbeitungsprozesse beeinflussen, die wiederum Persönlichkeits- und Werteeigenschaften beeinflussen, die wiederum die allgemeine politische Orientierung (Ideologie) beeinflussen, die letztendlich die Haltung zu aktuellen politischen Themen prägt.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.1: Anhand welcher Kriterien lassen sich Formen politischer Partizipation differenzieren?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.1: Anhand welcher Kriterien lassen sich Formen politischer Partizipation differenzieren?</summary>
     <div class="sol"><b>Musterlösung:</b> Politische Partizipationsformen können in Bezug auf ihre Konflikthaftigkeit (gering vs. hoch), ihre Reichweite (individuell vs. kollektiv), die für sie erforderlichen Ressourcen (Zeit, Kosten etc.) sowie in Bezug auf ihre Legalität bzw. Legitimität unterschieden werden.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.2: Welche Traits begünstigen die Neigung zu politischer Online-Partizipation?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.2: Welche Traits begünstigen die Neigung zu politischer Online-Partizipation?</summary>
     <div class="sol"><b>Musterlösung:</b> Erste Analysen deuten darauf hin, dass insbesondere die Traits „Extraversion" und „Offenheit" positiv mit der Neigung von Personen korrelieren, sich an politischen Online-Diskussionen, -Petitionen oder -Kampagnen zu beteiligen.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.1: Nennen und beschreiben Sie die vier Charaktertypen politischer Führung nach Barber.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.1: Nennen und beschreiben Sie die vier Charaktertypen politischer Führung nach Barber.</summary>
     <div class="sol"><b>Musterlösung:</b> Barber (2020) bestimmt anhand der zwei Dimensionen „Energie" (aktiv vs. passiv) und „Einstellung" (positiv vs. negativ) vier Charaktertypen, die – unabhängig vom individuellen Hintergrund – Aufschluss über die zu erwartende Leistung amerikanischer Präsidenten geben sollen: <br>– aktiv-positiv: zufriedene, aber zupackende Menschen, die selbstbewusst, offen und rational handeln (Beispiel: John F. Kennedy);<br>– aktiv-negativ: aggressive, zwanghafte und starr denkende Menschen, deren energische, aber unnachgiebige und unflexible Haltung zu desaströsen politischen Ergebnissen führen kann (Beispiel: Richard Nixon);<br>– passiv-positiv: optimistische, nachgiebige und fremdbestimmte Menschen, die nach Zuneigung durch angenehmes und kooperatives Verhalten suchen, anstatt politische Ziele konfrontativ zu verfolgen (Beispiel: Ronald Reagan);<br>– passiv-negativ: zurückgezogene, pflichtbewusste Menschen, deren politisches Handeln von vagen Prinzipien, Verboten und prozessualen Verfahren bestimmt ist (Beispiel: Dwight D. Eisenhower).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.2: Von welchen Traits wird der Führungsstil gemäß LTA bestimmt?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.2: Von welchen Traits wird der Führungsstil gemäß LTA bestimmt?</summary>
     <div class="sol"><b>Musterlösung:</b> Gemäß der LTA wird der Führungsstil maßgeblich von folgenden sieben Traits bestimmt: 1. der Überzeugung, dass man die Geschehnisse beeinflussen oder kontrollieren kann; 2. dem Bedürfnis nach Macht und Einfluss; 3. der konzeptionellen Komplexität (die Fähigkeit, Dinge und Menschen in der eigenen Umgebung zu unterscheiden); 4. Selbstvertrauen; 5. der Tendenz, sich auf die Lösung von Problemen und das Erreichen von Zielen zu konzentrieren und nicht auf die Aufrechterhaltung der Gruppe und den Umgang mit den Ideen und Empfindlichkeiten der anderen; 6. dem allgemeinen Misstrauen oder Argwohn gegenüber anderen; und 7. der Intensität, mit der eine Person eine gruppeninterne Voreingenommenheit hat.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.3: Benennen und beschreiben Sie die drei Merkmale der Dunklen Triade sowie deren gemeinsamen Kern.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.3: Benennen und beschreiben Sie die drei Merkmale der Dunklen Triade sowie deren gemeinsamen Kern.</summary>
     <div class="sol"><b>Musterlösung:</b> Die Dunkle Triade besteht aus Narzissmus, Machiavellismus und Psychopathie. Narzissmus zeichnet sich durch ein hypersensibles Selbstbild und hohe Eindrucksmotivation aus; narzisstisch geprägte Führungspersonen sind sehr charismatisch und vor allem daran interessiert, persönliche Erfolge zu erzielen und sich ein Denkmal zu setzen (auch auf Kosten anderer). Machiavellisten zeigen ein ausgeprägtes Streben nach Macht und strategisches Geschick; sie verfügen über eine ausdrucksstarke Selbstdarstellung und sind manipulativ. Psychopathie zeichnet sich durch Unkontrolliertheit und Impulsivität sowie ein Streben nach Nervenkitzel aus. Obwohl sich diese Merkmale unterscheiden, besteht eine hohe Wahrscheinlichkeit, dass eine Person mit erhöhten Werten bei einem Merkmal auch höhere Werte bei den anderen aufweist, da die Dunkle Triade einen gemeinsamen Kern hat: geringe Werte bei Moral, Verträglichkeit und sozialen Emotionen wie Empathie sowie keine Scheu vor dem Einsatz selbstbezogener zwischenmenschlicher Strategien.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.4: Beschreiben Sie den neueren Operational-Code-Ansatz und geben Sie ein Anwendungsbeispiel.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.4: Beschreiben Sie den neueren Operational-Code-Ansatz und geben Sie ein Anwendungsbeispiel.</summary>
     <div class="sol"><b>Musterlösung:</b> Nach dem neueren OC-Ansatz werden politische Entscheidungen durch kognitive Beschränkungen politischer Führungspersönlichkeiten beeinflusst, die an individuelle Systeme philosophischer und instrumenteller Überzeugungen geknüpft sind und der Orientierung durch Vereinfachung und Strukturierung komplexer Sachverhalte dienen. Philosophische Überzeugungen beziehen sich auf die externe Welt und umfassen u. a. Überzeugungen zur Natur des politischen Universums, der Konflikte und des Gegenübers, Einschätzungen der eigenen Erfolgsaussichten sowie den Glauben an die eigenen Kontrollmöglichkeiten. Instrumentelle Überzeugungen beziehen sich auf die interne Welt und umfassen u. a. die präferierte Strategie der Zielauswahl, die Art und Weise der Zielverwirklichung sowie die Herangehensweise beim Berechnen und Akzeptieren von Risiken. Der Einfluss ist nicht in jeder Situation gleich hoch, sondern kommt vor allem bei Entscheidungen zum Tragen, die unabhängig von anderen getroffen werden, nicht standardisierten Verfahren folgen, langfristige Planungen beinhalten oder von Komplexität/Informationsübermaß gekennzeichnet sind bzw. in unvorhergesehenen oder Stress-Situationen entstehen. Ein Anwendungsbeispiel ist die Analyse der OCs der US-Präsidenten George Bush und Bill Clinton nach dem Kalten Krieg durch Walker und Kollegen (1999): Eine günstige Machtposition der USA und das Fehlen existenzieller Interessen verstärkten den Effekt individueller OCs; beide OCs blieben stabil, doch Bush zeigte ein weniger kooperatives und unflexibleres Verhalten als Clinton.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.5: Was besagt das Kongruenzmodell der politischen Präferenz?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.5: Was besagt das Kongruenzmodell der politischen Präferenz?</summary>
     <div class="sol"><b>Musterlösung:</b> Das Kongruenzmodell der politischen Präferenz geht von einer synergetischen Beziehung zwischen den Persönlichkeiten der politischen Führerinnen und Führer und deren Wählerinnen und Wählern aus. Diese Übereinstimmung beruht auf der Wirkung des bei der Partnerwahl in Liebes- und Freundschaftsbeziehungen identifizierten Homophilie-Prinzips. Danach fühlen sich Wählerinnen und Wähler eher zu Kandidatinnen und Kandidaten hingezogen, die ihr eigenes Persönlichkeitsprofil widerspiegeln.</div>
   </details>
 </section>
 
 </div></section>
 <section class="tabpanel" id="p-s10"><div class="panelcard">
+<div class="exambox"><b>ℹ️ Übungsklausur:</b> Dieser Brief wird in der Übungsklausur nicht direkt geprüft – laut Aufgabenhinweis können aber <i>alle</i> Studienbriefe des Moduls geprüft werden.</div>
+
 <h2 class="briefttl">10 · Gruppen</h2>
 <p class="lead">Dieser Brief erklärt, wie sich Menschen über Gruppen definieren und was zwischen Gruppen passiert: von Nationalismus, Diskriminierung und Rassismus über politische Bewegungen und politische Gewalt (Genozid, Terrorismus) bis zur Frage, wie sich Eliten in Kleingruppen verrennen (Groupthink). Grundlage sind sechs sozialpsychologische Intergruppentheorien, die immer wieder auftauchen.</p>
 
@@ -5006,49 +5041,68 @@ Konz.
   <h3>✍️ Übungsaufgaben mit Musterlösung</h3>
 
   <details class="task">
-    <summary>Aufgabe 1.1: Was ist das minimale Gruppenparadigma und wie sah der Versuchsaufbau aus?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.1: Was ist das minimale Gruppenparadigma und wie sah der Versuchsaufbau aus?</summary>
     <div class="sol"><b>Musterlösung:</b> Das minimale Gruppenparadigma (SIT) besagt, dass soziale Kategorisierung in Gruppen schon unter minimalen Bedingungen die Beziehungen von interpersonell (individuelle Charakteristika) zu Intergruppe (Gruppenzugehörigkeit) verlagert, was negatives Gruppenverhalten wie Eigengruppenfavorisierung auslöst. Versuchsaufbau: Versuchspersonen bewerteten abstrakte Kunstwerke angeblich von Paul Klee oder Wassily Kandinsky, erhielten dann eine vertrauliche Mitteilung über ihre angebliche Präferenz und Einteilung in zwei etwa gleich große „Klee-"/„Kandinsky-Anhänger"-Gruppen. Beim anschließenden Verteilen von Geldbeträgen (nur Gruppenzugehörigkeit bekannt) wurden durchgehend die vermeintlich eigenen Gruppenmitglieder bevorzugt. Beweis: Es braucht keine besonderen (Wettbewerbs-)Situationen, um negatives Intergruppenverhalten auszulösen – diese wirken aber verstärkend.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.2: Von welchen Schlüsselbedingungen hängt gemäß ICT ein positiver Intergruppenkontakt ab?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.2: Von welchen Schlüsselbedingungen hängt gemäß ICT ein positiver Intergruppenkontakt ab?</summary>
     <div class="sol"><b>Musterlösung:</b> Kontakte bauen Vorurteile nicht per se ab; ohne Schlüsselbedingungen können sie sogar verstärken. Vier klassische Bedingungen: (1) gleicher Status der Mitglieder in der Situation (keine Hierarchie; real oft verletzt); (2) gemeinsame Ziele (z. B. Meisterschaft einer multikulturellen Mannschaft); (3) Intergruppen-Kooperation ohne Wettbewerb (entscheidend im Robbers-Cave-Experiment; Gruppenpuzzle-Technik); (4) Unterstützung von Behörden/Autoritäten/Normen. Zusätzliche neuere Bedingung: Potenzial zu persönlicher Bekanntschaft und Freundschaft (enge, ausgedehnte, wiederholte Interaktion).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 1.3: Nennen und erläutern Sie zwei Formen des impliziten Rassismus.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 1.3: Nennen und erläutern Sie zwei Formen des impliziten Rassismus.</summary>
     <div class="sol"><b>Musterlösung:</b> <b>Symbolischer Rassismus (SR):</b> Wandel des offenen, biologischen Rassismus seit der Bürgerrechtsbewegung zu einem auf ein abstraktes Kollektiv zielenden, von abstrakten moralischen Werten (nicht Eigeninteressen) bestimmten Rassismus. Vermischung von Anti-Black-Affekt und traditionellen amerikanischen Werten (Arbeitsethik, Meritokratie, Aufschub von Bedürfnisbefriedigung). <b>Aversiver Rassismus (AR):</b> Geht ebenfalls davon aus, dass biologischer Rassismus geächtet ist. Unterschiede zum SR: nicht an US-Kontext gebunden (auch anderswo anwendbar); beruht nicht auf bewusster Verdeckung, sondern auf intrapsychischem Konflikt (Aversion gegen andere „Rasse" UND gegen die Vorstellung, selbst rassistisch zu sein). Erfasst v. a. links-liberalen impliziten Rassismus; tritt nur auf, wenn Verhaltensregeln unklar sind und sich die negative Reaktion mit anderen Faktoren als „Rasse" rationalisieren lässt.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 2.1: Welche wesentlichen sozialpsychologischen Determinanten bestimmen die Beteiligung an sozialen Bewegungen und kollektiver Aktion?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 2.1: Welche wesentlichen sozialpsychologischen Determinanten bestimmen die Beteiligung an sozialen Bewegungen und kollektiver Aktion?</summary>
     <div class="sol"><b>Musterlösung:</b> Drei Determinanten: (1) ein die Eigengruppe beschwerender Missstand, v. a. (empfundene) Ungerechtigkeit/Ungleichbehandlung (erklärt durch Grievance Theories und v. a. RDT); (2) Gefühl der politischen Wirksamkeit (Efficacy) – als „instrumentelle Kosten-Nutzen-Erwartung" oder als hohe persönliche Wirksamkeitsüberzeugung (besonders bei Misstrauen ggü. Institutionen); (3) Streben nach positiver sozialer Identität – kollektive Aktion als Strategie des sozialen Wettbewerbs bei undurchlässigen Gruppengrenzen und gleichzeitig illegitim + instabil wahrgenommenem Statusgefälle.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.1: Was versteht man unter „Delegitimierung" bzw. „Dehumanisierung"?</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.1: Was versteht man unter „Delegitimierung" bzw. „Dehumanisierung"?</summary>
     <div class="sol"><b>Musterlösung:</b> Delegitimierung = Prozesse, durch die einer Fremdgruppe abgesprochen wird, in den Kreis derjenigen zu gehören, gegenüber denen grundlegende moralische Normen gelten. Dehumanisierung = wichtigste Form: Menschen wird rhetorisch/metaphorisch abgesprochen, Menschen zu sein („Untermenschen", Tiere, Monster). Andere Form: politische „Labels" („Kommunisten", „Faschisten", „Nazi", „Bourgeois"). In fast allen Fällen geht Genoziden/Massentötungen eine Delegitimierung/Dehumanisierung voraus.</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.2: Beschreiben Sie das Milgram-Experiment und die Schlussfolgerungen für die Erklärung von Genoziden/Massentötungen.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.2: Beschreiben Sie das Milgram-Experiment und die Schlussfolgerungen für die Erklärung von Genoziden/Massentötungen.</summary>
     <div class="sol"><b>Musterlösung:</b> Untersuchung, wie weit psychisch gesunde Menschen in der Gewaltanwendung gehen, wenn eine Autorität dies anordnet. Versuchsperson = „Lehrer", verabreicht „Schüler" (fingierte, steigende) Stromstöße bei Wortpaar-Fehlern; bei Zweifeln drängt der Versuchsleiter mit standardisierten Sätzen. Trotz Schmerzensschreien/Abbruchbitten gaben 26 von 40 die höchste (potenziell tödliche) Dosis. Schlussfolgerungen (v. a. Holocaustforschung): (a) Autorität etablierte eine Konstellation, in der Gewalt nicht mehr geächtet, sondern gerechtfertigt/erwünscht erschien; (b) ideologische Rechtfertigung durch „höheren Zweck" (Wissenschaft); (c) Einbindung in eine Befehlshierarchie → Verantwortungsverschiebung auf Autorität/„bürokratischen Apparat".</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 3.3: Nennen Sie drei wichtige Faktoren bei der psychologischen Erklärung des Terrorismus.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 3.3: Nennen Sie drei wichtige Faktoren bei der psychologischen Erklärung des Terrorismus.</summary>
     <div class="sol"><b>Musterlösung:</b> (1) tatsächliche/vermeintliche Unterdrückung/Demütigung als unerträglich wahrgenommen (Frustrations-Aggressions- und Demütigungs-Rache-Modell; soziale Deprivation); (2) Gruppenidentität/Gruppendynamik (Befriedigung sozialer Bedürfnisse; Abschottung → gegenseitige Radikalisierung, Peer Pressure, argumentative Immunisierung); (3) Entlastung von Verantwortung durch weitgehende Identifikation mit der Gruppe; (4) terroristische Ideologien vermitteln eine über den Tod hinausreichende Bedeutung (Significance Gain).</div>
   </details>
 
   <details class="task">
-    <summary>Aufgabe 4.1: Nennen Sie mindestens zwei Maßnahmen zur Verhinderung von Groupthink und führen Sie diese aus.</summary>
+    <summary><span class="badge-sb">📘 SB-Aufgabe</span> Aufgabe 4.1: Nennen Sie mindestens zwei Maßnahmen zur Verhinderung von Groupthink und führen Sie diese aus.</summary>
     <div class="sol"><b>Musterlösung:</b> Geeignete Maßnahmen (auch wenn nicht immer wirksam / mit Nebeneffekten): ausdrückliche Ermunterung aller Mitglieder, Einwände/Zweifel offen zu äußern (Leitung offen für Kritik; Gefahr langer Debatten/Zerwürfnisse); neutrale Führung (unparteiische Haltung; Gefahr inakzeptabler Gruppenposition); Advocatus Diaboli (kritisches Hinterfragen aller Vorschläge); mehrere unabhängige Planungs-/Evaluierungsgruppen (Gefahr hoher Kosten/Zeit). Weitere: nicht homogene Teams; bewusste Mehrheitsentscheidungen statt Einstimmigkeit; externe Kontrolle/Aufsicht.</div>
   </details>
 </section>
 
 </div></section>
+<section class="tabpanel" id="p-klausur"><div class="panelcard">
+<h2 class="secttl">📝 Übungsklausur LIB</h2><p class="lead">Die 5 Original-Aufgaben der HFH-Übungsklausur mit amtlicher Musterlösung – jede Aufgabe dem passenden Studienbrief zugeordnet. Tipp: erst selbst lösen, dann aufklappen und vergleichen.</p><div class="examinfo">⏱️ Bearbeitungszeit 100 Minuten · 5 Aufgaben · 100 Punkte · Hilfsmittel: Taschenrechner · Notenschlüssel: 1,0 = 100–95 P · 2,0 = 84,5–80 P · 3,0 = 69,5–65 P · 4,0 = 54,5–50 P · ab 49,5 P nicht bestanden.</div>
+<p class="kpts">SB „Von der Unterweisung zur Lernbegleitung“ · 19 P</p>
+<details class="task klausur"><summary><span class="badge-k">📝 Übungsklausur</span> Aufgabe 1 – Von der Unterweisung zur Lernbegleitung (19 P)</summary><div class="sol"><p class="qtext">1.1 (9 P) Erläutern Sie drei Probleme des institutionellen Lernens. — 1.2 (10 P) Begründen Sie anhand von zwei Aspekten, weshalb die (Binnen-)Differenzierung im Unterricht eine wesentliche Bedeutung für das Kompetenzlernen hat.</p><div class="amt"><b>Amtliche Musterlösung:</b><p><b>1.1 – drei Probleme des institutionellen Lernens (je 3 P):</b></p><ul><li>Die vielen <b>Übersetzungsschritte</b> sind hochgradig störanfällig – zwischen Arbeit und institutionellem Lernen besteht ein <b>Transferproblem</b>.</li><li>Die <b>Unvorhersehbarkeit und Komplexität der Praxis</b> lässt sich kaum in die Lehranstalt holen (z. B. Rollenspiel ≠ Wirklichkeit).</li><li>Institutionelles Lernen ist <b>„Lernen auf Vorrat“</b>, das später genutzt werden soll – heute oft veraltet oder schon wieder vergessen.</li><li>Der Prozess ist <b>schwerfällig</b>: Neuerungen aus der Berufspraxis kommen erst spät in der Ausbildung an; Gelerntes ist oft veraltet, bevor es angewendet wird.</li></ul><p><b>1.2 – zwei Aspekte der Binnendifferenzierung (je 5 P):</b></p><ul><li><b>Heterogenität & Vorkenntnisse:</b> Klassen sind sehr heterogen (Alter, Herkunft, Werte, Vorbildung). Vorkenntnisse sind zentral für den Lernerfolg (<b>Matthäus-Effekt</b>) → erfordert Differenzierung.</li><li><b>Lerntempo:</b> Unterschiede betragen in weiterführenden Schulen Faktor 1:3, in der Erwachsenenbildung bis 1:9. Ein gemeinsames Tempo ist unsinnig → Individualisierung durch Differenzierung.</li></ul></div></div></details>
+<p class="kpts">SB „Lernprozessbegleitung in der Ausbildung“ · 25 P</p>
+<details class="task klausur"><summary><span class="badge-k">📝 Übungsklausur</span> Aufgabe 2 – Lernprozessbegleitung / Geschäftsprozessanalyse (25 P)</summary><div class="sol"><p class="qtext">Erstellen Sie eine Geschäftsprozessanalyse für den Prozess „Bestellung von Büromaterial“. Es kommt auf die Umsetzung des dreischrittigen Vorgehens an.</p><div class="amt"><b>Amtliche Musterlösung:</b><p><b>Schritt 1 – Beschreibung der Tätigkeiten:</b> Bestelltermin wahrnehmen; richtiges Bestellformular benutzen; Ist- mit Sollbestand vergleichen; im Lager Überblick verschaffen/zählen; auffällige Lücken prüfen; ggf. in Abteilungen nachfragen; ausgefülltes Formular per E-Mail an Lieferanten senden und Bestellung ablegen.</p><p><b>Schritt 2 – Analyse der Anforderungen:</b> trotz vieler Tätigkeiten den Bestelltermin nicht vergessen; richtiges Formular richtig ausfüllen; Bedarf abschätzen (Vergleich mit Vorwochen, Inventarlisten); aktuelle Entwicklungen berücksichtigen; korrekt versenden (Lesebestätigung); richtige Ablage.</p><p><b>Schritt 3 – Ableitung von Kompetenzen:</b> <b>Wissen</b> (welches Material, Menge, Prozessschritte); <b>Fertigkeiten/Kompetenzen</b> (Überblick verschaffen, Infos beschaffen & interpretieren, Entscheidung treffen, ausfüllen/versenden/ablegen); <b>Fachkompetenz</b> (selbstständig sachgerecht lösen); <b>Sozialkompetenz</b> (mit Kolleg*innen kommunizieren); <b>personale Kompetenz</b> (zuverlässig, Entscheidungen selbstverantwortlich treffen).</p></div></div></details>
+<p class="kpts">SB „Praxisbeispiele der Lernbegleitung“ · 13 P</p>
+<details class="task klausur"><summary><span class="badge-k">📝 Übungsklausur</span> Aufgabe 3 – Praxisbeispiele der Lernbegleitung (13 P)</summary><div class="sol"><p class="qtext">3.1 (6 P) Beschreiben Sie Schritt 1 „Lernbedarf festlegen“ und begründen Sie Ihr Vorgehen. — 3.2 (7 P) Formulieren Sie sieben Auswertungsfragen für das Beispiel „Bestellung von Büromaterial“.</p><div class="amt"><b>Amtliche Musterlösung:</b><p><b>3.1 – Lernbedarf festlegen:</b> Extern vorgegebene Lernziele (Ausbildungsordnung, Rahmenlehrplan) sind generell und abstrakt. Der <b>individuelle Lernbedarf</b> ist subjektbezogen und ermöglicht <b>entdeckendes Lernen</b>. Wichtig: Lernende formulieren ihren Lernbedarf <b>selbst</b> – über <b>Selbstreflexion</b> der Lernenden und <b>Beobachtungen</b> der Begleitperson. Die begleitende Person regt die Selbstreflexion an, sodass Lernende die Bereiche identifizieren, die sie verbessern möchten.</p><p><b>3.2 – sieben Auswertungsfragen (je 1 P):</b></p><ul><li>Wie sind Sie bei der Büromaterialbestellung vorgegangen?</li><li>Welche Herausforderungen waren mit der Aufgabe verbunden?</li><li>Worauf kam es besonders an?</li><li>Wo musste abgewogen werden?</li><li>Gab es Probleme? Gab es Fehler?</li><li>Wie haben sich die Kolleg*innen in den Abteilungen Ihnen gegenüber verhalten?</li><li>Was haben Sie gelernt?</li></ul></div></div></details>
+<p class="kpts">SB „Pädagogisch-psychologische Beratung“ · 18 P</p>
+<details class="task klausur"><summary><span class="badge-k">📝 Übungsklausur</span> Aufgabe 4 – Pädagogisch-psychologische Beratung (18 P)</summary><div class="sol"><p class="qtext">4.1 (9 P) Erläutern Sie den Einsatz der Lebenslinie als Diagnostikinstrument in der Beratung von Erwachsenen. — 4.2 (9 P) Beschreiben Sie drei Charaktermerkmale, die Menschen prädestinieren, als beratende Person von Erwachsenen zu arbeiten.</p><div class="amt"><b>Amtliche Musterlösung:</b><p><b>4.1 – Lebenslinie (je 3 P):</b></p><ul><li>Aufgabe der Klientin/des Klienten: <b>bedeutsame Lebensereignisse</b> darstellen (emotional aufwühlende positive und negative Erlebnisse, biografische Umbrüche).</li><li>Ziel der beratenden Person: <b>Ressourcen und allgemeine Problemlösefähigkeiten</b> anhand der Ereignisse aufdecken und für die aktuelle Lebenssituation (z. B. die Krankheit) und die nahe Zukunft nutzbar machen.</li><li>Die beratende Person stellt Fragen, wie die Person zurückliegende Ereignisse <b>erlebt und bewältigt</b> hat (z. B. Beziehungsende, Umzug, Stress/Druck) → daraus Lösungsoptionen für derzeitige Probleme.</li></ul><p><b>4.2 – drei Charaktermerkmale (je 3 P):</b></p><ul><li><b>Empathie:</b> emotionaler und kognitiver Nachvollzug von Gefühlen, Motiven und Gedanken der Ratsuchenden – Mitgefühl, nicht Mitleid.</li><li><b>Fähigkeit zur Distanzierung:</b> immer wieder die Balance zwischen Nähe und Distanz finden.</li><li><b>Introversion:</b> Empathie erfordert ein Sich-Zurücknehmen; das Hineinversetzen fällt introvertierten Menschen leichter als extrovertierten.</li></ul></div></div></details>
+<p class="kpts">SB „Laufbahnberatung und berufliche Entwicklung“ · 25 P</p>
+<details class="task klausur"><summary><span class="badge-k">📝 Übungsklausur</span> Aufgabe 5 – Laufbahnberatung und berufliche Entwicklung (25 P)</summary><div class="sol"><p class="qtext">5.1a (8 P) Beschreiben Sie die Grafik (Top-5-Ausbildungsberufe von Frauen und Männern). — 5.1b (9 P) Erläutern Sie anhand von drei Einflussfaktoren, weshalb Frauen/Männer frauen-/männertypische Ausbildungsberufe wählen. — 5.2 (8 P) Beschreiben Sie das 360-Grad-Feedback als Methode der Potenzialanalyse und nennen Sie je einen Vor- und Nachteil.</p><div class="amt"><b>Amtliche Musterlösung:</b><p><b>5.1a – Grafik (je 2 P):</b> Die Grafik (2016) zeigt die Top-5-Ausbildungsberufe von Frauen und Männern. Männer wählen weiterhin klassische Männerberufe (Mechatroniker, Elektroniker, Mechaniker). Frauen wählen klassische Frauenberufe (kaufmännische Berufe, Gesundheitswesen). Ausgeglichen sind beide bei Verkäufer/in und Kauffrau/-mann im Einzelhandel.</p><p><b>5.1b – drei Einflussfaktoren (je 3 P):</b></p><ul><li><b>Elternhaus:</b> Kinder werden durch Eltern und deren Berufe beeinflusst (Modelllernen, Eltern als Vorbild).</li><li><b>Selbst-/Rollenbilder:</b> Wahl gemäß typisch weiblicher/männlicher Rollenschemata.</li><li><b>Peers:</b> Gleichaltrige haben großen Einfluss auf die Berufswahl.</li></ul><p><b>5.2 – 360-Grad-Feedback (4 P + je 2 P):</b> Beurteilungsmethode, bei der sich eine Person <b>selbst einschätzt</b> und zusätzlich Feedback von relevanten Dritten eingeholt wird → <b>Rundum-Perspektive</b>, die das Selbstbild mit verschiedenen Fremdbildern ergänzt. <b>Vorteil:</b> Transparenz der Leistungs-/Beurteilungskriterien, bessere Teamarbeit, effektivere Mitarbeitendengespräche. <b>Nachteil:</b> gibt nicht zwingend ein zutreffendes Bild (beurteilt eher die Beziehung zu den Feedbackgebenden), fördert Anpassertum / „Schönheitswettbewerbe“ – „A fool with a tool is still a fool“.</p></div></div></details>
+</div></section>
 <section class="tabpanel" id="p-quiz"><div class="panelcard">
-<h2 class="secttl">🎯 Abfragemodus</h2><p class="lead">Gleiche Fragen wie auf den Karteikarten – Frage lesen, selbst beantworten, dann aufklappen und prüfen.</p>
+<h2 class="secttl">🎯 Abfragemodus</h2><p class="lead">Gleiche Fragen wie auf den Karteikarten – Frage lesen, selbst beantworten, dann aufklappen und prüfen. Die 📝-Karten sind die echten Übungsklausur-Fragen.</p>
+<h3 class="quizttl">📝 Übungsklausur-Fragen</h3>
+<details class="quiz klausur"><summary><span class="badge-k">📝 Übungsklausur</span> Aufgabe 1 – Von der Unterweisung zur Lernbegleitung (19 P)</summary><div class="fc-a"><p class="qtext">1.1 (9 P) Erläutern Sie drei Probleme des institutionellen Lernens. — 1.2 (10 P) Begründen Sie anhand von zwei Aspekten, weshalb die (Binnen-)Differenzierung im Unterricht eine wesentliche Bedeutung für das Kompetenzlernen hat.</p><p><b>1.1 – drei Probleme des institutionellen Lernens (je 3 P):</b></p><ul><li>Die vielen <b>Übersetzungsschritte</b> sind hochgradig störanfällig – zwischen Arbeit und institutionellem Lernen besteht ein <b>Transferproblem</b>.</li><li>Die <b>Unvorhersehbarkeit und Komplexität der Praxis</b> lässt sich kaum in die Lehranstalt holen (z. B. Rollenspiel ≠ Wirklichkeit).</li><li>Institutionelles Lernen ist <b>„Lernen auf Vorrat“</b>, das später genutzt werden soll – heute oft veraltet oder schon wieder vergessen.</li><li>Der Prozess ist <b>schwerfällig</b>: Neuerungen aus der Berufspraxis kommen erst spät in der Ausbildung an; Gelerntes ist oft veraltet, bevor es angewendet wird.</li></ul><p><b>1.2 – zwei Aspekte der Binnendifferenzierung (je 5 P):</b></p><ul><li><b>Heterogenität & Vorkenntnisse:</b> Klassen sind sehr heterogen (Alter, Herkunft, Werte, Vorbildung). Vorkenntnisse sind zentral für den Lernerfolg (<b>Matthäus-Effekt</b>) → erfordert Differenzierung.</li><li><b>Lerntempo:</b> Unterschiede betragen in weiterführenden Schulen Faktor 1:3, in der Erwachsenenbildung bis 1:9. Ein gemeinsames Tempo ist unsinnig → Individualisierung durch Differenzierung.</li></ul></div></details>
+<details class="quiz klausur"><summary><span class="badge-k">📝 Übungsklausur</span> Aufgabe 2 – Lernprozessbegleitung / Geschäftsprozessanalyse (25 P)</summary><div class="fc-a"><p class="qtext">Erstellen Sie eine Geschäftsprozessanalyse für den Prozess „Bestellung von Büromaterial“. Es kommt auf die Umsetzung des dreischrittigen Vorgehens an.</p><p><b>Schritt 1 – Beschreibung der Tätigkeiten:</b> Bestelltermin wahrnehmen; richtiges Bestellformular benutzen; Ist- mit Sollbestand vergleichen; im Lager Überblick verschaffen/zählen; auffällige Lücken prüfen; ggf. in Abteilungen nachfragen; ausgefülltes Formular per E-Mail an Lieferanten senden und Bestellung ablegen.</p><p><b>Schritt 2 – Analyse der Anforderungen:</b> trotz vieler Tätigkeiten den Bestelltermin nicht vergessen; richtiges Formular richtig ausfüllen; Bedarf abschätzen (Vergleich mit Vorwochen, Inventarlisten); aktuelle Entwicklungen berücksichtigen; korrekt versenden (Lesebestätigung); richtige Ablage.</p><p><b>Schritt 3 – Ableitung von Kompetenzen:</b> <b>Wissen</b> (welches Material, Menge, Prozessschritte); <b>Fertigkeiten/Kompetenzen</b> (Überblick verschaffen, Infos beschaffen & interpretieren, Entscheidung treffen, ausfüllen/versenden/ablegen); <b>Fachkompetenz</b> (selbstständig sachgerecht lösen); <b>Sozialkompetenz</b> (mit Kolleg*innen kommunizieren); <b>personale Kompetenz</b> (zuverlässig, Entscheidungen selbstverantwortlich treffen).</p></div></details>
+<details class="quiz klausur"><summary><span class="badge-k">📝 Übungsklausur</span> Aufgabe 3 – Praxisbeispiele der Lernbegleitung (13 P)</summary><div class="fc-a"><p class="qtext">3.1 (6 P) Beschreiben Sie Schritt 1 „Lernbedarf festlegen“ und begründen Sie Ihr Vorgehen. — 3.2 (7 P) Formulieren Sie sieben Auswertungsfragen für das Beispiel „Bestellung von Büromaterial“.</p><p><b>3.1 – Lernbedarf festlegen:</b> Extern vorgegebene Lernziele (Ausbildungsordnung, Rahmenlehrplan) sind generell und abstrakt. Der <b>individuelle Lernbedarf</b> ist subjektbezogen und ermöglicht <b>entdeckendes Lernen</b>. Wichtig: Lernende formulieren ihren Lernbedarf <b>selbst</b> – über <b>Selbstreflexion</b> der Lernenden und <b>Beobachtungen</b> der Begleitperson. Die begleitende Person regt die Selbstreflexion an, sodass Lernende die Bereiche identifizieren, die sie verbessern möchten.</p><p><b>3.2 – sieben Auswertungsfragen (je 1 P):</b></p><ul><li>Wie sind Sie bei der Büromaterialbestellung vorgegangen?</li><li>Welche Herausforderungen waren mit der Aufgabe verbunden?</li><li>Worauf kam es besonders an?</li><li>Wo musste abgewogen werden?</li><li>Gab es Probleme? Gab es Fehler?</li><li>Wie haben sich die Kolleg*innen in den Abteilungen Ihnen gegenüber verhalten?</li><li>Was haben Sie gelernt?</li></ul></div></details>
+<details class="quiz klausur"><summary><span class="badge-k">📝 Übungsklausur</span> Aufgabe 4 – Pädagogisch-psychologische Beratung (18 P)</summary><div class="fc-a"><p class="qtext">4.1 (9 P) Erläutern Sie den Einsatz der Lebenslinie als Diagnostikinstrument in der Beratung von Erwachsenen. — 4.2 (9 P) Beschreiben Sie drei Charaktermerkmale, die Menschen prädestinieren, als beratende Person von Erwachsenen zu arbeiten.</p><p><b>4.1 – Lebenslinie (je 3 P):</b></p><ul><li>Aufgabe der Klientin/des Klienten: <b>bedeutsame Lebensereignisse</b> darstellen (emotional aufwühlende positive und negative Erlebnisse, biografische Umbrüche).</li><li>Ziel der beratenden Person: <b>Ressourcen und allgemeine Problemlösefähigkeiten</b> anhand der Ereignisse aufdecken und für die aktuelle Lebenssituation (z. B. die Krankheit) und die nahe Zukunft nutzbar machen.</li><li>Die beratende Person stellt Fragen, wie die Person zurückliegende Ereignisse <b>erlebt und bewältigt</b> hat (z. B. Beziehungsende, Umzug, Stress/Druck) → daraus Lösungsoptionen für derzeitige Probleme.</li></ul><p><b>4.2 – drei Charaktermerkmale (je 3 P):</b></p><ul><li><b>Empathie:</b> emotionaler und kognitiver Nachvollzug von Gefühlen, Motiven und Gedanken der Ratsuchenden – Mitgefühl, nicht Mitleid.</li><li><b>Fähigkeit zur Distanzierung:</b> immer wieder die Balance zwischen Nähe und Distanz finden.</li><li><b>Introversion:</b> Empathie erfordert ein Sich-Zurücknehmen; das Hineinversetzen fällt introvertierten Menschen leichter als extrovertierten.</li></ul></div></details>
+<details class="quiz klausur"><summary><span class="badge-k">📝 Übungsklausur</span> Aufgabe 5 – Laufbahnberatung und berufliche Entwicklung (25 P)</summary><div class="fc-a"><p class="qtext">5.1a (8 P) Beschreiben Sie die Grafik (Top-5-Ausbildungsberufe von Frauen und Männern). — 5.1b (9 P) Erläutern Sie anhand von drei Einflussfaktoren, weshalb Frauen/Männer frauen-/männertypische Ausbildungsberufe wählen. — 5.2 (8 P) Beschreiben Sie das 360-Grad-Feedback als Methode der Potenzialanalyse und nennen Sie je einen Vor- und Nachteil.</p><p><b>5.1a – Grafik (je 2 P):</b> Die Grafik (2016) zeigt die Top-5-Ausbildungsberufe von Frauen und Männern. Männer wählen weiterhin klassische Männerberufe (Mechatroniker, Elektroniker, Mechaniker). Frauen wählen klassische Frauenberufe (kaufmännische Berufe, Gesundheitswesen). Ausgeglichen sind beide bei Verkäufer/in und Kauffrau/-mann im Einzelhandel.</p><p><b>5.1b – drei Einflussfaktoren (je 3 P):</b></p><ul><li><b>Elternhaus:</b> Kinder werden durch Eltern und deren Berufe beeinflusst (Modelllernen, Eltern als Vorbild).</li><li><b>Selbst-/Rollenbilder:</b> Wahl gemäß typisch weiblicher/männlicher Rollenschemata.</li><li><b>Peers:</b> Gleichaltrige haben großen Einfluss auf die Berufswahl.</li></ul><p><b>5.2 – 360-Grad-Feedback (4 P + je 2 P):</b> Beurteilungsmethode, bei der sich eine Person <b>selbst einschätzt</b> und zusätzlich Feedback von relevanten Dritten eingeholt wird → <b>Rundum-Perspektive</b>, die das Selbstbild mit verschiedenen Fremdbildern ergänzt. <b>Vorteil:</b> Transparenz der Leistungs-/Beurteilungskriterien, bessere Teamarbeit, effektivere Mitarbeitendengespräche. <b>Nachteil:</b> gibt nicht zwingend ein zutreffendes Bild (beurteilt eher die Beziehung zu den Feedbackgebenden), fördert Anpassertum / „Schönheitswettbewerbe“ – „A fool with a tool is still a fool“.</p></div></details>
 <h3 class="quizttl">1 · Wohlstand</h3>
 
 <details class="quiz"><summary>Welche drei Produktionsfaktoren unterscheidet die VWL und was bedeuten sie?</summary>
@@ -5888,6 +5942,7 @@ Konz.
 </div></section>
 <section class="tabpanel" id="p-spick"><div class="panelcard">
 <h2 class="secttl">📋 Spickzettel – alle Definitionen & Modelle kompakt</h2>
+<details class="cheatbrief klausurcheat" open><summary>📝 Klausur-Kompakt – die 5 Übungsklausur-Aufgaben</summary><dl class="cheat"><dt>📝 Aufgabe 1 · „Lernbegleitung“ (19 P)</dt><dd>Drei Probleme des institutionellen Lernens (Transferproblem, Komplexität der Praxis, Lernen auf Vorrat, Schwerfälligkeit); Binnendifferenzierung über Heterogenität/Matthäus-Effekt und Lerntempo (1:3 → 1:9).</dd><dt>📝 Aufgabe 2 · „LPB“ (25 P)</dt><dd>Geschäftsprozessanalyse in 3 Schritten: Tätigkeiten beschreiben → Anforderungen analysieren → Kompetenzen ableiten (Wissen, Fertigkeiten, Fach-, Sozial-, personale Kompetenz). Beispiel Büromaterial.</dd><dt>📝 Aufgabe 3 · „Praxis“ (13 P)</dt><dd>Schritt 1 Lernbedarf festlegen: individuell/subjektbezogen, Lernende formulieren selbst (Selbstreflexion + Beobachtung). Sieben Auswertungsfragen (Vorgehen, Herausforderungen, worauf es ankam, Abwägung, Fehler, Verhalten der Kolleg*innen, Gelerntes).</dd><dt>📝 Aufgabe 4 · „Beratung“ (18 P)</dt><dd>Lebenslinie: Klient*in stellt bedeutsame Ereignisse dar → Berater*in deckt Ressourcen/Problemlösefähigkeiten auf und macht sie nutzbar. Drei Merkmale: Empathie, Distanzierung (Nähe/Distanz), Introversion.</dd><dt>📝 Aufgabe 5 · „Laufbahn“ (25 P)</dt><dd>Grafik Top-5-Berufe (Männer technisch, Frauen kaufmännisch/Gesundheit, ausgeglichen im Einzelhandel); drei Einflussfaktoren (Elternhaus/Modelllernen, Rollenbilder, Peers); 360-Grad-Feedback = Selbst- + Fremdbilder, Vorteil Transparenz/Team, Nachteil „fool with a tool“.</dd></dl></details>
 <details class="cheatbrief" open><summary>1 · Wohlstand</summary>
   <dl class="cheat">
     <dt>VWL</dt><dd>Volkswirtschaftstheorie (Analyse mit Modellen) + Wirtschaftspolitik (Umsetzung). Bedürfnisse (unendlich) vs. Bedarf (leistbar); Knappheit → Allokation.</dd>
