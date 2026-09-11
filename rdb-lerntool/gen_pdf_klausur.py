@@ -81,13 +81,12 @@ def build():
 
     E=[]
     E.append(Paragraph("RDB – Übungsklausur ausführlich erklärt", S_h1))
-    E.append(Paragraph("Alle Fragen der HFH-Übungsklausur mit Musterlösung, vertiefender Erklärung und Merksatz · "
+    E.append(Paragraph("Alle Fragen der HFH-Übungsklausur mit Musterlösung und Merksatz · "
                        "Modul Rahmenbedingungen der Berufsbildung (MP00-RDB-PK1)", S_sub))
     E.append(HRFlowable(width="100%",thickness=1.2,color=PRI,spaceAfter=5))
     E.append(Paragraph("<b>Aufbau je Frage:</b> "
                        '<font color="#475569">FRAGE</font> (Originalaufgabe) → '
                        '<font color="#166534">MUSTERLÖSUNG</font> (klausurtauglich) → '
-                       '<font color="#1d4ed8">AUSFÜHRLICH ERKLÄRT</font> (Hintergrund, Fachbegriffe, Beispiel) → '
                        '<font color="#92400e">MERKE</font> (Prüfungstipp). '
                        "Gesamt 5 Aufgaben · 14 Teilaufgaben · 100 Punkte · 100 Minuten.", S_body))
     E.append(Spacer(1,4))
@@ -114,9 +113,6 @@ def build():
         E.append(KeepTogether(block[:2]))
         E.append(Spacer(1,3))
         E.append(block[3])
-        if ex["auf"]:
-            E.append(Spacer(1,3))
-            E.append(box("AUSFÜHRLICH ERKLÄRT", bullets(ex["auf"]), BLUEBG, BLUEBD, PRI))
         if ex["mer"]:
             E.append(Spacer(1,3))
             E.append(box("MERKE · PRÜFUNGSTIPP", bullets(ex["mer"]), AMBERBG, AMBERBD, AMBER))
