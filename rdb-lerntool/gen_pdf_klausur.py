@@ -52,6 +52,42 @@ def box(label, body_html, bg, bd, lc):
         ("TOPPADDING",(0,0),(-1,-1),5),("BOTTOMPADDING",(0,0),(-1,-1),6)]))
     return t
 
+S_cell=ParagraphStyle("cell",fontName="DV",fontSize=8.3,leading=10,textColor=INK)
+S_cellh=ParagraphStyle("cellh",fontName="DVB",fontSize=8.3,leading=10,textColor=colors.white)
+S_small=ParagraphStyle("small",fontName="DV",fontSize=7.8,leading=9.6,textColor=MUT,spaceBefore=3)
+
+def box_flow(label, flows, bg, bd, lc):
+    cell=[Paragraph(label, S_lbl(lc))]+flows
+    t=Table([[cell]], colWidths=[CW])
+    t.setStyle(TableStyle([("BACKGROUND",(0,0),(-1,-1),bg),("BOX",(0,0),(-1,-1),0.6,bd),
+        ("LEFTPADDING",(0,0),(-1,-1),7),("RIGHTPADDING",(0,0),(-1,-1),7),
+        ("TOPPADDING",(0,0),(-1,-1),5),("BOTTOMPADDING",(0,0),(-1,-1),6)]))
+    return t
+
+def models_table():
+    rows=[["Modell","Vorteil","Nachteil","Region"],
+          ["Informelles Modell","hohe Aufnahmefähigkeit gerade in ärmeren Ländern",
+           "enge, nur funktionsbezogene Qualifizierung; keine Fachtheorie/Allgemeinbildung",
+           "Afrika, Asien, Lateinamerika"],
+          ["Marktmodell","praxisnah, spezialisiert, kostensparend für den Staat",
+           "sehr betriebsspezifisch → Wechsel schwer, Abhängigkeit vom Arbeitgeber",
+           "Japan, USA, Großbritannien"],
+          ["Kooperatives / Duales Modell","Praxisbezug, kostensparend für den Staat",
+           "frühe, enge Spezialisierung; Betriebsbedarf rasch erschöpft",
+           "Deutschland, Schweiz, Österreich"],
+          ["Schulmodell","breite Grundausbildung, weniger Abhängigkeit vom Arbeitgeber",
+           "Politik reagiert zu langsam auf den Bedarf der Wirtschaft",
+           "Frankreich, Italien"]]
+    data=[[Paragraph(esc(c), S_cellh if i==0 else S_cell) for c in r] for i,r in enumerate(rows)]
+    t=Table(data, colWidths=[30*mm,52*mm,60*mm,30*mm], repeatRows=1)
+    t.setStyle(TableStyle([("BACKGROUND",(0,0),(-1,0),hx("#166534")),
+        ("ROWBACKGROUNDS",(0,1),(-1,-1),[colors.white, hx("#f0fdf4")]),
+        ("GRID",(0,0),(-1,-1),0.5,hx("#bbf7d0")),("VALIGN",(0,0),(-1,-1),"TOP"),
+        ("LEFTPADDING",(0,0),(-1,-1),4),("RIGHTPADDING",(0,0),(-1,-1),4),
+        ("TOPPADDING",(0,0),(-1,-1),3),("BOTTOMPADDING",(0,0),(-1,-1),3)]))
+    return t
+def hx(c): return colors.HexColor(c)
+
 def parse_extra(txt):
     d={}
     for b in re.split(r"(?m)^###\s+", txt):
@@ -105,14 +141,18 @@ def build():
         if a["punkte"]: meta.append(esc(a["punkte"]))
         head=f'Aufgabe {esc(nr)}'
         if meta: head+='  <font size="8" color="#64748b">('+"  ·  ".join(meta)+")</font>"
+        if nr=="5.1":
+            note=("In der Klausur genügen 3 Modelle. Punkte: je Modell 1 P (max. 3), "
+                  "je Vor-/Nachteil 2 P (max. 6), je Region 1 P (max. 3) = 12 P.")
+            ml=box_flow("MUSTERLÖSUNG", [models_table(), Paragraph(note, S_small)], GREENBG, GREENBD, GREEN)
+        else:
+            ml=box("MUSTERLÖSUNG", bullets(a["l"]), GREENBG, GREENBD, GREEN)
         block=[Paragraph(head, S_ah),
-               box("FRAGE", bullets(a["f"]), GRAYBG, GRAYBD, MUT),
-               Spacer(1,3),
-               box("MUSTERLÖSUNG", bullets(a["l"]), GREENBG, GREENBD, GREEN)]
+               box("FRAGE", bullets(a["f"]), GRAYBG, GRAYBD, MUT)]
         # Kopf + Frage zusammenhalten
         E.append(KeepTogether(block[:2]))
         E.append(Spacer(1,3))
-        E.append(block[3])
+        E.append(ml)
         if ex["mer"]:
             E.append(Spacer(1,3))
             E.append(box("MERKE · PRÜFUNGSTIPP", bullets(ex["mer"]), AMBERBG, AMBERBD, AMBER))
