@@ -111,9 +111,18 @@ GROUPS={"1":"Aufgabe 1 · SB1 Einführung in das System der beruflichen Bildung 
 BEREICH={"1":"SB1 Einführung","2":"SB2 Rechtliche Grundlagen","3":"SB3 Schulrecht I",
          "4":"SB4 Schulrecht II","5":"SB5 Internationaler Vergleich"}
 
+def parse_simple(txt):
+    d={}
+    for b in re.split(r"(?m)^###\s+", txt):
+        b=b.strip()
+        if not b or b.startswith("#"): continue
+        nl=b.find("\n"); d[b[:nl].strip()]=b[nl+1:].strip()
+    return d
+
 def build():
     klausur=g.parse_klausur(open(os.path.join(g.CONTENT,"UEBUNGSKLAUSUR.md"),encoding="utf-8").read())
     extra=parse_extra(open(os.path.join(g.CONTENT,"KLAUSUR_EXTRA.md"),encoding="utf-8").read())
+    einfach=parse_simple(open(os.path.join(g.CONTENT,"KLAUSUR_EINFACH.md"),encoding="utf-8").read())
 
     E=[]
     E.append(Paragraph("RDB – Übungsklausur ausführlich erklärt", S_h1))
@@ -122,7 +131,7 @@ def build():
     E.append(HRFlowable(width="100%",thickness=1.2,color=PRI,spaceAfter=5))
     E.append(Paragraph("<b>Aufbau je Frage:</b> "
                        '<font color="#475569">FRAGE</font> (Originalaufgabe) → '
-                       '<font color="#166534">MUSTERLÖSUNG</font> (klausurtauglich) → '
+                       '<font color="#166534">MUSTERLÖSUNG</font> (einfach formuliert, Fachwörter bleiben) → '
                        '<font color="#92400e">MERKE</font> (Prüfungstipp). '
                        "Gesamt 5 Aufgaben · 14 Teilaufgaben · 100 Punkte · 100 Minuten.", S_body))
     E.append(Spacer(1,4))
@@ -146,7 +155,8 @@ def build():
                   "je Vor-/Nachteil 2 P (max. 6), je Region 1 P (max. 3) = 12 P.")
             ml=box_flow("MUSTERLÖSUNG", [models_table(), Paragraph(note, S_small)], GREENBG, GREENBD, GREEN)
         else:
-            ml=box("MUSTERLÖSUNG", bullets(a["l"]), GREENBG, GREENBD, GREEN)
+            sol=einfach.get(nr, a["l"])
+            ml=box("MUSTERLÖSUNG", bullets(sol), GREENBG, GREENBD, GREEN)
         block=[Paragraph(head, S_ah),
                box("FRAGE", bullets(a["f"]), GRAYBG, GRAYBD, MUT)]
         # Kopf + Frage zusammenhalten
