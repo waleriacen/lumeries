@@ -64,29 +64,72 @@ def box_flow(label, flows, bg, bd, lc):
         ("TOPPADDING",(0,0),(-1,-1),5),("BOTTOMPADDING",(0,0),(-1,-1),6)]))
     return t
 
-def models_table():
-    rows=[["Modell","Vorteil","Nachteil","Region"],
-          ["Informelles Modell","hohe Aufnahmefähigkeit gerade in ärmeren Ländern",
-           "enge, nur funktionsbezogene Qualifizierung; keine Fachtheorie/Allgemeinbildung",
-           "Afrika, Asien, Lateinamerika"],
-          ["Marktmodell","praxisnah, spezialisiert, kostensparend für den Staat",
-           "sehr betriebsspezifisch → Wechsel schwer, Abhängigkeit vom Arbeitgeber",
-           "Japan, USA, Großbritannien"],
-          ["Kooperatives / Duales Modell","Praxisbezug, kostensparend für den Staat",
-           "frühe, enge Spezialisierung; Betriebsbedarf rasch erschöpft",
-           "Deutschland, Schweiz, Österreich"],
-          ["Schulmodell","breite Grundausbildung, weniger Abhängigkeit vom Arbeitgeber",
-           "Politik reagiert zu langsam auf den Bedarf der Wirtschaft",
-           "Frankreich, Italien"]]
-    data=[[Paragraph(esc(c), S_cellh if i==0 else S_cell) for c in r] for i,r in enumerate(rows)]
-    t=Table(data, colWidths=[30*mm,52*mm,60*mm,30*mm], repeatRows=1)
+def hx(c): return colors.HexColor(c)
+
+def green_table(header, rows, widths):
+    data=[[Paragraph(esc(c), S_cellh if i==0 else S_cell) for c in r]
+          for i,r in enumerate([header]+rows)]
+    t=Table(data, colWidths=[w*mm for w in widths], repeatRows=1)
     t.setStyle(TableStyle([("BACKGROUND",(0,0),(-1,0),hx("#166534")),
         ("ROWBACKGROUNDS",(0,1),(-1,-1),[colors.white, hx("#f0fdf4")]),
         ("GRID",(0,0),(-1,-1),0.5,hx("#bbf7d0")),("VALIGN",(0,0),(-1,-1),"TOP"),
         ("LEFTPADDING",(0,0),(-1,-1),4),("RIGHTPADDING",(0,0),(-1,-1),4),
         ("TOPPADDING",(0,0),(-1,-1),3),("BOTTOMPADDING",(0,0),(-1,-1),3)]))
     return t
-def hx(c): return colors.HexColor(c)
+
+# Musterlösungen, die als Tabelle dargestellt werden (statt Fließtext)
+TABLES={
+ "1.2":{"lead":"Im IT-Bereich ist Weiterbildung zwingend – vor allem in zwei Formen:",
+   "header":["Form","Was sie bedeutet"],
+   "rows":[["Anpassungsfortbildung","Wissen auffrischen und an neue Entwicklungen/Marktsituationen anpassen – damit man auf dem Stand bleibt."],
+           ["Lernen am Arbeitsplatz","Direkt bei der Arbeit lernen: organisiert (z. B. Schulung) oder informell/selbstständig (nebenbei)."]],
+   "widths":[44,120],
+   "note":"Kern: Am wichtigsten ist die Fähigkeit, sich selbst laufend neues Wissen anzueignen."},
+ "2.1":{"lead":None,
+   "header":["Merkmal","BGJ (Berufsgrundbildungsjahr)","BVJ (Berufsvorbereitungsjahr)"],
+   "rows":[["Anrechnung","zählt als 1. Ausbildungsjahr (wird angerechnet)","wird nicht angerechnet; dafür Hauptschulabschluss nachholbar"],
+           ["Zielgruppe","hat Schulabschluss, aber keine Lehrstelle","Schulabbrecher / noch nicht ausbildungsreif"]],
+   "widths":[26,69,69],"note":None},
+ "2.2":{"lead":"Die Handlungskompetenz besteht aus vier Teilkompetenzen (Beispiel: Lehrkraft):",
+   "header":["Teilkompetenz","Bedeutung / Beispiel"],
+   "rows":[["Fachkompetenz","Inhalt fachlich richtig aufbereiten (z. B. korrekte Aufgabenblätter)."],
+           ["Methodenkompetenz","passende Methode und Medien wählen (z. B. Lehrvideo, Software)."],
+           ["Sozialkompetenz","gut mit anderen umgehen – Schüler, Eltern, Kollegen."],
+           ["Persönlichkeitskompetenz","Verantwortung übernehmen und sich abgrenzen können."]],
+   "widths":[46,118],"note":None},
+ "3.1":{"lead":"Drei rechtliche Bereiche führen zu einem Berufsabschluss:",
+   "header":["Regelungsbereich","Kennzeichen"],
+   "rows":[["Duales System (BBiG)","Ausbildungsberufe nach dem Berufsbildungsgesetz."],
+           ["Berufsfachschulen (Landesrecht)","Berufe, die nach Landesrecht geregelt sind."],
+           ["Berufszulassungsgesetze","meist an Schulen des Gesundheitswesens (Heilberufe)."]],
+   "widths":[54,110],"note":None},
+ "3.2":{"lead":None,
+   "header":["Aspekt","Duales System","Krankenhaus"],
+   "rows":[["Praxis","Betrieb zahlt die praktische Ausbildung.","Krankenhaus trägt Ausbildung + Ausbildungsstätte ganz selbst."],
+           ["Schule","Staat zahlt die Berufsschule.","Geld kommt v. a. von den Krankenversicherungen (+ ggf. Landeszuschüsse)."]],
+   "widths":[20,64,80],"note":None},
+ "4.2":{"lead":"Remonstration (§ 36 BeamtStG) – so gehst du bei Bedenken gegen eine Weisung vor:",
+   "header":["Stufe","Vorgehen"],
+   "rows":[["1","Bedenken der/dem direkten Vorgesetzten sagen; bleibt sie/er dabei → nächsthöhere Stelle."],
+           ["2","Bestätigt auch diese die Weisung → ausführen, aber von der Haftung befreit."],
+           ["3","Ausnahme: strafbar oder Menschenwürde verletzt → nicht ausführen."]],
+   "widths":[14,150],"note":None},
+ "4.3":{"lead":"Schulentwicklung = eine Schule Schritt für Schritt weiterentwickeln. Drei Säulen (nach Rolff):",
+   "header":["Säule","Inhalt"],
+   "rows":[["Personalentwicklung","Qualifizierung und Führung des Kollegiums."],
+           ["Organisationsentwicklung","Strukturen und Abläufe der Schule."],
+           ["Unterrichtsentwicklung","Qualität des Unterrichts – dient dem Lernen der SuS."]],
+   "widths":[50,114],
+   "note":"Wichtig: laufender Prozess, an dem alle Beteiligten mitwirken."},
+ "5.1":{"lead":None,
+   "header":["Modell","Vorteil","Nachteil","Region"],
+   "rows":[["Informelles Modell","hohe Aufnahmefähigkeit gerade in ärmeren Ländern","enge, nur funktionsbezogene Qualifizierung; keine Fachtheorie/Allgemeinbildung","Afrika, Asien, Lateinamerika"],
+           ["Marktmodell","praxisnah, spezialisiert, kostensparend für den Staat","sehr betriebsspezifisch → Wechsel schwer, Abhängigkeit vom Arbeitgeber","Japan, USA, Großbritannien"],
+           ["Kooperatives / Duales Modell","Praxisbezug, kostensparend für den Staat","frühe, enge Spezialisierung; Betriebsbedarf rasch erschöpft","Deutschland, Schweiz, Österreich"],
+           ["Schulmodell","breite Grundausbildung, weniger Abhängigkeit vom Arbeitgeber","Politik reagiert zu langsam auf den Bedarf der Wirtschaft","Frankreich, Italien"]],
+   "widths":[30,44,60,30],
+   "note":"In der Klausur genügen 3 Modelle. Punkte: je Modell 1 P (max. 3), je Vor-/Nachteil 2 P (max. 6), je Region 1 P (max. 3) = 12 P."},
+}
 
 def parse_extra(txt):
     d={}
@@ -150,10 +193,12 @@ def build():
         if a["punkte"]: meta.append(esc(a["punkte"]))
         head=f'Aufgabe {esc(nr)}'
         if meta: head+='  <font size="8" color="#64748b">('+"  ·  ".join(meta)+")</font>"
-        if nr=="5.1":
-            note=("In der Klausur genügen 3 Modelle. Punkte: je Modell 1 P (max. 3), "
-                  "je Vor-/Nachteil 2 P (max. 6), je Region 1 P (max. 3) = 12 P.")
-            ml=box_flow("MUSTERLÖSUNG", [models_table(), Paragraph(note, S_small)], GREENBG, GREENBD, GREEN)
+        if nr in TABLES:
+            sp=TABLES[nr]; flows=[]
+            if sp.get("lead"): flows.append(Paragraph(esc(sp["lead"]), S_body))
+            flows.append(green_table(sp["header"], sp["rows"], sp["widths"]))
+            if sp.get("note"): flows.append(Paragraph(esc(sp["note"]), S_small))
+            ml=box_flow("MUSTERLÖSUNG", flows, GREENBG, GREENBD, GREEN)
         else:
             sol=einfach.get(nr, a["l"])
             ml=box("MUSTERLÖSUNG", bullets(sol), GREENBG, GREENBD, GREEN)
